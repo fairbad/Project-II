@@ -39,7 +39,7 @@ public interface DAO {
 	
 	public ArrayList<Campaign> getAllCampaignsByUserId(int id);
 	
-	public ArrayList<Campaign> getAllPublicCampaigns(int id);
+	public ArrayList<Campaign> getAllPublicCampaigns(boolean isPublic);
 	
 	/*
 	 * Chapter Operations

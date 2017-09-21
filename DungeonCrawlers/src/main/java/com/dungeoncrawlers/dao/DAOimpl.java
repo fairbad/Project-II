@@ -81,9 +81,8 @@ public class DAOimpl implements DAO {
 	}
 
 	@Override
-	public ArrayList<Campaign> getAllPublicCampaigns(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public ArrayList<Campaign> getAllPublicCampaigns(boolean isPublic) {
+		return (ArrayList<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("isPublic", isPublic)).list();
 	}
 
 	@Override
