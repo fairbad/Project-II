@@ -9,9 +9,8 @@ import com.dungeoncrawlers.dao.DAO;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		DAO dao = (DAO)context.getBean("myDao");
+		//AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		//DAO dao = (DAO)context.getBean("myDao");
 		/*
 		User u = new User();
 		u.setUsername("testman");

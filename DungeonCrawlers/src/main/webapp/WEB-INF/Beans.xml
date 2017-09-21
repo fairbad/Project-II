@@ -11,10 +11,14 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
+	<!-- enable controller annotations -->
+	<mvc:annotation-driven />
+
 	<!-- enable @Transactional -->
 	<tx:annotation-driven/>
 	
 	<!-- enable autowiring -->
+	<context:annotation-config />
 	<context:component-scan base-package="com.dungeoncrawlers"/>
 	
 	<!-- database -->
