@@ -22,13 +22,18 @@ public class NonPlayableCharacter implements Serializable{
     @Column
     private String image;
 
-    public NonPlayableCharacter() {}
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
+	@JoinColumn(name="USER_ID", nullable = false)
+	private User author;
     
-	public NonPlayableCharacter(int id, String name, String image) {
+    public NonPlayableCharacter() {}
+
+	public NonPlayableCharacter(int id, String name, String image, User author) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
+		this.author = author;
 	}
 
 	public int getId() {
@@ -54,4 +59,13 @@ public class NonPlayableCharacter implements Serializable{
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	
 }

@@ -1,11 +1,12 @@
 package com.dungeoncrawlers.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.dungeoncrawlers.beans.Campaign;
 import com.dungeoncrawlers.beans.Chapter;
 import com.dungeoncrawlers.beans.Enemy;
 import com.dungeoncrawlers.beans.Event;
+import com.dungeoncrawlers.beans.EventType;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
@@ -31,15 +32,17 @@ public interface DAO {
 	 */
 	public Campaign getCampaign(int id);
 	
+	public List<Campaign> getAllCampaigns();
+	
 	public Campaign addCampaign(Campaign campaign);
 	
 	public Campaign updateCampaign(Campaign campaign);
 	
-	public void deleteCampaign(int id);
+	public void deleteCampaign(Campaign campaign);
 	
-	public ArrayList<Campaign> getAllCampaignsByUserId(int id);
+	public List<Campaign> getAllCampaignsByUser(User author);
 	
-	public ArrayList<Campaign> getAllPublicCampaigns(boolean isPublic);
+	public List<Campaign> getAllPublicCampaigns();
 	
 	/*
 	 * Chapter Operations
@@ -50,9 +53,9 @@ public interface DAO {
 	
 	public Chapter updateChapter(Chapter chapter);
 	
-	public void deleteChapter(int id);
+	public void deleteChapter(Chapter chapter);
 	
-	public ArrayList<Chapter> getAllChaptersByCampaignId(int id);
+	public List<Chapter> getAllChaptersByCampaign(Campaign campaign);
 	
 	/*
 	 * Map Operations
@@ -63,7 +66,7 @@ public interface DAO {
 	
 	public Map updateMap(Map map);
 	
-	public void deleteMap(int id);
+	public void deleteMap(Map map);
 	
 	/*
 	 * Location Operations
@@ -74,9 +77,9 @@ public interface DAO {
 	
 	public Location updateLocation(Location location);
 	
-	public void deleteLocation(int id);
+	public void deleteLocation(Location location);
 	
-	public ArrayList<Location> getAllLocationsByChapterId(int id);
+	public List<Location> getAllLocationsByChapter(Chapter chapter);
 	
 	/*
 	 * Event Operations
@@ -87,13 +90,19 @@ public interface DAO {
 	
 	public Event updateEvent(Event event);
 	
-	public void deleteEvent(int id);
+	public void deleteEvent(Event event);
 	
-	public ArrayList<Event> getAllEventsByLocationId(int id);
+	public List<Event> getAllEventsByLocation(Location location);
 	
-	public Event getEventType(int id);
+	/*
+	 * Event Type Operations
+	 */
 	
-	public Event addEventType(Event event);
+	public EventType getEventType(int id);
+	
+	public EventType addEventType(EventType eventType);
+	
+	public List<EventType> getAllEventTypes();
 	
 	/*
 	 * Character Operations
@@ -104,9 +113,9 @@ public interface DAO {
 	
 	public Character updateCharacter(Character character);
 	
-	public void deleteCharacter(int id);
+	public void deleteCharacter(Character character);
 	
-	public ArrayList<Character> getAllCharactersByUserId(int id);
+	public List<Character> getAllCharactersByUser(User author);
 	
 	/*
 	 * Enemy Operations
@@ -117,9 +126,11 @@ public interface DAO {
 	
 	public Enemy updateEnemy(Enemy enemy);
 	
-	public void deleteEnemy(int id);
+	public void deleteEnemy(Enemy enemy);
 	
-	public ArrayList<Enemy> getAllEnemiesByEventId(int id);
+	public List<Enemy> getAllEnemiesByEvent(Event event);
+	
+	public List<Enemy> getAllEnemiesByUser(User author);
 	
 	/*
 	 * NonPlayableCharacter Operations
@@ -130,9 +141,11 @@ public interface DAO {
 	
 	public NonPlayableCharacter updateNonPlayableCharacter(NonPlayableCharacter npc);
 	
-	public void deleteNonPlayableCharacter(int id);
+	public void deleteNonPlayableCharacter(NonPlayableCharacter npc);
 	
-	public ArrayList<NonPlayableCharacter> getAllNonPlayableCharactersByEventId(int id);
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByEvent(Event event);
+	
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User author);
 	
 	/*
 	 * Rating Operations
@@ -143,6 +156,6 @@ public interface DAO {
 	
 	public Rating updateRating(Rating rating);
 	
-	public ArrayList<Rating> getAllRatingsByCampaignId(int id);
+	public List<Rating> getAllRatingsByCampaign(Campaign campaign);
 	
 }

@@ -1,8 +1,7 @@
 package com.dungeoncrawlers.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -13,6 +12,7 @@ import com.dungeoncrawlers.beans.Chapter;
 import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Enemy;
 import com.dungeoncrawlers.beans.Event;
+import com.dungeoncrawlers.beans.EventType;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
@@ -52,277 +52,270 @@ public class DAOimpl implements DAO {
 
 	@Override
 	public Campaign getCampaign(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Campaign) sessionFactory.getCurrentSession().get(Campaign.class, id);
+	}
+	
+	@Override
+	public List<Campaign> getAllCampaigns(){
+		return (List<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).list();
 	}
 
 	@Override
 	public Campaign addCampaign(Campaign campaign) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(campaign);
+		return campaign;
 	}
 
 	@Override
 	public Campaign updateCampaign(Campaign campaign) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(campaign);
+		return campaign;
 	}
 
 	@Override
-	public void deleteCampaign(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteCampaign(Campaign campaign) {
+		sessionFactory.getCurrentSession().delete(campaign);
 	}
 
 	@Override
-	public ArrayList<Campaign> getAllCampaignsByUserId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Campaign> getAllCampaignsByUser(User author) {
+		return (List<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("author", author)).list();
 	}
 
 	@Override
-	public ArrayList<Campaign> getAllPublicCampaigns(boolean isPublic) {
-		return (ArrayList<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("isPublic", isPublic)).list();
+	public List<Campaign> getAllPublicCampaigns() {
+		return (List<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("isPublic", true)).list();
 	}
 
 	@Override
 	public Chapter getChapter(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Chapter) sessionFactory.getCurrentSession().get(Chapter.class, id);
 	}
 
 	@Override
 	public Chapter addChapter(Chapter chapter) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(chapter);
+		return chapter;
 	}
 
 	@Override
 	public Chapter updateChapter(Chapter chapter) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(chapter);
+		return chapter;
 	}
 
 	@Override
-	public void deleteChapter(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteChapter(Chapter chapter) {
+		sessionFactory.getCurrentSession().delete(chapter);
 	}
 
 	@Override
-	public ArrayList<Chapter> getAllChaptersByCampaignId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Chapter> getAllChaptersByCampaign(Campaign campaign) {
+		return (List<Chapter>) sessionFactory.getCurrentSession().createCriteria(Chapter.class).add(Restrictions.eq("campaign", campaign)).list();
 	}
 
 	@Override
 	public Map getMap(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Map) sessionFactory.getCurrentSession().get(Map.class, id);
 	}
 
 	@Override
 	public Map addMap(Map map) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(map);
+		return map;
 	}
 
 	@Override
 	public Map updateMap(Map map) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(map);
+		return map;
 	}
 
 	@Override
-	public void deleteMap(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteMap(Map map) {
+		sessionFactory.getCurrentSession().delete(map);
 	}
 
 	@Override
 	public Location getLocation(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Location) sessionFactory.getCurrentSession().get(Location.class, id);
 	}
 
 	@Override
 	public Location addLocation(Location location) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(location);
+		return location;
 	}
 
 	@Override
 	public Location updateLocation(Location location) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(location);
+		return location;
 	}
 
 	@Override
-	public void deleteLocation(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteLocation(Location location) {
+		sessionFactory.getCurrentSession().delete(location);
 	}
 
 	@Override
-	public ArrayList<Location> getAllLocationsByChapterId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Location> getAllLocationsByChapter(Chapter chapter) {
+		return (List<Location>) sessionFactory.getCurrentSession().createCriteria(Location.class).add(Restrictions.eq("chapter", chapter)).list();
 	}
 
 	@Override
 	public Event getEvent(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Event) sessionFactory.getCurrentSession().get(Event.class, id);
 	}
 
 	@Override
 	public Event addEvent(Event event) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(event);
+		return event;
 	}
 
 	@Override
 	public Event updateEvent(Event event) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(event);
+		return event;
 	}
 
 	@Override
-	public void deleteEvent(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteEvent(Event event) {
+		sessionFactory.getCurrentSession().delete(event);
 	}
 
 	@Override
-	public ArrayList<Event> getAllEventsByLocationId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Event> getAllEventsByLocation(Location location) {
+		return (List<Event>) sessionFactory.getCurrentSession().createCriteria(Event.class).add(Restrictions.eq("location", location)).list();
 	}
 
 	@Override
-	public Event getEventType(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public EventType getEventType(int id) {
+		return (EventType) sessionFactory.getCurrentSession().get(Event.class, id);
 	}
 
 	@Override
-	public Event addEventType(Event event) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public EventType addEventType(EventType eventType) {
+		sessionFactory.getCurrentSession().save(eventType);
+		return eventType;
 	}
 
+	@Override
+	public List<EventType> getAllEventTypes(){
+		return (List<EventType>) sessionFactory.getCurrentSession().createCriteria(EventType.class).list();
+	}
+	
 	@Override
 	public Character getCharacter(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Character) sessionFactory.getCurrentSession().get(Character.class, id);
 	}
 
 	@Override
 	public Character addCharacter(Character character) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(character);
+		return character;
 	}
 
 	@Override
 	public Character updateCharacter(Character character) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(character);
+		return character;
 	}
 
 	@Override
-	public void deleteCharacter(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteCharacter(Character character) {
+		sessionFactory.getCurrentSession().delete(character);
 	}
 
 	@Override
-	public ArrayList<Character> getAllCharactersByUserId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Character> getAllCharactersByUser(User author) {
+		return (List<Character>) sessionFactory.getCurrentSession().createCriteria(Character.class).add(Restrictions.eq("author", author)).list();
 	}
 
 	@Override
 	public Enemy getEnemy(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Enemy) sessionFactory.getCurrentSession().get(Enemy.class, id);
 	}
 
 	@Override
 	public Enemy addEnemy(Enemy enemy) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(enemy);
+		return enemy;
 	}
 
 	@Override
 	public Enemy updateEnemy(Enemy enemy) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(enemy);
+		return enemy;
 	}
 
 	@Override
-	public void deleteEnemy(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteEnemy(Enemy enemy) {
+		sessionFactory.getCurrentSession().delete(enemy);
 	}
 
 	@Override
-	public ArrayList<Enemy> getAllEnemiesByEventId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Enemy> getAllEnemiesByEvent(Event event) {
+		return (List<Enemy>) sessionFactory.getCurrentSession().createCriteria(Enemy.class).add(Restrictions.eq("event", event)).list();
+	}
+
+	@Override
+	public List<Enemy> getAllEnemiesByUser(User author) {
+		return (List<Enemy>) sessionFactory.getCurrentSession().createCriteria(Enemy.class).add(Restrictions.eq("author", author)).list();
 	}
 
 	@Override
 	public NonPlayableCharacter getNonPlayableCharacter(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (NonPlayableCharacter) sessionFactory.getCurrentSession().get(NonPlayableCharacter.class, id);
 	}
 
 	@Override
 	public NonPlayableCharacter addNonPlayableCharacter(NonPlayableCharacter npc) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(npc);
+		return npc;
 	}
 
 	@Override
 	public NonPlayableCharacter updateNonPlayableCharacter(NonPlayableCharacter npc) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(npc);
+		return npc;
 	}
 
 	@Override
-	public void deleteNonPlayableCharacter(int id) {
-		sessionFactory.getCurrentSession();
-		
+	public void deleteNonPlayableCharacter(NonPlayableCharacter npc) {
+		sessionFactory.getCurrentSession().delete(npc);
 	}
 
 	@Override
-	public ArrayList<NonPlayableCharacter> getAllNonPlayableCharactersByEventId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByEvent(Event event) {
+		return (List<NonPlayableCharacter>) sessionFactory.getCurrentSession().createCriteria(NonPlayableCharacter.class).add(Restrictions.eq("event", event)).list();
 	}
 
+	@Override
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User author) {
+		return (List<NonPlayableCharacter>) sessionFactory.getCurrentSession().createCriteria(NonPlayableCharacter.class).add(Restrictions.eq("author", author)).list();
+	}
+	
 	@Override
 	public Rating getRating(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+		return (Rating) sessionFactory.getCurrentSession().get(Rating.class, id);
 	}
 
 	@Override
 	public Rating addRating(Rating rating) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().save(rating);
+		return rating;
 	}
 
 	@Override
 	public Rating updateRating(Rating rating) {
-		sessionFactory.getCurrentSession();
-		return null;
+		sessionFactory.getCurrentSession().update(rating);
+		return rating;
 	}
 
 	@Override
-	public ArrayList<Rating> getAllRatingsByCampaignId(int id) {
-		sessionFactory.getCurrentSession();
-		return null;
+	public List<Rating> getAllRatingsByCampaign(Campaign campaign) {
+		return (List<Rating>) sessionFactory.getCurrentSession().createCriteria(Rating.class).add(Restrictions.eq("campaign", campaign)).list();
 	}
-
 }
