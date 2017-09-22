@@ -12,6 +12,7 @@ import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
 import com.dungeoncrawlers.beans.Rating;
+import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
 import com.dungeoncrawlers.dto.CharacterDTO;
@@ -46,8 +47,6 @@ public interface ServiceInterface {
 	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO);
 	
 	public List<Campaign> getAllPublicCampaigns();
-	
-	public List<Campaign> sortByMostViewed();
 
 	// update order method
 	//public
@@ -75,6 +74,8 @@ public interface ServiceInterface {
 	public Map updateMap(MapDTO mapDTO);
 	
 	public void deleteMap(MapDTO mapDTO);
+	
+	public List<Map> getAllMapsByUser(UserDTO userDTO);
 	
 	/*
 	 * Location Operations
@@ -165,6 +166,8 @@ public interface ServiceInterface {
 	public Rating updateRating(RatingDTO ratingDTO);
 	
 	public List<Rating> getAllRatingsByCampaign(CampaignDTO campaignDTO);
+	
+	public List<Rating> getAllRatingsByUser(UserDTO userDTO);
 	
 	public void updateAllCampaignRatings();
 	

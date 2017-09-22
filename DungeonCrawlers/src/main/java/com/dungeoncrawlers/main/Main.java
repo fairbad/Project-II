@@ -57,7 +57,5 @@ public class Main {
 			System.out.println(cha.getName());
 		}
 		*/
-		
-		
 	}
 }

@@ -68,6 +68,8 @@ public interface DAO {
 	
 	public void deleteMap(Map map);
 	
+	public List<Map> getAllMapsByUser(User user);
+	
 	/*
 	 * Location Operations
 	 */
@@ -157,5 +159,7 @@ public interface DAO {
 	public Rating updateRating(Rating rating);
 	
 	public List<Rating> getAllRatingsByCampaign(Campaign campaign);
+	
+	public List<Rating> getAllRatingsByUser(User user);
 	
 }

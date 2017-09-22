@@ -25,14 +25,19 @@ public class Map implements Serializable {
 	@Column
 	private String image;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "USER_ID", nullable = false)
+	private User author;
+	
 	public Map() {}
 	
-	public Map(int id, String name, String description, String image) {
+	public Map(int id, String name, String description, String image, User author) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
+		this.author = author;
 	}
 
 	public int getId() {
@@ -66,4 +71,13 @@ public class Map implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	
 }

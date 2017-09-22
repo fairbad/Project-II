@@ -104,17 +104,6 @@ public class ServiceImpl implements ServiceInterface{
 		return daoimpl.getAllPublicCampaigns();
 	}
 
-	// to finish
-	@Override
-	public List<Campaign> sortByMostViewed() {
-		List<Campaign> campaigns = daoimpl.getAllCampaigns();
-		for(Campaign c: campaigns) {
-			c.getNumViews();
-		}
-		
-		return null;
-	}
-
 	@Override
 	public Chapter getChapter(int id) {
 		return daoimpl.getChapter(id);
@@ -204,6 +193,16 @@ public class ServiceImpl implements ServiceInterface{
 		map.setName(mapDTO.getName());
 		
 		daoimpl.deleteMap(map);
+	}
+	
+	@Override
+	public List<Map> getAllMapsByUser(UserDTO userDTO){
+		User author = new User();
+		author.setEmail(userDTO.getEmail());
+		author.setPassword(userDTO.getPassword());
+		author.setUsername(userDTO.getUsername());
+		
+		return daoimpl.getAllMapsByUser(author);
 	}
 
 	@Override
@@ -533,6 +532,16 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setRating(campaignDTO.getRating());
 		
 		return daoimpl.getAllRatingsByCampaign(campaign);
+	}
+	
+	@Override
+	public List<Rating> getAllRatingsByUser(UserDTO userDTO){
+		User user = new User();
+		user.setEmail(userDTO.getEmail());
+		user.setPassword(userDTO.getPassword());
+		user.setUsername(userDTO.getUsername());
+		
+		return daoimpl.getAllRatingsByUser(user);
 	}
 	
 	@Override

@@ -139,6 +139,11 @@ public class DAOimpl implements DAO {
 	public void deleteMap(Map map) {
 		sessionFactory.getCurrentSession().delete(map);
 	}
+	
+	@Override
+	public List<Map> getAllMapsByUser(User author){
+		return (List<Map>) sessionFactory.getCurrentSession().createCriteria(Map.class).add(Restrictions.eq("author", author)).list();
+	}
 
 	@Override
 	public Location getLocation(int id) {
@@ -321,5 +326,10 @@ public class DAOimpl implements DAO {
 	@Override
 	public List<Rating> getAllRatingsByCampaign(Campaign campaign) {
 		return (List<Rating>) sessionFactory.getCurrentSession().createCriteria(Rating.class).add(Restrictions.eq("campaign", campaign)).list();
+	}
+	
+	@Override
+	public List<Rating> getAllRatingsByUser(User user){
+		return (List<Rating>) sessionFactory.getCurrentSession().createCriteria(Rating.class).add(Restrictions.eq("user", user)).list();
 	}
 }
