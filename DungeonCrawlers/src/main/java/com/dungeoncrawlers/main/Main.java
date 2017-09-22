@@ -31,7 +31,7 @@ public class Main {
 		dao.updateUser(u);
 		System.out.println(dao.getUser(50).getUsername());*/
 		
-
+/*
 		User u = dao.getUser(50);
 		
 		Character c = new Character();
@@ -43,7 +43,7 @@ public class Main {
 		Character c2 = new Character();
 		c2.setAuthor(u);
 		c2.setName("Character3");
-
+*/
 		//dao.addCharacter(c);
 		//dao.addCharacter(c1);
 		//dao.addCharacter(c2);

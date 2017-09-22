@@ -41,7 +41,7 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public Campaign getCampaign(int id) {
-		return dao.getCampaign(id);
+		return daoimpl.getCampaign(id);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
 		
-		return dao.addCampaign(campaign);
+		return daoimpl.addCampaign(campaign);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
 		
-		return dao.updateCampaign(campaign);
+		return daoimpl.updateCampaign(campaign);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
 		
-		dao.deleteCampaign(campaign);
+		daoimpl.deleteCampaign(campaign);
 	}
 
 	@Override
@@ -96,18 +96,18 @@ public class ServiceImpl implements ServiceInterface{
 		author.setPassword(userDTO.getPassword());
 		author.setUsername(userDTO.getUsername());
 		
-		return dao.getAllCampaignsByUser(author);
+		return daoimpl.getAllCampaignsByUser(author);
 	}
 
 	@Override
 	public List<Campaign> getAllPublicCampaigns() {
-		return dao.getAllPublicCampaigns();
+		return daoimpl.getAllPublicCampaigns();
 	}
 
 	// to finish
 	@Override
 	public List<Campaign> sortByMostViewed() {
-		List<Campaign> campaigns = dao.getAllCampaigns();
+		List<Campaign> campaigns = daoimpl.getAllCampaigns();
 		for(Campaign c: campaigns) {
 			c.getNumViews();
 		}
@@ -117,7 +117,7 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public Chapter getChapter(int id) {
-		return dao.getChapter(id);
+		return daoimpl.getChapter(id);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setName(chapterDTO.getName());
 		chapter.setOrder(chapterDTO.getOrder());
 		
-		return dao.addChapter(chapter);
+		return daoimpl.addChapter(chapter);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setName(chapterDTO.getName());
 		chapter.setOrder(chapterDTO.getOrder());
 		
-		return dao.updateChapter(chapter);
+		return daoimpl.updateChapter(chapter);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setName(chapterDTO.getName());
 		chapter.setOrder(chapterDTO.getOrder());
 		
-		dao.deleteChapter(chapter);
+		daoimpl.deleteChapter(chapter);
 	}
 
 	@Override
@@ -168,12 +168,12 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
 		
-		return dao.getAllChaptersByCampaign(campaign);
+		return daoimpl.getAllChaptersByCampaign(campaign);
 	}
 
 	@Override
 	public Map getMap(int id) {
-		return dao.getMap(id);
+		return daoimpl.getMap(id);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class ServiceImpl implements ServiceInterface{
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
 		
-		return dao.addMap(map);
+		return daoimpl.addMap(map);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class ServiceImpl implements ServiceInterface{
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
 		
-		return dao.updateMap(map);
+		return daoimpl.updateMap(map);
 	}
 
 	@Override
@@ -203,12 +203,12 @@ public class ServiceImpl implements ServiceInterface{
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
 		
-		dao.deleteMap(map);
+		daoimpl.deleteMap(map);
 	}
 
 	@Override
 	public Location getLocation(int id) {
-		return dao.getLocation(id);
+		return daoimpl.getLocation(id);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class ServiceImpl implements ServiceInterface{
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
 		
-		return dao.addLocation(location);
+		return daoimpl.addLocation(location);
 	}
 
 	@Override
@@ -230,7 +230,7 @@ public class ServiceImpl implements ServiceInterface{
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
 		
-		return dao.updateLocation(location);
+		return daoimpl.updateLocation(location);
 	}
 
 	@Override
@@ -241,7 +241,7 @@ public class ServiceImpl implements ServiceInterface{
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
 		
-		dao.deleteLocation(location);
+		daoimpl.deleteLocation(location);
 	}
 
 	@Override
@@ -253,12 +253,12 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setName(chapterDTO.getName());
 		chapter.setOrder(chapterDTO.getOrder());
 		
-		return dao.getAllLocationsByChapter(chapter);
+		return daoimpl.getAllLocationsByChapter(chapter);
 	}
 
 	@Override
 	public Event getEvent(int id) {
-		return dao.getEvent(id);
+		return daoimpl.getEvent(id);
 	}
 
 	@Override
@@ -272,7 +272,7 @@ public class ServiceImpl implements ServiceInterface{
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
-		return dao.addEvent(event);
+		return daoimpl.addEvent(event);
 	}
 
 	@Override
@@ -286,7 +286,7 @@ public class ServiceImpl implements ServiceInterface{
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
-		return dao.updateEvent(event);
+		return daoimpl.updateEvent(event);
 	}
 
 	@Override
@@ -300,7 +300,7 @@ public class ServiceImpl implements ServiceInterface{
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
-		dao.deleteEvent(event);
+		daoimpl.deleteEvent(event);
 	}
 
 	@Override
@@ -311,12 +311,12 @@ public class ServiceImpl implements ServiceInterface{
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
 		
-		return dao.getAllEventsByLocation(location);
+		return daoimpl.getAllEventsByLocation(location);
 	}
 
 	@Override
 	public EventType getEventType(int id) {
-		return dao.getEventType(id);
+		return daoimpl.getEventType(id);
 	}
 
 	@Override
@@ -324,17 +324,17 @@ public class ServiceImpl implements ServiceInterface{
 		EventType eventType = new EventType();
 		eventType.setEvent(eventTypeDTO.getEvent());
 		
-		return dao.addEventType(eventType);
+		return daoimpl.addEventType(eventType);
 	}
 
 	@Override
 	public List<EventType> getAllEventTypes() {
-		return dao.getAllEventTypes();
+		return daoimpl.getAllEventTypes();
 	}
 
 	@Override
 	public Character getCharacter(int id) {
-		return dao.getCharacter(id);
+		return daoimpl.getCharacter(id);
 	}
 
 	@Override
@@ -344,7 +344,7 @@ public class ServiceImpl implements ServiceInterface{
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
-		return dao.addCharacter(character);
+		return daoimpl.addCharacter(character);
 	}
 
 	@Override
@@ -354,7 +354,7 @@ public class ServiceImpl implements ServiceInterface{
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
-		return dao.updateCharacter(character);
+		return daoimpl.updateCharacter(character);
 	}
 
 	@Override
@@ -364,7 +364,7 @@ public class ServiceImpl implements ServiceInterface{
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
-		dao.deleteCharacter(character);
+		daoimpl.deleteCharacter(character);
 	}
 
 	@Override
@@ -374,12 +374,12 @@ public class ServiceImpl implements ServiceInterface{
 		author.setPassword(userDTO.getPassword());
 		author.setUsername(userDTO.getUsername());
 		
-		return dao.getAllCharactersByUser(author);
+		return daoimpl.getAllCharactersByUser(author);
 	}
 
 	@Override
 	public Enemy getEnemy(int id) {
-		return dao.getEnemy(id);
+		return daoimpl.getEnemy(id);
 	}
 
 	@Override
@@ -389,7 +389,7 @@ public class ServiceImpl implements ServiceInterface{
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
-		return dao.addEnemy(enemy);
+		return daoimpl.addEnemy(enemy);
 	}
 
 	@Override
@@ -399,7 +399,7 @@ public class ServiceImpl implements ServiceInterface{
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
-		return dao.updateEnemy(enemy);
+		return daoimpl.updateEnemy(enemy);
 	}
 
 	@Override
@@ -409,7 +409,7 @@ public class ServiceImpl implements ServiceInterface{
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
-		dao.deleteEnemy(enemy);
+		daoimpl.deleteEnemy(enemy);
 	}
 
 	@Override
@@ -423,7 +423,7 @@ public class ServiceImpl implements ServiceInterface{
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
-		return dao.getAllEnemiesByEvent(event);
+		return daoimpl.getAllEnemiesByEvent(event);
 	}
 
 	@Override
@@ -433,12 +433,12 @@ public class ServiceImpl implements ServiceInterface{
 		author.setPassword(userDTO.getPassword());
 		author.setUsername(userDTO.getUsername());
 		
-		return dao.getAllEnemiesByUser(author);
+		return daoimpl.getAllEnemiesByUser(author);
 	}
 
 	@Override
 	public NonPlayableCharacter getNonPlayableCharacter(int id) {
-		return dao.getNonPlayableCharacter(id);
+		return daoimpl.getNonPlayableCharacter(id);
 	}
 
 	@Override
@@ -448,7 +448,7 @@ public class ServiceImpl implements ServiceInterface{
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
-		return dao.addNonPlayableCharacter(npc);
+		return daoimpl.addNonPlayableCharacter(npc);
 	}
 
 	@Override
@@ -458,7 +458,7 @@ public class ServiceImpl implements ServiceInterface{
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
-		return dao.updateNonPlayableCharacter(npc);
+		return daoimpl.updateNonPlayableCharacter(npc);
 	}
 
 	@Override
@@ -468,7 +468,7 @@ public class ServiceImpl implements ServiceInterface{
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
-		dao.deleteNonPlayableCharacter(npc);
+		daoimpl.deleteNonPlayableCharacter(npc);
 	}
 
 	@Override
@@ -482,7 +482,7 @@ public class ServiceImpl implements ServiceInterface{
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
-		return dao.getAllNonPlayableCharactersByEvent(event);
+		return daoimpl.getAllNonPlayableCharactersByEvent(event);
 	}
 
 	@Override
@@ -492,12 +492,12 @@ public class ServiceImpl implements ServiceInterface{
 		author.setPassword(userDTO.getPassword());
 		author.setUsername(userDTO.getUsername());
 		
-		return dao.getAllNonPlayableCharactersByUser(author);
+		return daoimpl.getAllNonPlayableCharactersByUser(author);
 	}
 
 	@Override
 	public Rating getRating(int id) {
-		return dao.getRating(id);
+		return daoimpl.getRating(id);
 	}
 
 	@Override
@@ -507,7 +507,7 @@ public class ServiceImpl implements ServiceInterface{
 		rating.setRating(ratingDTO.getRating());
 		rating.setUser(ratingDTO.getUser());
 		
-		return dao.addRating(rating);
+		return daoimpl.addRating(rating);
 	}
 
 	@Override
@@ -517,7 +517,7 @@ public class ServiceImpl implements ServiceInterface{
 		rating.setRating(ratingDTO.getRating());
 		rating.setUser(ratingDTO.getUser());
 		
-		return dao.updateRating(rating);
+		return daoimpl.updateRating(rating);
 	}
 
 	@Override
@@ -532,14 +532,14 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
 		
-		return dao.getAllRatingsByCampaign(campaign);
+		return daoimpl.getAllRatingsByCampaign(campaign);
 	}
 	
 	@Override
 	public void updateAllCampaignRatings() {
-		List<Campaign> campaigns = dao.getAllCampaigns();
+		List<Campaign> campaigns = daoimpl.getAllCampaigns();
 		for(Campaign c: campaigns) {
-			List<Rating> ratings = dao.getAllRatingsByCampaign(c);
+			List<Rating> ratings = daoimpl.getAllRatingsByCampaign(c);
 			float total = 0;
 			int count = 0;
 			for(Rating r: ratings) {
@@ -547,7 +547,7 @@ public class ServiceImpl implements ServiceInterface{
 				count ++;
 			}
 			c.setRating(total/count);
-			dao.updateCampaign(c);
+			daoimpl.updateCampaign(c);
 		}
 	}
 }
