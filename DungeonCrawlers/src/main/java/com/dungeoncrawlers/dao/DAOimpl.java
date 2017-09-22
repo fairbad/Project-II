@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dungeoncrawlers.beans.Campaign;
@@ -19,9 +21,11 @@ import com.dungeoncrawlers.beans.NonPlayableCharacter;
 import com.dungeoncrawlers.beans.Rating;
 import com.dungeoncrawlers.beans.User;
 
+@Repository
 @Transactional
 public class DAOimpl implements DAO {
 
+	@Autowired
 	private SessionFactory sessionFactory;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {

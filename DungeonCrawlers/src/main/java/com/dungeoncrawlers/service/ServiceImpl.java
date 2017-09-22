@@ -33,10 +33,10 @@ import com.dungeoncrawlers.dto.UserDTO;
 public class ServiceImpl implements ServiceInterface{
 	
 	@Autowired
-	private DAO dao;
+	private DAO daoimpl;
 	
-	public void setDao(DAO dao) {
-		this.dao = dao;
+	public void setDao(DAO daoimpl) {
+		this.daoimpl = daoimpl;
 	}
 
 	@Override
