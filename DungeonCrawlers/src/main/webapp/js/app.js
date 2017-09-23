@@ -2,7 +2,6 @@ var dndApp = angular.module("dndApp", ["ui.router"]);
 
 dndApp.config(function($stateProvider, $urlRouterProvider){
 	console.log("init dndApp");
-
 	$stateProvider
 	.state("login",{
 		url:"/login",
