@@ -1,7 +1,11 @@
-var dndApp = angular.module("dndApp", ["ui.router"]);
+/**
+ * 
+ */
+var DungeonCrawlers = angular.module("DungeonCrawlers",["ui.router"]);
 
-dndApp.config(function($stateProvider, $urlRouterProvider){
-	console.log("init dndApp");
+DungeonCrawlers.config(function($stateProvider, $urlRouterProvider){
+	console.log("init bank app..");
+
 	$stateProvider
 	.state("login",{
 		url:"/login",
@@ -17,39 +21,26 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
 		url:"/home",
 		templateUrl: "templates/home.html",
 		controller: "HomeCtrl as home"
-	})
-	.state("editUser",{
-		url:"/editUser",
-		templateUrl: "templates/editUser.html",
-		controller: "EditCtrl as edit user"
-	});
+	});	
 });
 
-dndApp.service("UserService", function($http, $q){
-	console.log("in userService");
-
+DungeonCrawlers.service("ServiceInterface",function($http,$q){
+	console.log("In Service Inside the javaScript");
 	var service = this;
-
 	service.user={
-			username : "",
-			password : "",
-			email : "",
+			email :"",
+			password :"",
 			authenticated : false
 	};
-
-	service.getUser= function(){
+	service.getUser = function(){
 		return service.user;
 	};
-
 	service.setUser = function(data){
-		service.user.username = data.username;
-		service.user.password = data.password;
 		service.user.email = data.email;
+		service.user.password = data.password;
 		service.user.authenticated = data.authenticated;
 	};
-
 	service.authenticateUser = function(){
-		console.log("Inside the login")
 		var promise = $http.post(
 				'rest/user/auth', service.user)
 				.then(
@@ -63,8 +54,8 @@ dndApp.service("UserService", function($http, $q){
 				);
 		return promise;
 	};
-
 	service.registerUser = function(){
+
 		var promise;
 
 		promise = $http.post(
@@ -79,12 +70,12 @@ dndApp.service("UserService", function($http, $q){
 					return $q.reject(error);
 				}
 		);
+
 		return promise;
 	};
-
+	
 });
-
-dndApp.controller("LoginCtrl", function(UserService, $state){
+DungeonCrawlers.controller("LoginCtrl", function(UserService, $state){
 	console.log("in loginctrl");
 
 	var login = this;
@@ -96,13 +87,11 @@ dndApp.controller("LoginCtrl", function(UserService, $state){
 	
 		promise.then(
 				function(response){
-					console.log('response= '+response.data);
-
-					if(response.data && login.user){
+					if(login.user!= null){
 						login.user.authenticated = true;
-						UserService.setUser(response.data);
+						ServiceInterface.setUser(response.data);
 						console.log("setting user in login ctrl")
-						console.log(UserService.getUser());
+						console.log(ServiceInterface.getUser());
 						$state.go("home");
 					} else{
 						alert("Invalid login!");
@@ -114,28 +103,3 @@ dndApp.controller("LoginCtrl", function(UserService, $state){
 	};
 });
 
-dndApp.controller("RegisterCtrl", function(UserService, $state){
-	console.log("in registerctrl");
-	var register = this;
-
-	register.user = UserService.getUser();
-	register.doRegister = function(){
-
-		var promise = UserService.registerUser();
-
-		promise.then(
-				function(response){
-					console.log("setting data");
-					console.log(response.data);
-					UserService.setUser(response.data);
-					$state.go('login');
-				}, function(error){
-					console.log(error);
-				}	
-		)
-	}
-});
-
-dndApp.controller("NavCtrl", function($state){
-	console.log("in navctrl");
-})

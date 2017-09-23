@@ -26,6 +26,8 @@ public interface DAO {
 	public User addUser(User user);
 	
 	public User updateUser(User user);
+	//Add this
+	public User findUserByEmail(String username);
 	
 	/*
 	 * Campaign Operations
