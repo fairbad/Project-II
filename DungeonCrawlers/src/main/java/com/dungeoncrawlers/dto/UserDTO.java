@@ -1,5 +1,4 @@
 package com.dungeoncrawlers.dto;
-
 public class UserDTO {
 	private int id;
 	
@@ -8,15 +7,20 @@ public class UserDTO {
 	private String email;
 	
 	private String password;
-
-	public UserDTO() {}
 	
-	public UserDTO(int id, String username, String email, String password) {
+	private boolean authenticated;
+
+	public UserDTO() {
+		super();
+	}
+
+	public UserDTO(int id, String username, String email, String password, boolean authenticated) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.authenticated = authenticated;
 	}
 
 	public int getId() {
@@ -50,4 +54,20 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isAuthenticated() {
+		return authenticated;
+	}
+
+	public void setAuthenticated(boolean authenticated) {
+		this.authenticated = authenticated;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", authenticated=" + authenticated + "]";
+	}
+	
+	
 }

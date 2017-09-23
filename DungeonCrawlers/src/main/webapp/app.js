@@ -87,7 +87,7 @@ DungeonCrawlers.controller("LoginCtrl", function(UserService, $state){
 	
 		promise.then(
 				function(response){
-					if(response && login.user){
+					if(login.user!= null){
 						login.user.authenticated = true;
 						ServiceInterface.setUser(response.data);
 						console.log("setting user in login ctrl")
