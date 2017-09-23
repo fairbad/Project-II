@@ -1,6 +1,6 @@
 var dndApp = angular.module("dndApp", ["ui.router"]);
 
-dndApp.config(function($statProvider, $urlRouterProvider){
+dndApp.config(function($stateProvider, $urlRouterProvider){
 	console.log("init app");
 	
 	$stateProvider
@@ -23,3 +23,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state){
 dndApp.controller("RegisterCtrl", function(UserService, $state){
 	console.log("in registerCtrl");
 });
+
+dndApp.controller("NavCtrl", function($state){
+	console.log("in navctrl");
+})
