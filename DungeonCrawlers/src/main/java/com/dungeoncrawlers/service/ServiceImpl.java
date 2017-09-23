@@ -47,11 +47,11 @@ public class ServiceImpl implements ServiceInterface{
 	
 	@Override
 	public User addUser(UserDTO userDTO) {
+		System.out.println(userDTO.getEmail() + " " + userDTO.getPassword() + " " + userDTO.getUsername());
 		User user = new User();
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
 		user.setUsername(userDTO.getUsername());
-		
 		return daoimpl.addUser(user);
 	}
 	
