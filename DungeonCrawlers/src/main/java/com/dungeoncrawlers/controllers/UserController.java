@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dungeoncrawlers.service.ServiceInterface;
 
-@RestController
-@RequestMapping(value="/user")
+//@RestController
+//@RequestMapping(value="/user")
 public class UserController {
 
-	@Autowired
+	//@Autowired
 	private ServiceInterface serviceImpl;
 
 	public void setServiceImpl(ServiceInterface serviceImpl) {

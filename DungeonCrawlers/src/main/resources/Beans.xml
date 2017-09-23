@@ -48,9 +48,9 @@
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
 	
-	<!-- DAO -->
+	<!-- DAO
 	<bean id="myDao" class="com.dungeoncrawlers.dao.DAOimpl">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
-
+ -->
 </beans>
