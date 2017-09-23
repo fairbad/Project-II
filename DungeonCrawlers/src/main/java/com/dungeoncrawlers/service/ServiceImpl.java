@@ -40,6 +40,32 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
+	public User getUser(int id) {
+		return daoimpl.getUser(id);
+		
+	}
+	
+	@Override
+	public User addUser(UserDTO userDTO) {
+		User user = new User();
+		user.setEmail(userDTO.getEmail());
+		user.setPassword(userDTO.getPassword());
+		user.setUsername(userDTO.getUsername());
+		
+		return daoimpl.addUser(user);
+	}
+	
+	@Override
+	public User updateUser(UserDTO userDTO) {
+		User user = new User();
+		user.setEmail(userDTO.getEmail());
+		user.setPassword(userDTO.getPassword());
+		user.setUsername(userDTO.getUsername());
+		
+		return daoimpl.updateUser(user);
+	}
+	
+	@Override
 	public Campaign getCampaign(int id) {
 		return daoimpl.getCampaign(id);
 	}

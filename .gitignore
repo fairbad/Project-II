@@ -44,6 +44,7 @@ Desktop.ini
 ######################
  
 *.pydevproject
+Servers
 .project
 .metadata
 .recommenders

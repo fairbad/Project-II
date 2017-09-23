@@ -38,7 +38,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 	</bean>
@@ -48,9 +48,9 @@
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
 	
-	<!-- DAO -->
+	<!-- DAO
 	<bean id="myDao" class="com.dungeoncrawlers.dao.DAOimpl">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
-
+ -->
 </beans>
