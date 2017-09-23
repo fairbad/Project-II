@@ -28,7 +28,7 @@ public class UserController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO){
 		System.out.println("creating new user");
-		serviceimpl.add(userDTO);
+		serviceimpl.addUser(userDTO);
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 }
