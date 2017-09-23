@@ -1,5 +1,6 @@
 package com.dungeoncrawlers.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -35,6 +36,17 @@ public class DAOimpl implements DAO {
 	@Override
 	public User getUser(int id) {
 		return (User)sessionFactory.getCurrentSession().get(User.class, id);
+	}
+	@Override
+	//Add this
+	public User findUserByEmail(String email) {
+		System.out.println("Inside the find user DAO");
+		ArrayList<User> list = (ArrayList<User>) sessionFactory
+				.getCurrentSession()
+				.createQuery("from User where lower(email)=?")
+				.setParameter(0, email.toLowerCase()).list();
+		if(list.size()==0)return null;
+		else { return list.get(0);}
 	}
 
 	@Override
