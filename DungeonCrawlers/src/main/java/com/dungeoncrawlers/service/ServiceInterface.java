@@ -30,12 +30,12 @@ public interface ServiceInterface {
 	/*
 	 * User Operations
 	 */
-	
 	public User getUser(int id);
 	
 	public User addUser(UserDTO userDTO);
 	
 	public User updateUser(UserDTO userDTO);
+	
 	public UserDTO authenticateUser(UserDTO userDto);
 	
 	/*
