@@ -13,6 +13,25 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
 		url:"/register",
 		templateUrl:"templates/register.html",
 		controller: "RegisterCtrl as register"
+	})
+	.state("create",{
+		url:"/create",
+		templateUrl: "templates/create.html"
+	})
+	.state("create.character",{
+		url:"/character",
+		templateUrl: "templates/character.html",
+		controller: "CharacterCtrl as character"
+	})
+	.state("create.NPC",{
+		url:"/NPC",
+		templateUrl: "templates/NPC.html",
+		controller: "NPCCtrl as NPC"
+	})
+	.state("create.enemy",{
+		url:"/enemy",
+		templateUrl: "templates/enemy.html",
+		controller: "EnemyCtrl as enemy"
 	});
 });
 
@@ -98,6 +117,18 @@ dndApp.controller("RegisterCtrl", function(UserService, $state){
 				}	
 		)
 	}
+});
+
+dndApp.controller("CharacterCtrl", function(UserService, $state){
+	console.log("in CharacterCtrl");
+});
+
+dndApp.controller("NPCCtrl", function(UserService, $state){
+	console.log("in NPCCtrl");
+});
+
+dndApp.controller("EnemyCtrl", function(UserService, $state){
+	console.log("in EnemyCtrl");
 });
 
 dndApp.controller("NavCtrl", function($state){
