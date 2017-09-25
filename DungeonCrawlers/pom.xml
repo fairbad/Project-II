@@ -129,7 +129,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>TomcatServer</server>
-					<path>/DungeonCrawlers</path>
+					<path>/mkyongWebApp</path>
 				</configuration>
 			</plugin>
 		</plugins>
