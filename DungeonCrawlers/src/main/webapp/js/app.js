@@ -13,6 +13,11 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
 		url:"/register",
 		templateUrl:"templates/register.html",
 		controller: "RegisterCtrl as register"
+	})
+	.state("home",{
+		url:"/home",
+		templateUrl:"templates/home.html",
+		controller:"HomeCtrl as home"
 	});
 });
 
@@ -76,6 +81,30 @@ dndApp.service("UserService", function($http, $q){
 
 dndApp.controller("LoginCtrl", function(UserService, $state){
 	console.log("in loginCtrl");
+	
+	var login = this;
+	login.user = UserService.getUser();
+
+	login.doLogin = function(){
+		console.log("about to authenticate user");
+		var promise = UserService.authenticateUser();
+	
+		promise.then(
+				function(response){
+					if(response && login.user){
+						login.user.authenticated = true;
+						ServiceInterface.setUser(response.data);
+						console.log("setting user in login ctrl")
+						console.log(ServiceInterface.getUser());
+						$state.go("home");
+					} else{
+						alert("Invalid login!");
+					}
+				},function(error){
+					console.log(error);
+				});
+	
+	};
 });
 
 dndApp.controller("RegisterCtrl", function(UserService, $state){
