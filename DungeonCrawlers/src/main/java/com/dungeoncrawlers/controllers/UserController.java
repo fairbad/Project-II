@@ -36,10 +36,11 @@ public class UserController {
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO> 
-        authenticateUser(@RequestBody UserDTO userDto){ 
+        authenticateUser(@RequestBody UserDTO userDTO){ 
         System.out.println("Inside the user Login Conntroller");
-        
-        return new ResponseEntity<UserDTO>(serviceimpl.authenticateUser(userDto),HttpStatus.OK);
+        System.out.println("Controller after authentication: " + serviceimpl.authenticateUser(userDTO).toString());
+        serviceimpl.authenticateUser(userDTO);
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 
     @RequestMapping(value="/editUser", method= {RequestMethod.POST},

@@ -36,7 +36,7 @@ public interface ServiceInterface {
 	
 	public User updateUser(UserDTO userDTO);
 	
-	public UserDTO authenticateUser(UserDTO userDto);
+	public User authenticateUser(UserDTO userDto);
 	
 	/*
 	 * Campaign Operations

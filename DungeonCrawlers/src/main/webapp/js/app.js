@@ -51,8 +51,8 @@ dndApp.service("UserService", function($http, $q){
 
 	service.authenticateUser = function(){
 		var promise = $http.post(
-		'rest/user/auth', service.user)
-		.then(
+		'rest/user/auth', service.user
+		).then(
 				function(response){
 					console.log(response);
 					return response;
@@ -108,15 +108,12 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
         var promise = UserService.authenticateUser();
 
         promise.then(function(response) {
-            console.log('response= ' + response.data);
-
-            if (response.data && login.user) {
+            if (login.user && respone.data) {
                 login.user.authenticated = true;
+                console.log(response.data);
                 UserService.setUser(response.data);
                 console.log("setting user in login ctrl")
                 console.log(UserService.getUser());
-                //session.setUser(data.user);
-                //console.log('Current User' + session.getUser)
                 $state.go("home");
             } else {
                 alert("Invalid login!");
