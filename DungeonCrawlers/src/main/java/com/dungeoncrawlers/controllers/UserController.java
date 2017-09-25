@@ -31,4 +31,32 @@ public class UserController {
 		serviceimpl.addUser(userDTO);
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
+	
+	 @RequestMapping(value="/auth", method= {RequestMethod.POST},
+            consumes= {MediaType.APPLICATION_JSON_VALUE},
+            produces= {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<UserDTO> 
+        authenticateUser(@RequestBody UserDTO userDto){ 
+        System.out.println("Inside the user Login Conntroller");
+        
+        return new ResponseEntity<UserDTO>(serviceimpl.authenticateUser(userDto),HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/editUser", method= {RequestMethod.POST},
+            consumes= {MediaType.APPLICATION_JSON_VALUE},
+            produces= {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<UserDTO>    edtiUser(@RequestBody UserDTO userDTO){
+        System.out.println("Inside the Edit User Conntroller");
+        serviceimpl.updateUser(userDTO);
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value="/homeView", method= {RequestMethod.POST},
+            consumes= {MediaType.APPLICATION_JSON_VALUE},
+            produces= {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<UserDTO>    getUser(@RequestBody UserDTO userDTO){
+        System.out.println("Inside the Edit User Conntroller");
+        serviceimpl.getUser(userDTO.getId());
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+    }
 }

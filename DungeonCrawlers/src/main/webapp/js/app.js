@@ -18,7 +18,12 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
 		url:"/home",
 		templateUrl:"templates/home.html",
 		controller:"HomeCtrl as home"
-	});
+	})
+	.state("editUser",{
+        url:"/editUser",
+        templateUrl:"templates/editUser.html",
+        controller:"EditCtrl as editUser"
+    });
 });
 
 dndApp.service("UserService", function($http, $q){
@@ -46,16 +51,16 @@ dndApp.service("UserService", function($http, $q){
 
 	service.authenticateUser = function(){
 		var promise = $http.post(
-				'rest/user/auth', service.user)
-				.then(
-						function(response){
-							console.log(response);
-							return response;
-						},
-						function(error){
-							console.log('login promise fail');
-						}
-				);
+		'rest/user/auth', service.user)
+		.then(
+				function(response){
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('login promise fail');
+				}
+		);
 		return promise;
 	};
 
@@ -76,35 +81,51 @@ dndApp.service("UserService", function($http, $q){
 		);
 		return promise;
 	};
+	
+	service.homeView = function(){
+        var promise;
+        promise = $http.get('rest/user/home').then(function(response){
+            console.log(response);
+            return response;
+            
+        }, function(error){
+            console.log('Show User promise failed');
+            return $q.reject(error);
+        });
+        return promise;
+    };
 
 });
 
-dndApp.controller("LoginCtrl", function(UserService, $state){
-	console.log("in loginCtrl");
-	
-	var login = this;
-	login.user = UserService.getUser();
+dndApp.controller("LoginCtrl", function(UserService, $state) {
+    console.log("in loginctrl");
 
-	login.doLogin = function(){
-		console.log("about to authenticate user");
-		var promise = UserService.authenticateUser();
-	
-		promise.then(
-				function(response){
-					if(response && login.user){
-						login.user.authenticated = true;
-						ServiceInterface.setUser(response.data);
-						console.log("setting user in login ctrl")
-						console.log(ServiceInterface.getUser());
-						$state.go("home");
-					} else{
-						alert("Invalid login!");
-					}
-				},function(error){
-					console.log(error);
-				});
-	
-	};
+    var login = this;
+    login.user = UserService.getUser();
+
+    login.doLogin = function() {
+        console.log("about to authenticate user");
+        var promise = UserService.authenticateUser();
+
+        promise.then(function(response) {
+            console.log('response= ' + response.data);
+
+            if (response.data && login.user) {
+                login.user.authenticated = true;
+                UserService.setUser(response.data);
+                console.log("setting user in login ctrl")
+                console.log(UserService.getUser());
+                //session.setUser(data.user);
+                //console.log('Current User' + session.getUser)
+                $state.go("home");
+            } else {
+                alert("Invalid login!");
+            }
+        }, function(error) {
+            console.log(error);
+        });
+
+    };
 });
 
 dndApp.controller("RegisterCtrl", function(UserService, $state){
@@ -121,7 +142,7 @@ dndApp.controller("RegisterCtrl", function(UserService, $state){
 					console.log("setting data");
 					console.log(response.data);
 					UserService.setUser(response.data);
-					$state.go('login');
+					$state.go("home");
 				}, function(error){
 					console.log(error);
 				}	
@@ -129,6 +150,12 @@ dndApp.controller("RegisterCtrl", function(UserService, $state){
 	}
 });
 
+dndApp.controller("HomeCtrl",function(UserService,$state){
+    console.log("in the Home Control")
+    var home = this;
+    home.user = UserService.getUser();
+});
+
 dndApp.controller("NavCtrl", function($state){
 	console.log("in navctrl");
-})
+});
