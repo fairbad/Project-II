@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.UserDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
 
@@ -27,7 +28,6 @@ public class UserController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO){
-		System.out.println("creating new user");
 		serviceimpl.addUser(userDTO);
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
@@ -37,9 +37,7 @@ public class UserController {
             produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO> 
         authenticateUser(@RequestBody UserDTO userDTO){ 
-        System.out.println("Inside the user Login Conntroller");
-        System.out.println("Controller after authentication: " + serviceimpl.authenticateUser(userDTO).toString());
-        serviceimpl.authenticateUser(userDTO);
+        userDTO = serviceimpl.authenticateUser(userDTO);
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 
@@ -47,7 +45,7 @@ public class UserController {
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO>    edtiUser(@RequestBody UserDTO userDTO){
-        System.out.println("Inside the Edit User Conntroller");
+        System.out.println("Inside the Edit User Controller");
         serviceimpl.updateUser(userDTO);
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
@@ -56,7 +54,7 @@ public class UserController {
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO>    getUser(@RequestBody UserDTO userDTO){
-        System.out.println("Inside the Edit User Conntroller");
+        System.out.println("Inside the Home Controller");
         serviceimpl.getUser(userDTO.getId());
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }

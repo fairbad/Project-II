@@ -40,15 +40,14 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public User authenticateUser(UserDTO userDto) {
+	public UserDTO authenticateUser(UserDTO userDto) {
 		User user = daoimpl.getUser(userDto.getEmail(), userDto.getPassword());
-
 		if (user == null)
 			return null;
 		
-		System.out.println(user.toString());
-		userDto.setAuthenticated(true);
-		return user;
+		//TODO: This is kinda jacked up at the moment. Instead, the DAO might want to return the UserDTO.
+		UserDTO tmp = new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), true);
+		return tmp;
 	}
 	
 	@Override
