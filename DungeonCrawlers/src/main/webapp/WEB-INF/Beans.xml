@@ -21,6 +21,12 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.dungeoncrawlers"/>
 	
+	<!-- 
+	driver=oracle.jdbc.driver.OracleDriver
+	url=jdbc\:oracle\:thin\:@//mydatabase.clowtjmlyf7s.us-east-2.rds.amazonaws.com:1521/ORCL
+	usr=MyDatabase
+	pwd=p4ssw0rd
+	 -->
 	<!-- database -->
 	<bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
