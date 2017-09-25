@@ -23,7 +23,27 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
         url:"/editUser",
         templateUrl:"templates/editUser.html",
         controller:"EditCtrl as editUser"
-    });
+    })
+	.state("create",{
+		url:"/create",
+		templateUrl: "templates/create.html"
+	})
+	.state("create.character",{
+		url:"/character",
+		templateUrl: "templates/character.html",
+		controller: "CharacterCtrl as character"
+	})
+	.state("create.NPC",{
+		url:"/NPC",
+		templateUrl: "templates/NPC.html",
+		controller: "NPCCtrl as NPC"
+	})
+	.state("create.enemy",{
+		url:"/enemy",
+		templateUrl: "templates/enemy.html",
+		controller: "EnemyCtrl as enemy"
+	});
+
 });
 
 dndApp.service("UserService", function($http, $q){
@@ -154,6 +174,18 @@ dndApp.controller("HomeCtrl",function(UserService,$state){
     console.log("in the Home Control")
     var home = this;
     home.user = UserService.getUser();
+});
+
+dndApp.controller("CharacterCtrl", function(UserService, $state){
+	console.log("in CharacterCtrl");
+});
+
+dndApp.controller("NPCCtrl", function(UserService, $state){
+	console.log("in NPCCtrl");
+});
+
+dndApp.controller("EnemyCtrl", function(UserService, $state){
+	console.log("in EnemyCtrl");
 });
 
 dndApp.controller("NavCtrl", function($state){
