@@ -148,7 +148,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.addChapter(chapter);
 	}
@@ -160,7 +159,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.updateChapter(chapter);
 	}
@@ -172,7 +170,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		daoimpl.deleteChapter(chapter);
 	}
@@ -282,7 +279,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.getAllLocationsByChapter(chapter);
 	}
