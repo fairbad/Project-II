@@ -1,5 +1,8 @@
 package com.dungeoncrawlers.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,9 +38,11 @@ public class UserController {
 	 @RequestMapping(value="/auth", method= {RequestMethod.POST},
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<UserDTO> 
-        authenticateUser(@RequestBody UserDTO userDTO){ 
+    public ResponseEntity<UserDTO>
+        authenticateUser(HttpServletRequest req, @RequestBody UserDTO userDTO){ 
         userDTO = serviceimpl.authenticateUser(userDTO);
+        HttpSession session = req.getSession(true);
+        session.setAttribute("currentUser", serviceimpl.getUser(userDTO.getId()));
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 

@@ -83,7 +83,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Campaign addCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
-		campaign.setAuthor(campaignDTO.getAuthor());
+		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
 		campaign.setMap(campaignDTO.getMap());
@@ -98,7 +98,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Campaign updateCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
-		campaign.setAuthor(campaignDTO.getAuthor());
+		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
 		campaign.setMap(campaignDTO.getMap());
@@ -113,7 +113,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
-		campaign.setAuthor(campaignDTO.getAuthor());
+		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
 		campaign.setMap(campaignDTO.getMap());
@@ -127,12 +127,12 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO) {
-		User author = new User();
-		author.setEmail(userDTO.getEmail());
-		author.setPassword(userDTO.getPassword());
-		author.setUsername(userDTO.getUsername());
+		User User = new User();
+		User.setEmail(userDTO.getEmail());
+		User.setPassword(userDTO.getPassword());
+		User.setUsername(userDTO.getUsername());
 		
-		return daoimpl.getAllCampaignsByUser(author);
+		return daoimpl.getAllCampaignsByUser(User);
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public List<Chapter> getAllChaptersByCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
-		campaign.setAuthor(campaignDTO.getAuthor());
+		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
 		campaign.setMap(campaignDTO.getMap());
@@ -233,12 +233,12 @@ public class ServiceImpl implements ServiceInterface{
 	
 	@Override
 	public List<Map> getAllMapsByUser(UserDTO userDTO){
-		User author = new User();
-		author.setEmail(userDTO.getEmail());
-		author.setPassword(userDTO.getPassword());
-		author.setUsername(userDTO.getUsername());
+		User User = new User();
+		User.setEmail(userDTO.getEmail());
+		User.setPassword(userDTO.getPassword());
+		User.setUsername(userDTO.getUsername());
 		
-		return daoimpl.getAllMapsByUser(author);
+		return daoimpl.getAllMapsByUser(User);
 	}
 
 	@Override
@@ -375,7 +375,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Character addCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
-		character.setAuthor(characterDTO.getAuthor());
+		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
@@ -385,7 +385,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Character updateCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
-		character.setAuthor(characterDTO.getAuthor());
+		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
@@ -395,7 +395,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
-		character.setAuthor(characterDTO.getAuthor());
+		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
 		
@@ -404,12 +404,12 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public List<Character> getAllCharactersByUser(UserDTO userDTO) {
-		User author = new User();
-		author.setEmail(userDTO.getEmail());
-		author.setPassword(userDTO.getPassword());
-		author.setUsername(userDTO.getUsername());
+		User User = new User();
+		User.setEmail(userDTO.getEmail());
+		User.setPassword(userDTO.getPassword());
+		User.setUsername(userDTO.getUsername());
 		
-		return daoimpl.getAllCharactersByUser(author);
+		return daoimpl.getAllCharactersByUser(User);
 	}
 
 	@Override
@@ -420,7 +420,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Enemy addEnemy(EnemyDTO enemyDTO) {
 		Enemy enemy = new Enemy();
-		enemy.setAuthor(enemyDTO.getAuthor());
+		enemy.setUser(enemyDTO.getUser());
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
@@ -430,7 +430,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Enemy updateEnemy(EnemyDTO enemyDTO) {
 		Enemy enemy = new Enemy();
-		enemy.setAuthor(enemyDTO.getAuthor());
+		enemy.setUser(enemyDTO.getUser());
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
@@ -440,7 +440,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteEnemy(EnemyDTO enemyDTO) {
 		Enemy enemy = new Enemy();
-		enemy.setAuthor(enemyDTO.getAuthor());
+		enemy.setUser(enemyDTO.getUser());
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
 		
@@ -463,12 +463,12 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public List<Enemy> getAllEnemiesByUser(UserDTO userDTO) {
-		User author = new User();
-		author.setEmail(userDTO.getEmail());
-		author.setPassword(userDTO.getPassword());
-		author.setUsername(userDTO.getUsername());
+		User User = new User();
+		User.setEmail(userDTO.getEmail());
+		User.setPassword(userDTO.getPassword());
+		User.setUsername(userDTO.getUsername());
 		
-		return daoimpl.getAllEnemiesByUser(author);
+		return daoimpl.getAllEnemiesByUser(User);
 	}
 
 	@Override
@@ -479,7 +479,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public NonPlayableCharacter addNonPlayableCharacter(NPCDTO npcDTO) {
 		NonPlayableCharacter npc = new NonPlayableCharacter();
-		npc.setAuthor(npcDTO.getAuthor());
+		npc.setUser(npcDTO.getUser());
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
@@ -489,7 +489,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public NonPlayableCharacter updateNonPlayableCharacter(NPCDTO npcDTO) {
 		NonPlayableCharacter npc = new NonPlayableCharacter();
-		npc.setAuthor(npcDTO.getAuthor());
+		npc.setUser(npcDTO.getUser());
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
@@ -499,7 +499,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteNonPlayableCharacter(NPCDTO npcDTO) {
 		NonPlayableCharacter npc = new NonPlayableCharacter();
-		npc.setAuthor(npcDTO.getAuthor());
+		npc.setUser(npcDTO.getUser());
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
 		
@@ -522,12 +522,12 @@ public class ServiceImpl implements ServiceInterface{
 
 	@Override
 	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(UserDTO userDTO) {
-		User author = new User();
-		author.setEmail(userDTO.getEmail());
-		author.setPassword(userDTO.getPassword());
-		author.setUsername(userDTO.getUsername());
+		User User = new User();
+		User.setEmail(userDTO.getEmail());
+		User.setPassword(userDTO.getPassword());
+		User.setUsername(userDTO.getUsername());
 		
-		return daoimpl.getAllNonPlayableCharactersByUser(author);
+		return daoimpl.getAllNonPlayableCharactersByUser(User);
 	}
 
 	@Override
@@ -558,7 +558,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public List<Rating> getAllRatingsByCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
-		campaign.setAuthor(campaignDTO.getAuthor());
+		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
 		campaign.setMap(campaignDTO.getMap());

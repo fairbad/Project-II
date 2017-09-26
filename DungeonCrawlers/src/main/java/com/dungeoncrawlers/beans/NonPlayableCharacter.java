@@ -24,7 +24,7 @@ public class NonPlayableCharacter implements Serializable{
 
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
 	@JoinColumn(name="USER_ID", nullable = false)
-	private User author;
+	private User user;
     
     public NonPlayableCharacter() {}
 
@@ -33,7 +33,7 @@ public class NonPlayableCharacter implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		this.author = author;
+		this.user = author;
 	}
 
 	public int getId() {
@@ -60,12 +60,12 @@ public class NonPlayableCharacter implements Serializable{
 		this.image = image;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User author) {
+		this.user = author;
 	}
 	
 }
