@@ -32,9 +32,8 @@ public class CreatorController {
 	@RequestMapping(value="/createCharacter", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CharacterDTO> createCharacter(HttpServletRequest req, @RequestBody CharacterDTO characterDTO){
+	public ResponseEntity<CharacterDTO> createCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
 		System.out.println("creating new character");
-        HttpSession session = req.getSession(true);
         User currentUser = (User) session.getAttribute("currentUser");
         characterDTO.setUser(currentUser);
 		characterDTO.setId(serviceimpl.addCharacter(characterDTO).getId());
