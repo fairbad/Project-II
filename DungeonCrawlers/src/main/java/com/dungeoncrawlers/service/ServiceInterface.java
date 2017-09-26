@@ -47,6 +47,8 @@ public interface ServiceInterface {
 	
 	public Campaign updateCampaign(CampaignDTO campaignDTO);
 	
+	public Campaign updateCampaignMap(Campaign campaign, MapDTO mapDTO);
+	
 	public void deleteCampaign(CampaignDTO campaignDTO);
 	
 	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO);

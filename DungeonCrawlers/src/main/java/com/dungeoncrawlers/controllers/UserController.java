@@ -31,8 +31,11 @@ public class UserController {
 	@RequestMapping(value="/register", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO){
-		serviceimpl.addUser(userDTO);
+	public ResponseEntity<UserDTO>	registerUser(HttpSession session, @RequestBody UserDTO userDTO){
+		User u = serviceimpl.addUser(userDTO);
+		if (u != null) {
+			session.setAttribute("user", u);
+		}
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 	

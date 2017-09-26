@@ -571,41 +571,108 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 });
 
 dndApp.controller("DetailsCtrl", function(CampaignService, $state){
-	console.log("in CampaignCtrl");
+	console.log("in DetailsCtrl");
 
 	var campaign = this;
-	campaign.character = CampaignService.getCharacter();
-	campaign.createCharacter = function(){
-
-		var promise = CreatorService.createCharacter();
+	campaign.campaign = CampaignService.getCampaign();
+	campaign.createCampaign = function(){
+		
+		var promise = CampaignService.createCampaign();
 		console.log(promise);
 
 		promise.then(
 			function(response){
-				console.log("setting character data");
+				console.log("setting campaign data");
 				console.log(response.data);
-				CreatorService.setCharacter(response.data);
+				CampaignService.setCampaign(response.data);
 			}, function(error){
 				console.log(error);
-			}
-		)
-	}
+			});
+	};
 });
 
 dndApp.controller("MapCtrl", function(CampaignService, $state){
 	console.log("in MapCtrl");
+	
+	var map = this;
+	map.map = CampaignService.getMap();
+	map.createMap = function(){
+		
+		var promise = CampaignService.createMap();
+		console.log(promise);
+
+		promise.then(
+			function(response){
+				console.log("setting map data");
+				console.log(response.data);
+				CampaignService.setMap(response.data);
+			}, function(error){
+				console.log(error);
+			});
+	};
 });
 
 dndApp.controller("ChapterCtrl", function(CampaignService, $state){
 	console.log("in ChapterCtrl");
+	
+	var chapter = this;
+	chapter.chapter = CampaignService.getChapter();
+	chapter.createChapter = function(){
+		
+		var promise = CampaignService.createChapter();
+		console.log(promise);
+
+		promise.then(
+			function(response){
+				console.log("setting chapter data");
+				console.log(response.data);
+				CampaignService.setChapter(response.data);
+			}, function(error){
+				console.log(error);
+			});
+	};
 });
 
 dndApp.controller("LocationCtrl", function(CampaignService, $state){
 	console.log("in LocationCtrl");
+	
+	var location = this;
+	location.location = CampaignService.getLocation();
+	location.createLocation = function(){
+		
+		var promise = CampaignService.createLocation();
+		console.log(promise);
+
+		promise.then(
+			function(response){
+				console.log("setting location data");
+				console.log(response.data);
+				CampaignService.setLocation(response.data);
+			}, function(error){
+				console.log(error);
+			});
+	};
 });
 
 dndApp.controller("EventCtrl", function(CampaignService, $state){
 	console.log("in EventCtrl");
+	
+	var event = this;
+	event.event = CampaignService.getEvent();
+	event.createEvent = function(){
+		
+		var promise = CampaignService.createEvent();
+		console.log(promise);
+
+		promise.then(
+			function(response){
+				console.log("setting event data");
+				console.log(response.data);
+				CampaignService.setEvent(response.data);
+			}, function(error){
+				console.log(error);
+			});
+	};
 });
 
 dndApp.controller("NavCtrl", function($state) {

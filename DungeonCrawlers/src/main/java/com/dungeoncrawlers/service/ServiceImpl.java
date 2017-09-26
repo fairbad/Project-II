@@ -98,6 +98,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Campaign updateCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
+		campaign.setId(campaignDTO.getId());
 		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
@@ -106,6 +107,17 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setNumViews(campaignDTO.getNumViews());
 		campaign.setPublic(campaignDTO.isPublic());
 		campaign.setRating(campaignDTO.getRating());
+		
+		return daoimpl.updateCampaign(campaign);
+	}
+	
+	@Override
+	public Campaign updateCampaignMap(Campaign campaign, MapDTO mapDTO) {
+		Map map = new Map();
+		map.setDescription(mapDTO.getDescription());
+		map.setImage(mapDTO.getImage());
+		map.setName(mapDTO.getName());
+		campaign.setMap(map);
 		
 		return daoimpl.updateCampaign(campaign);
 	}
@@ -207,7 +219,7 @@ public class ServiceImpl implements ServiceInterface{
 		map.setDescription(mapDTO.getDescription());
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
-		
+		map.setAuthor(mapDTO.getUser());
 		return daoimpl.addMap(map);
 	}
 
@@ -217,7 +229,7 @@ public class ServiceImpl implements ServiceInterface{
 		map.setDescription(mapDTO.getDescription());
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
-		
+		map.setAuthor(mapDTO.getUser());
 		return daoimpl.updateMap(map);
 	}
 
@@ -227,7 +239,7 @@ public class ServiceImpl implements ServiceInterface{
 		map.setDescription(mapDTO.getDescription());
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
-		
+		map.setAuthor(mapDTO.getUser());
 		daoimpl.deleteMap(map);
 	}
 	
