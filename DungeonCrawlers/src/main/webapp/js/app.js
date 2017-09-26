@@ -49,7 +49,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: "EnemyCtrl as enemy"
 	})
 	.state("viewCreations",{
-		url:"/view",
+		url:"/viewCreation",
 		templateUrl: "templates/viewCreations.html"
 	})
 	.state("viewCreations.characters",{
@@ -66,6 +66,25 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/enemies",
 		templateUrl: "templates/viewEnemies.html",
 		controller: "ViewEnemiesCtrl as viewEnemies"
+	})
+	.state("deleteCreation",{
+		url:"/deleteCreation",
+		templateUrl: "templates/deleteCreation.html"
+	})
+	.state("deleteCreation.character",{
+		url:"/character",
+		templateUrl: "templates/deleteCharacter.html",
+		controller: "DeleteCharacterCtrl as deleteCharacter"
+	})
+	.state("deleteCreation.NPC",{
+		url:"/NPC",
+		templateUrl: "templates/deleteNPC.html",
+		controller: "DeleteNPCCtrl as deleteNPC"
+	})
+	.state("deleteCreation.enemy",{
+		url:"/enemy",
+		templateUrl: "templates/deleteEnemy.html",
+		controller: "DeleteEnemyCtrl as deleteEnemy"
 	})
 	.state("campaign",{
 		url:"/campaign",
@@ -412,6 +431,30 @@ dndApp.controller("ViewNPCsCtrl",function(CreatorService, $state, $scope){
 });
 
 dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getEnemies();
+	promise.then(
+		function(response){
+			$scope.enemies = response.data;
+	})
+});
+
+dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getCharacters();
+	promise.then(
+		function(response){
+			$scope.characters = response.data;
+	})
+});
+
+dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getNPCs();
+	promise.then(
+		function(response){
+			$scope.NPCs = response.data;
+	})
+});
+
+dndApp.controller("DeleteEnemyCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getEnemies();
 	promise.then(
 		function(response){
