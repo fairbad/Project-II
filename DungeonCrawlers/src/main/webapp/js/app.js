@@ -572,6 +572,24 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 
 dndApp.controller("DetailsCtrl", function(CampaignService, $state){
 	console.log("in CampaignCtrl");
+
+	var campaign = this;
+	campaign.character = CampaignService.getCharacter();
+	campaign.createCharacter = function(){
+
+		var promise = CreatorService.createCharacter();
+		console.log(promise);
+
+		promise.then(
+			function(response){
+				console.log("setting character data");
+				console.log(response.data);
+				CreatorService.setCharacter(response.data);
+			}, function(error){
+				console.log(error);
+			}
+		)
+	}
 });
 
 dndApp.controller("MapCtrl", function(CampaignService, $state){

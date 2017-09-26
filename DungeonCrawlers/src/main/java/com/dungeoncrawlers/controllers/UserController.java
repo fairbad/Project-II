@@ -40,16 +40,18 @@ public class UserController {
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO> 
-        authenticateUser(@RequestBody UserDTO userDTO, HttpSession session){ 
-        userDTO = serviceimpl.authenticateUser(userDTO);
-        if(userDTO != null){
-        	 session.setAttribute("user", userDTO);
-        	 userDTO = (UserDTO)session.getAttribute("user");
-        	 System.out.println("This is my session: " + session.getId());
-             System.out.println("This is my session user: " + session.getAttribute("user"));
-        } 
-        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
-    }
+			authenticateUser(@RequestBody UserDTO userDTO, HttpSession session) {
+		userDTO = serviceimpl.authenticateUser(userDTO);
+
+		if (userDTO != null) {
+			User u = new User(userDTO.getId(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword());
+			session.setAttribute("user", u);
+			u = (User) session.getAttribute("user");
+			System.out.println("This is my session: " + session.getId());
+			System.out.println("This is my session user: " + session.getAttribute("user"));
+		}
+		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+	}
 
     @RequestMapping(value="/editUser", method= {RequestMethod.POST},
             consumes= {MediaType.APPLICATION_JSON_VALUE},
