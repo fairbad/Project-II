@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.UserDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
 
@@ -42,10 +43,15 @@ public class UserController {
         authenticateUser(@RequestBody UserDTO userDTO, HttpSession session){ 
         userDTO = serviceimpl.authenticateUser(userDTO);
         if(userDTO != null){
-        	 session.setAttribute("user", userDTO);
-        	 userDTO = (UserDTO)session.getAttribute("user");
-        	 System.out.println("This is my session: " + session.getId());
-             System.out.println("This is my session user: " + session.getAttribute("user"));
+        	User user = new User();
+        	user.setId(userDTO.getId());
+        	user.setEmail(userDTO.getEmail());
+        	user.setPassword(userDTO.getPassword());
+        	user.setUsername(userDTO.getUsername());
+        	session.setAttribute("user", user);
+        	user = (User)session.getAttribute("user");
+        	System.out.println("This is my session: " + session.getId());
+            System.out.println("This is my session user: " + session.getAttribute("user"));
         } 
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }

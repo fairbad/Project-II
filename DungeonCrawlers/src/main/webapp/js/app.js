@@ -252,6 +252,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
 		var promise = UserService.authenticateUser();
 
 		promise.then(function(response) {
+			console.log(response);
 			if (login.user && response.data) {
 				login.user.authenticated = true;
 				console.log(response.data);
