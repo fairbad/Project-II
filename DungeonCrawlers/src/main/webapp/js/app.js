@@ -66,6 +66,16 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/chapter",
 		templateUrl: "templates/chapter.html",
 		controller: "ChapterCtrl as chapter"
+	})
+	.state("campaign.location",{
+		url:"/location",
+		templateUrl: "templates/location.html",
+		controller: "LocationCtrl as location"
+	})
+	.state("campaign.event",{
+		url:"/event",
+		templateUrl: "templates/event.html",
+		controller: "EventCtrl as event"
 	});
 
 });
@@ -239,6 +249,170 @@ dndApp.service("CreatorService", function($http, $q){
 	};
 });
 
+dndApp.service("CampaignService", function($http, $q){
+	console.log("in campaignService");
+
+	var service = this;
+
+	service.campaign={
+		name : "",
+		desc : "",
+		image : ""
+	};
+
+	service.map={
+		name : "",
+		desc : "",
+		image : ""
+	};
+
+	service.chapter={
+		name : "",
+		desc : "",
+		image : ""
+	};
+	
+	service.location={
+			name : "",
+			desc : "",
+			image : ""
+	};
+	
+	service.event={
+			name : "",
+			desc : "",
+			image : ""
+	};
+
+	service.getCampaign = function(){
+		return service.campaign;
+	};
+
+	service.getMap = function(){
+		return service.map;
+	};
+
+	service.getChapter = function(){
+		return service.chapter;
+	};
+	
+	service.getLocation = function(){
+		return service.location;
+	};
+	
+	service.getEvent = function(){
+		return service.event;
+	};
+
+	service.setCampaign = function(data){
+		service.campaign.name = data.name;
+		service.campaign.desc = data.description;
+		service.campaign.image = data.image;
+	};
+
+	service.setMap = function(data){
+		service.map.name = data.name;
+		service.map.desc = data.description;
+		service.map.image = data.image;
+	};
+
+	service.setChapter = function(data){
+		service.chapter.name = data.name;
+		service.chapter.desc = data.description;
+		service.chapter.image = data.image;
+	};
+	
+	service.setLocation = function(data){
+		service.location.name = data.name;
+		service.location.desc = data.description;
+		service.location.image = data.image;
+	};
+	
+	service.setEvent = function(data){
+		service.event.name = data.name;
+		service.event.desc = data.description;
+		service.event.image = data.image;
+	};
+
+	service.createCampaign = function(){
+		var promise = $http.post('rest/campaign/details',
+			service.campaign).then(
+				function(response){
+					console.log("response service.createCampaign")
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('createCampaign promise fail');
+				}
+			);
+			return promise;
+	};
+
+	service.createMap = function(){
+		var promise = $http.post('rest/campaign/map',
+			service.map).then(
+				function(response){
+					console.log("response service.createMap")
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('createMap promise fail');
+				}
+			);
+			return promise;
+	};
+
+	service.createChapter = function(){
+		console.log(service.chapter);
+		var promise = $http.post('rest/campaign/chapter',
+			service.chapter).then(
+				function(response){
+					console.log("response service.createChapter")
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('createChapter promise fail');
+				}
+			);
+			return promise;
+	};
+	
+	service.createLocation = function(){
+		console.log(service.location);
+		var promise = $http.post('rest/campaign/location',
+			service.location).then(
+				function(response){
+					console.log("response service.createLocation")
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('createLocation promise fail');
+				}
+			);
+			return promise;
+	};
+	
+	service.createEvent = function(){
+		console.log(service.event);
+		var promise = $http.post('rest/campaign/event',
+			service.event).then(
+				function(response){
+					console.log("response service.createEvent")
+					console.log(response);
+					return response;
+				},
+				function(error){
+					console.log('createEvent promise fail');
+				}
+			);
+			return promise;
+	};
+});
+
 dndApp.controller("LoginCtrl", function(UserService, $state) {
 	console.log("in loginctrl");
 
@@ -396,19 +570,26 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 	}
 });
 
-dndApp.controller("NavCtrl", function($state) {
-	console.log("in navctrl");
-});
-
-dndApp.controller("DetailsCtrl", function(UserService, $state){
+dndApp.controller("DetailsCtrl", function(CampaignService, $state){
 	console.log("in CampaignCtrl");
 });
 
-dndApp.controller("MapCtrl", function(UserService, $state){
+dndApp.controller("MapCtrl", function(CampaignService, $state){
 	console.log("in MapCtrl");
 });
 
-dndApp.controller("ChapterCtrl", function(UserService, $state){
+dndApp.controller("ChapterCtrl", function(CampaignService, $state){
 	console.log("in ChapterCtrl");
 });
 
+dndApp.controller("LocationCtrl", function(CampaignService, $state){
+	console.log("in LocationCtrl");
+});
+
+dndApp.controller("EventCtrl", function(CampaignService, $state){
+	console.log("in EventCtrl");
+});
+
+dndApp.controller("NavCtrl", function($state) {
+	console.log("in navctrl");
+});
