@@ -42,6 +42,25 @@ dndApp.config(function($stateProvider, $urlRouterProvider){
 		url:"/enemy",
 		templateUrl: "templates/enemy.html",
 		controller: "EnemyCtrl as enemy"
+	})
+	.state("campaign",{
+		url:"/campaign",
+		templateUrl: "templates/campaign.html"
+	})
+	.state("campaign.details",{
+		url:"/details",
+		templateUrl: "templates/details.html",
+		controller: "DetailsCtrl as details"
+	})
+	.state("campaign.map",{
+		url:"/map",
+		templateUrl: "templates/map.html",
+		controller: "MapCtrl as map"
+	})
+	.state("campaign.chapter",{
+		url:"/chapter",
+		templateUrl: "templates/chapter.html",
+		controller: "ChapterCtrl as chapter"
 	});
 
 });
@@ -191,3 +210,16 @@ dndApp.controller("EnemyCtrl", function(UserService, $state){
 dndApp.controller("NavCtrl", function($state){
 	console.log("in navctrl");
 });
+
+dndApp.controller("DetailsCtrl", function(UserService, $state){
+	console.log("in CampaignCtrl");
+});
+
+dndApp.controller("MapCtrl", function(UserService, $state){
+	console.log("in MapCtrl");
+});
+
+dndApp.controller("ChapterCtrl", function(UserService, $state){
+	console.log("in ChapterCtrl");
+});
+
