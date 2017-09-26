@@ -411,7 +411,7 @@ dndApp.controller("ViewNPCsCtrl",function(CreatorService, $state, $scope){
 	})
 });
 
-dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state){
+dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getEnemies();
 	promise.then(
 		function(response){
