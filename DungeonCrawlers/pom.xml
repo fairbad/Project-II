@@ -130,6 +130,7 @@
 					<url>http://localhost:8080/manager/text</url>
 					<server>TomcatServer</server>
 					<path>/DungeonCrawlers</path>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>
