@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dungeoncrawlers.beans.Character;
+import com.dungeoncrawlers.beans.Enemy;
+import com.dungeoncrawlers.beans.NonPlayableCharacter;
 import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.dto.EnemyDTO;
@@ -66,7 +68,6 @@ public class CreatorController {
 	}
 
 	@RequestMapping(value="/getCharacters", method= {RequestMethod.GET},
-			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<CharacterDTO>> getCharacters(HttpSession session){
 		System.out.println("getting characters");
@@ -79,25 +80,35 @@ public class CreatorController {
         }
 		return new ResponseEntity<List<CharacterDTO>>(charactersDTO, HttpStatus.OK);
 	}
-/*
+
 	@RequestMapping(value="/getNPCs", method= {RequestMethod.GET},
-			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<> getNPCs(HttpSession session){
+	public ResponseEntity<List<NPCDTO>> getNPCs(HttpSession session){
 		System.out.println("getting NPCs");
-		
-		return new ResponseEntity<>(HttpStatus.OK);
+        User currentUser = (User) session.getAttribute("user");
+        List<NonPlayableCharacter> NPCs = serviceimpl.getAllNonPlayableCharactersByUser(currentUser);
+        List<NPCDTO> npcDTOs = new ArrayList<>();
+        for(NonPlayableCharacter npc: NPCs) {
+        	NPCDTO temp = new NPCDTO(npc.getId(),npc.getName(),npc.getImage(),currentUser);
+        	npcDTOs.add(temp);
+        }
+		return new ResponseEntity<List<NPCDTO>>(npcDTOs, HttpStatus.OK);
 	}
 
 	@RequestMapping(value="/getEnemies", method= {RequestMethod.GET},
-			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<> getEnemies(HttpSession session){
+	public ResponseEntity<List<EnemyDTO>> getEnemies(HttpSession session){
 		System.out.println("getting Enemys");
-		
-		return new ResponseEntity<>(HttpStatus.OK);
+        User currentUser = (User) session.getAttribute("user");
+        List<Enemy> enemies = serviceimpl.getAllEnemiesByUser(currentUser);
+        List<EnemyDTO> enemyDTOs = new ArrayList<>();
+        for(Enemy e: enemies) {
+        	EnemyDTO temp = new EnemyDTO(e.getId(),e.getName(),e.getImage(),currentUser);
+        	enemyDTOs.add(temp);
+        }
+		return new ResponseEntity<List<EnemyDTO>>(enemyDTOs, HttpStatus.OK);
 	}
-*/	
+	
 	@RequestMapping(value="/editCharacter", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
@@ -106,10 +117,6 @@ public class CreatorController {
 		
 		Character character = serviceimpl.updateCharacter(characterDTO);
 		
-		/*
-        User currentUser = (User) session.getAttribute("user");
-        characterDTO.setUser(currentUser);
-        characterDTO.setId(serviceimpl.updateCharacter(characterDTO).getId());*/
 		return new ResponseEntity<CharacterDTO>(characterDTO, HttpStatus.OK);
 	}
 

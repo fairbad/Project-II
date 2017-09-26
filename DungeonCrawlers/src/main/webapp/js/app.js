@@ -48,6 +48,25 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: "templates/enemy.html",
 		controller: "EnemyCtrl as enemy"
 	})
+	.state("viewCreations",{
+		url:"/view",
+		templateUrl: "templates/viewCreations.html"
+	})
+	.state("viewCreations.characters",{
+		url:"/characters",
+		templateUrl: "templates/viewCharacters.html",
+		controller: "ViewCharactersCtrl as viewCharacters"
+	})
+	.state("viewCreations.NPCs",{
+		url:"/NPCs",
+		templateUrl: "templates/viewNPCs.html",
+		controller: "ViewNPCsCtrl as viewNPCs"
+	})
+	.state("viewCreations.enemies",{
+		url:"/enemies",
+		templateUrl: "templates/viewEnemies.html",
+		controller: "ViewEnemiesCtrl as viewEnemies"
+	})
 	.state("campaign",{
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
@@ -144,7 +163,6 @@ dndApp.service("UserService", function($http, $q) {
 
 });
 
-
 dndApp.service("CreatorService", function($http, $q){
 	console.log("in creatorService");
 
@@ -165,6 +183,10 @@ dndApp.service("CreatorService", function($http, $q){
 		image : ""
 	};
 
+	service.characters = [];
+	service.NPCs = [];
+	service.enemies = [];
+
 	service.getCharacter = function(){
 		return service.character;
 	};
@@ -174,69 +196,87 @@ dndApp.service("CreatorService", function($http, $q){
 	};
 
 	service.getEnemy = function(){
-		return service.Enemy;
-	};
-
-	service.setCharacter = function(data){
-		service.character.name = data.name;
-		service.character.image = data.image;
-	};
-
-	service.setNPC = function(data){
-		service.NPC.name = data.name;
-		service.NPC.image = data.image;
-	};
-
-	service.setEnemy = function(data){
-		service.enemy.name = data.name;
-		service.enemy.image = data.image;
+		return service.enemy;
 	};
 
 	service.createCharacter = function(){
 		var promise = $http.post('rest/creator/createCharacter',
 			service.character).then(
 				function(response){
-					console.log("response service.createCharacter")
-					console.log(response);
 					return response;
 				},
 				function(error){
 					console.log('createCharacter promise fail');
 				}
 			);
-			return promise;
+		return promise;
 	};
 
 	service.createNPC = function(){
 		var promise = $http.post('rest/creator/createNPC',
 			service.NPC).then(
 				function(response){
-					console.log("response service.createNPC")
-					console.log(response);
 					return response;
 				},
 				function(error){
 					console.log('createNPC promise fail');
 				}
 			);
-			return promise;
+		return promise;
 	};
 
 	service.createEnemy = function(){
-		console.log(service.character);
 		var promise = $http.post('rest/creator/createEnemy',
 			service.enemy).then(
 				function(response){
-					console.log("response service.createEnemy")
-					console.log(response);
 					return response;
 				},
 				function(error){
 					console.log('createEnemy promise fail');
 				}
 			);
-			return promise;
+		return promise;
 	};
+
+	service.getCharacters = function(){
+		var promise = $http.get('rest/creator/getCharacters',
+			service.characters).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all characters failed")
+				}
+			);
+		return promise;
+	};
+
+	service.getNPCs = function(){
+		var promise = $http.get('rest/creator/getNPCs',
+			service.NPCs).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all NPC failed")
+				}
+			);
+		return promise;
+	}
+
+	service.getEnemies = function(){
+		var promise = $http.get('rest/creator/getEnemies',
+			service.enemies).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all enemies failed")
+				}
+			);
+		return promise;
+	}
+
 });
 
 dndApp.controller("LoginCtrl", function(UserService, $state) {
@@ -269,6 +309,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
 
 	};
 });
+
 dndApp.controller("LogoutCtrl", function(UserService, $state) {
 	console.log("in logoutctrl");
 
@@ -323,6 +364,7 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 		})
 	}
 });
+
 dndApp.controller("HomeCtrl", function(UserService, $state) {
 	console.log("in the Home Control")
 	var home = this;
@@ -330,71 +372,51 @@ dndApp.controller("HomeCtrl", function(UserService, $state) {
 });
 
 dndApp.controller("CharacterCtrl", function(CreatorService, $state){
-	console.log("in CharacterCtrl");
-
 	var character = this;
 	character.character = CreatorService.getCharacter();
 	character.createCharacter = function(){
-
 		var promise = CreatorService.createCharacter();
-		console.log(promise);
-
-		promise.then(
-			function(response){
-				console.log("setting character data");
-				console.log(response.data);
-				CreatorService.setCharacter(response.data);
-			}, function(error){
-				console.log(error);
-			}
-		)
 	}
 });
-
 
 dndApp.controller("NPCCtrl", function(CreatorService, $state){
-	console.log("in NPCCtrl");
-
 	var NPC = this;
-
 	NPC.NPC = CreatorService.getNPC();
 	NPC.createNPC = function(){
-
 		var promise = CreatorService.createNPC();
-
-		promise.then(
-			function(response){
-				console.log("setting NPC data");
-				console.log(response.data);
-				CreatorService.setNPC(response.data);
-			}, function(error){
-				console.log(error);
-			}
-		)
 	}
 });
 
-
 dndApp.controller("EnemyCtrl", function(CreatorService, $state){
-	console.log("in EnemyCtrl");
-
 	var enemy = this;
-
 	enemy.enemy = CreatorService.getEnemy();
 	enemy.createEnemy = function(){
-
 		var promise = CreatorService.createEnemy();
-
-		promise.then(
-			function(response){
-				console.log("setting Enemy data");
-				console.log(response.data);
-				CreatorService.setEnemy(response.data);
-			}, function(error){
-				console.log(error);
-			}
-		)
 	}
+});
+
+dndApp.controller("ViewCharactersCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getCharacters();
+	promise.then(
+		function(response){
+			$scope.characters = response.data;
+	})
+});
+
+dndApp.controller("ViewNPCsCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getNPCs();
+	promise.then(
+		function(response){
+			$scope.NPCs = response.data;
+	})
+});
+
+dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state){
+	var promise = CreatorService.getEnemies();
+	promise.then(
+		function(response){
+			$scope.enemies = response.data;
+	})
 });
 
 dndApp.controller("NavCtrl", function($state) {

@@ -83,8 +83,8 @@ public class DAOimpl implements DAO {
 	}
 
 	@Override
-	public List<Campaign> getAllCampaignsByUser(User author) {
-		return (List<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("author", author)).list();
+	public List<Campaign> getAllCampaignsByUser(User user) {
+		return (List<Campaign>) sessionFactory.getCurrentSession().createCriteria(Campaign.class).add(Restrictions.eq("user", user)).list();
 	}
 
 	@Override
@@ -142,8 +142,8 @@ public class DAOimpl implements DAO {
 	}
 	
 	@Override
-	public List<Map> getAllMapsByUser(User author){
-		return (List<Map>) sessionFactory.getCurrentSession().createCriteria(Map.class).add(Restrictions.eq("author", author)).list();
+	public List<Map> getAllMapsByUser(User user){
+		return (List<Map>) sessionFactory.getCurrentSession().createCriteria(Map.class).add(Restrictions.eq("user", user)).list();
 	}
 
 	@Override
@@ -239,8 +239,8 @@ public class DAOimpl implements DAO {
 	}
 
 	@Override
-	public List<Character> getAllCharactersByUser(User author) {
-		return (List<Character>) sessionFactory.getCurrentSession().createCriteria(Character.class).add(Restrictions.eq("author", author)).list();
+	public List<Character> getAllCharactersByUser(User user) {
+		return (List<Character>) sessionFactory.getCurrentSession().createCriteria(Character.class).add(Restrictions.eq("user", user)).list();
 	}
 
 	@Override
@@ -271,8 +271,8 @@ public class DAOimpl implements DAO {
 	}
 
 	@Override
-	public List<Enemy> getAllEnemiesByUser(User author) {
-		return (List<Enemy>) sessionFactory.getCurrentSession().createCriteria(Enemy.class).add(Restrictions.eq("author", author)).list();
+	public List<Enemy> getAllEnemiesByUser(User user) {
+		return (List<Enemy>) sessionFactory.getCurrentSession().createCriteria(Enemy.class).add(Restrictions.eq("user", user)).list();
 	}
 
 	@Override
@@ -303,8 +303,8 @@ public class DAOimpl implements DAO {
 	}
 
 	@Override
-	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User author) {
-		return (List<NonPlayableCharacter>) sessionFactory.getCurrentSession().createCriteria(NonPlayableCharacter.class).add(Restrictions.eq("author", author)).list();
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User user) {
+		return (List<NonPlayableCharacter>) sessionFactory.getCurrentSession().createCriteria(NonPlayableCharacter.class).add(Restrictions.eq("user", user)).list();
 	}
 	
 	@Override
