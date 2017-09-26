@@ -126,13 +126,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<Campaign> getAllCampaignsByUser(User user) {
 		
-		return daoimpl.getAllCampaignsByUser(User);
+		return daoimpl.getAllCampaignsByUser(user);
 	}
 
 	@Override
@@ -403,13 +399,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Character> getAllCharactersByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<Character> getAllCharactersByUser(User user) {
 		
-		return daoimpl.getAllCharactersByUser(User);
+		return daoimpl.getAllCharactersByUser(user);
 	}
 
 	@Override
@@ -462,13 +454,8 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Enemy> getAllEnemiesByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
-		
-		return daoimpl.getAllEnemiesByUser(User);
+	public List<Enemy> getAllEnemiesByUser(User user) {
+		return daoimpl.getAllEnemiesByUser(user);
 	}
 
 	@Override
@@ -521,13 +508,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User user) {
 		
-		return daoimpl.getAllNonPlayableCharactersByUser(User);
+		return daoimpl.getAllNonPlayableCharactersByUser(user);
 	}
 
 	@Override
@@ -571,11 +554,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 	
 	@Override
-	public List<Rating> getAllRatingsByUser(UserDTO userDTO){
-		User user = new User();
-		user.setEmail(userDTO.getEmail());
-		user.setPassword(userDTO.getPassword());
-		user.setUsername(userDTO.getUsername());
+	public List<Rating> getAllRatingsByUser(User user){
 		
 		return daoimpl.getAllRatingsByUser(user);
 	}

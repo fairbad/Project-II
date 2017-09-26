@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.UserDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
 
