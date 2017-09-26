@@ -1,5 +1,6 @@
 <h1>Characters</h1>	
 <div>
-	<select ng-model="chars" ng-options="name for name in characters">
-</select>
+	<select ng-model="character" ng-options="character as character.name for character in characters" ng-change="change()">
+	</select>
+	<button type="submit" class="btn btn-danger" ng-click="delete()">Delete</button>
 </div>

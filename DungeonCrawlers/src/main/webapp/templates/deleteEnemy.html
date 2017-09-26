@@ -1,7 +1,4 @@
 <h1>Enemies</h1>	
 <div>
-	<ul ng-repeat="x in enemies">
-		<li>{{ x.name }}</li>
-		<li>{{ x.image }}</li>
-	</ul>
+	<select ng-model="enemy" ng-options="enemy as enemy.name for enemy in enemies">
 </div>

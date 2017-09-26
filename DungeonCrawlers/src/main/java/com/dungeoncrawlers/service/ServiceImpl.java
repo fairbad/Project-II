@@ -387,6 +387,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
+		character.setId(characterDTO.getId());
 		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());

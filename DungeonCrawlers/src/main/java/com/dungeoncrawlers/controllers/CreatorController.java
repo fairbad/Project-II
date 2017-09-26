@@ -114,9 +114,7 @@ public class CreatorController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CharacterDTO> editCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
 		System.out.println("editing character");
-		
-		Character character = serviceimpl.updateCharacter(characterDTO);
-		
+		serviceimpl.updateCharacter(characterDTO);
 		return new ResponseEntity<CharacterDTO>(characterDTO, HttpStatus.OK);
 	}
 
@@ -125,9 +123,7 @@ public class CreatorController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<NPCDTO> editNPC(HttpSession session, @RequestBody NPCDTO npcDTO){
 		System.out.println("editing NPC");
-        User currentUser = (User) session.getAttribute("user");
-        npcDTO.setUser(currentUser);
-        npcDTO.setId(serviceimpl.updateNonPlayableCharacter(npcDTO).getId());
+		serviceimpl.updateNonPlayableCharacter(npcDTO);
 		return new ResponseEntity<NPCDTO>(npcDTO, HttpStatus.OK);
 	}
 
@@ -136,9 +132,33 @@ public class CreatorController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<EnemyDTO> editEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO){
 		System.out.println("editing Enemy");
-        User currentUser = (User) session.getAttribute("user");
-        enemyDTO.setUser(currentUser);
-        enemyDTO.setId(serviceimpl.updateEnemy(enemyDTO).getId());
+		serviceimpl.updateEnemy(enemyDTO);
 		return new ResponseEntity<EnemyDTO>(enemyDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/deleteCharacter", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<CharacterDTO> deleteCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
+		System.out.println("delete character");
+		serviceimpl.deleteCharacter(characterDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/deleteNPC", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE},
+			produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<NPCDTO> deleteNPC(HttpSession session, @RequestBody NPCDTO npcDTO){
+		System.out.println("delete NPC");
+		serviceimpl.deleteNonPlayableCharacter(npcDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/deleteEnemy", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE},
+			produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<EnemyDTO> deleteEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO){
+		System.out.println("delete Enemy");
+		serviceimpl.deleteEnemy(enemyDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

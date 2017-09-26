@@ -296,6 +296,45 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	}
 
+	service.deleteCharacter = function(character){
+		service.character = character;
+		var promise = $http.post('rest/creator/deleteCharacter',
+			service.character).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("failed to delete")
+				}
+			);	
+		return promise;
+	}
+
+	service.deleteNPC = function(){
+		var promise = $http.post('rest/creator/deleteNPC',
+			service.NPC).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("failed to delete")
+				}
+			);	
+		return promise;
+	}
+
+	service.deleteEnemy = function(){
+		var promise = $http.post('rest/creator/deleteEnemy',
+			service.enemy).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("failed to delete")
+				}
+			);	
+		return promise;
+	}
 });
 
 dndApp.controller("LoginCtrl", function(UserService, $state) {
@@ -443,7 +482,15 @@ dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope)
 	promise.then(
 		function(response){
 			$scope.characters = response.data;
+			console.log($scope.characters);
 	})
+	$scope.change = function(){
+		console.log($scope.character.id);
+	}
+	$scope.delete = function(){
+		CreatorService.deleteCharacter($scope.character);
+		
+	}
 });
 
 dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
