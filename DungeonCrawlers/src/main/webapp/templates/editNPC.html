@@ -1,0 +1,11 @@
+<h1>NPC</h1>	
+<div>
+	<select ng-model="NPC" ng-options="NPC as NPC.name for NPC in NPCs">
+	</select>
+
+	<form name="editNPC" ng-submit="NPC.editNPC()">
+	<input id="name" type="text" placeholder="Name" ng-model="NPC.NPC.name" ng-value="{{NPC.name}}">
+	<input id="image" type="text" placeholder="Image" ng-model="NPC.NPC.image" ng-value="{{NPC.image}}">
+	<button type="submit" class="btn btn-primary">Update</button>
+	</form>
+</div>

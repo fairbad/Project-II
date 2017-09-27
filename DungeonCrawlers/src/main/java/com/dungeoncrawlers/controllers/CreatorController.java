@@ -114,6 +114,10 @@ public class CreatorController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CharacterDTO> editCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
 		System.out.println("editing character");
+		System.out.println(characterDTO.getId());
+		System.out.println(characterDTO.getImage());
+		System.out.println(characterDTO.getName());
+		System.out.println(characterDTO.getUser().toString());
 		serviceimpl.updateCharacter(characterDTO);
 		return new ResponseEntity<CharacterDTO>(characterDTO, HttpStatus.OK);
 	}

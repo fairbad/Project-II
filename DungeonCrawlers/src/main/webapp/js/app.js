@@ -49,7 +49,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: "EnemyCtrl as enemy"
 	})
 	.state("viewCreations",{
-		url:"/viewCreation",
+		url:"/viewCreations",
 		templateUrl: "templates/viewCreations.html"
 	})
 	.state("viewCreations.characters",{
@@ -66,6 +66,25 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/enemies",
 		templateUrl: "templates/viewEnemies.html",
 		controller: "ViewEnemiesCtrl as viewEnemies"
+	})
+	.state("editCreation",{
+		url:"/editCreation",
+		templateUrl: "templates/editCreation.html"
+	})
+	.state("editCreation.character",{
+		url:"/character",
+		templateUrl: "templates/editCharacter.html",
+		controller: "EditCharacterCtrl as editCharacter"
+	})
+	.state("editCreation.NPC",{
+		url:"/NPC",
+		templateUrl: "templates/editNPC.html",
+		controller: "EditNPCCtrl as editNPC"
+	})
+	.state("editCreation.enemy",{
+		url:"/enemy",
+		templateUrl: "templates/editEnemy.html",
+		controller: "EditEnemyCtrl as editEnemy"
 	})
 	.state("deleteCreation",{
 		url:"/deleteCreation",
@@ -296,6 +315,47 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	}
 
+	service.editCharacter = function(character){
+		service.character = character;
+		console.log(service.character);
+		var promise = $http.post('rest/creator/editCharacter',
+			service.character).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log('editCharacter promise fail');
+				}
+			);
+		return promise;
+	};
+
+	service.editNPC = function(){
+		var promise = $http.post('rest/creator/editNPC',
+			service.NPC).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log('editNPC promise fail');
+				}
+			);
+		return promise;
+	};
+
+	service.editEnemy = function(){
+		var promise = $http.post('rest/creator/editEnemy',
+			service.enemy).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log('editEnemy promise fail');
+				}
+			);
+		return promise;
+	};
+
 	service.deleteCharacter = function(character){
 		service.character = character;
 		var promise = $http.post('rest/creator/deleteCharacter',
@@ -477,19 +537,55 @@ dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
 	})
 });
 
+dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getCharacters();
+	promise.then(
+		function(response){
+			$scope.characters = response.data;
+	})
+	$scope.update = function(){
+		console.log($scope.character);
+		CreatorService.editCharacter($scope.character);
+	}
+});
+
+dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getNPCs();
+	promise.then(
+		function(response){
+			$scope.NPCs = response.data;
+	})
+	var NPC = this;
+	NPC.NPC = CreatorService.getNPC();
+	NPC.editNPC = function(){
+		console.log("doing edit for character");
+		var promise = CreatorService.editNPC();
+	}
+});
+
+dndApp.controller("EditEnemyCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getEnemies();
+	promise.then(
+		function(response){
+			$scope.enemies = response.data;
+	})
+	var enemy = this;
+	enemy.enemy = CreatorService.getEnemy();
+	enemy.editEnemy = function(){
+		var promise = CreatorService.editEnemy();
+	}
+});
+
 dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getCharacters();
 	promise.then(
 		function(response){
 			$scope.characters = response.data;
-			console.log($scope.characters);
 	})
-	$scope.change = function(){
-		console.log($scope.character.id);
-	}
 	$scope.delete = function(){
 		CreatorService.deleteCharacter($scope.character);
-		
+		var index = $scope.characters.indexOf($scope.character);
+		$scope.characters.splice(index, 1);
 	}
 });
 
@@ -499,6 +595,11 @@ dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
 		function(response){
 			$scope.NPCs = response.data;
 	})
+	$scope.delete = function(){
+		CreatorService.deleteNPC($scope.NPC);
+		var index = $scope.NPCs.indexOf($scope.NPC);
+		$scope.NPCs.splice(index, 1);
+	}
 });
 
 dndApp.controller("DeleteEnemyCtrl",function(CreatorService, $state, $scope){
@@ -507,6 +608,11 @@ dndApp.controller("DeleteEnemyCtrl",function(CreatorService, $state, $scope){
 		function(response){
 			$scope.enemies = response.data;
 	})
+	$scope.delete = function(){
+		CreatorService.deleteEnemy($scope.enemy);
+		var index = $scope.enemies.indexOf($scope.enemy);
+		$scope.enemies.splice(index, 1);
+	}
 });
 
 dndApp.controller("NavCtrl", function($state) {
