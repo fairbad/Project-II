@@ -2,9 +2,7 @@
 <div>
 	<select ng-model="character" ng-options="character as character.name for character in characters">
 	</select>
-
 	<input id="name" type="text" placeholder="Name" ng-model="character.name">
 	<input id="image" type="text" placeholder="Image" ng-model="character.image">
-
 	<button type="submit" class="btn btn-primary" ng-click="update()">Update</button>
 </div>

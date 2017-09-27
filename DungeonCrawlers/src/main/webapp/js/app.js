@@ -317,7 +317,6 @@ dndApp.service("CreatorService", function($http, $q){
 
 	service.editCharacter = function(character){
 		service.character = character;
-		console.log(service.character);
 		var promise = $http.post('rest/creator/editCharacter',
 			service.character).then(
 				function(response){
@@ -330,7 +329,8 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	};
 
-	service.editNPC = function(){
+	service.editNPC = function(NPC){
+		service.NPC = NPC;
 		var promise = $http.post('rest/creator/editNPC',
 			service.NPC).then(
 				function(response){
@@ -343,7 +343,8 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	};
 
-	service.editEnemy = function(){
+	service.editEnemy = function(enemy){
+		service.enemy = enemy;
 		var promise = $http.post('rest/creator/editEnemy',
 			service.enemy).then(
 				function(response){
@@ -370,7 +371,8 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	}
 
-	service.deleteNPC = function(){
+	service.deleteNPC = function(NPC){
+		service.NPC = NPC;
 		var promise = $http.post('rest/creator/deleteNPC',
 			service.NPC).then(
 				function(response){
@@ -383,7 +385,8 @@ dndApp.service("CreatorService", function($http, $q){
 		return promise;
 	}
 
-	service.deleteEnemy = function(){
+	service.deleteEnemy = function(enemy){
+		service.enemy = enemy;
 		var promise = $http.post('rest/creator/deleteEnemy',
 			service.enemy).then(
 				function(response){
@@ -544,7 +547,6 @@ dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
 			$scope.characters = response.data;
 	})
 	$scope.update = function(){
-		console.log($scope.character);
 		CreatorService.editCharacter($scope.character);
 	}
 });
@@ -555,11 +557,8 @@ dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
 		function(response){
 			$scope.NPCs = response.data;
 	})
-	var NPC = this;
-	NPC.NPC = CreatorService.getNPC();
-	NPC.editNPC = function(){
-		console.log("doing edit for character");
-		var promise = CreatorService.editNPC();
+	$scope.update = function(){
+		CreatorService.editNPC($scope.NPC);
 	}
 });
 
@@ -569,10 +568,8 @@ dndApp.controller("EditEnemyCtrl",function(CreatorService, $state, $scope){
 		function(response){
 			$scope.enemies = response.data;
 	})
-	var enemy = this;
-	enemy.enemy = CreatorService.getEnemy();
-	enemy.editEnemy = function(){
-		var promise = CreatorService.editEnemy();
+	$scope.update = function(){
+		CreatorService.editEnemy($scope.enemy);
 	}
 });
 
