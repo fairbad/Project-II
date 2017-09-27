@@ -68,6 +68,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public User updateUser(UserDTO userDTO) {
 		User user = new User();
+		user.setId(userDTO.getId());
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
 		user.setUsername(userDTO.getUsername());
@@ -125,6 +126,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteCampaign(CampaignDTO campaignDTO) {
 		Campaign campaign = new Campaign();
+		campaign.setId(campaign.getId());
 		campaign.setUser(campaignDTO.getUser());
 		campaign.setDescription(campaignDTO.getDescription());
 		campaign.setImage(campaignDTO.getImage());
@@ -138,13 +140,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<Campaign> getAllCampaignsByUser(User user) {
 		
-		return daoimpl.getAllCampaignsByUser(User);
+		return daoimpl.getAllCampaignsByUser(user);
 	}
 
 	@Override
@@ -164,7 +162,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.addChapter(chapter);
 	}
@@ -172,11 +169,11 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Chapter updateChapter(ChapterDTO chapterDTO) {
 		Chapter chapter = new Chapter();
+		chapter.setId(chapterDTO.getId());
 		chapter.setCampaign(chapterDTO.getCampaign());
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.updateChapter(chapter);
 	}
@@ -184,11 +181,11 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteChapter(ChapterDTO chapterDTO) {
 		Chapter chapter = new Chapter();
+		chapter.setId(chapterDTO.getId());
 		chapter.setCampaign(chapterDTO.getCampaign());
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		daoimpl.deleteChapter(chapter);
 	}
@@ -226,6 +223,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Map updateMap(MapDTO mapDTO) {
 		Map map = new Map();
+		map.setId(mapDTO.getId());
 		map.setDescription(mapDTO.getDescription());
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
@@ -236,6 +234,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteMap(MapDTO mapDTO) {
 		Map map = new Map();
+		map.setId(mapDTO.getId());
 		map.setDescription(mapDTO.getDescription());
 		map.setImage(mapDTO.getImage());
 		map.setName(mapDTO.getName());
@@ -272,6 +271,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Location updateLocation(LocationDTO locationDTO) {
 		Location location = new Location();
+		location.setId(locationDTO.getId());
 		location.setChapter(locationDTO.getChapter());
 		location.setDescription(locationDTO.getDescription());
 		location.setImage(locationDTO.getImage());
@@ -283,6 +283,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteLocation(LocationDTO locationDTO) {
 		Location location = new Location();
+		location.setId(locationDTO.getId());
 		location.setChapter(locationDTO.getChapter());
 		location.setDescription(locationDTO.getDescription());
 		location.setImage(locationDTO.getImage());
@@ -298,7 +299,6 @@ public class ServiceImpl implements ServiceInterface{
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
-		chapter.setOrder(chapterDTO.getOrder());
 		
 		return daoimpl.getAllLocationsByChapter(chapter);
 	}
@@ -325,6 +325,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Event updateEvent(EventDTO eventDTO) {
 		Event event = new Event();
+		event.setId(eventDTO.getId());
 		event.setDescription(eventDTO.getDescription());
 		event.setEnemies(eventDTO.getEnemies());
 		event.setEvent(eventDTO.getEvent());
@@ -339,6 +340,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteEvent(EventDTO eventDTO) {
 		Event event = new Event();
+		event.setId(eventDTO.getId());
 		event.setDescription(eventDTO.getDescription());
 		event.setEnemies(eventDTO.getEnemies());
 		event.setEvent(eventDTO.getEvent());
@@ -397,6 +399,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Character updateCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
+		character.setId(characterDTO.getId());
 		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
@@ -407,6 +410,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteCharacter(CharacterDTO characterDTO) {
 		Character character = new Character();
+		character.setId(characterDTO.getId());
 		character.setUser(characterDTO.getUser());
 		character.setImage(characterDTO.getImage());
 		character.setName(characterDTO.getName());
@@ -415,13 +419,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Character> getAllCharactersByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<Character> getAllCharactersByUser(User user) {
 		
-		return daoimpl.getAllCharactersByUser(User);
+		return daoimpl.getAllCharactersByUser(user);
 	}
 
 	@Override
@@ -442,6 +442,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Enemy updateEnemy(EnemyDTO enemyDTO) {
 		Enemy enemy = new Enemy();
+		enemy.setId(enemyDTO.getId());
 		enemy.setUser(enemyDTO.getUser());
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
@@ -452,6 +453,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteEnemy(EnemyDTO enemyDTO) {
 		Enemy enemy = new Enemy();
+		enemy.setId(enemyDTO.getId());
 		enemy.setUser(enemyDTO.getUser());
 		enemy.setImage(enemyDTO.getImage());
 		enemy.setName(enemyDTO.getName());
@@ -474,13 +476,8 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Enemy> getAllEnemiesByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
-		
-		return daoimpl.getAllEnemiesByUser(User);
+	public List<Enemy> getAllEnemiesByUser(User user) {
+		return daoimpl.getAllEnemiesByUser(user);
 	}
 
 	@Override
@@ -501,6 +498,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public NonPlayableCharacter updateNonPlayableCharacter(NPCDTO npcDTO) {
 		NonPlayableCharacter npc = new NonPlayableCharacter();
+		npc.setId(npcDTO.getId());
 		npc.setUser(npcDTO.getUser());
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
@@ -511,6 +509,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public void deleteNonPlayableCharacter(NPCDTO npcDTO) {
 		NonPlayableCharacter npc = new NonPlayableCharacter();
+		npc.setId(npcDTO.getId());
 		npc.setUser(npcDTO.getUser());
 		npc.setImage(npcDTO.getImage());
 		npc.setName(npcDTO.getName());
@@ -533,13 +532,9 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(UserDTO userDTO) {
-		User User = new User();
-		User.setEmail(userDTO.getEmail());
-		User.setPassword(userDTO.getPassword());
-		User.setUsername(userDTO.getUsername());
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User user) {
 		
-		return daoimpl.getAllNonPlayableCharactersByUser(User);
+		return daoimpl.getAllNonPlayableCharactersByUser(user);
 	}
 
 	@Override
@@ -560,6 +555,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Rating updateRating(RatingDTO ratingDTO) {
 		Rating rating = new Rating();
+		rating.setId(ratingDTO.getId());
 		rating.setCampaign(ratingDTO.getCampaign());
 		rating.setRating(ratingDTO.getRating());
 		rating.setUser(ratingDTO.getUser());
@@ -583,11 +579,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 	
 	@Override
-	public List<Rating> getAllRatingsByUser(UserDTO userDTO){
-		User user = new User();
-		user.setEmail(userDTO.getEmail());
-		user.setPassword(userDTO.getPassword());
-		user.setUsername(userDTO.getUsername());
+	public List<Rating> getAllRatingsByUser(User user){
 		
 		return daoimpl.getAllRatingsByUser(user);
 	}

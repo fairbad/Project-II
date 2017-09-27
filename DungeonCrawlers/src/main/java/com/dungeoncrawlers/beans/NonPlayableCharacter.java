@@ -22,7 +22,7 @@ public class NonPlayableCharacter implements Serializable{
     @Column
     private String image;
 
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID", nullable = false)
 	private User user;
     

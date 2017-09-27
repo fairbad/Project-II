@@ -56,6 +56,8 @@ public class TestDAO {
 		assertEquals(2,characters.size());
 		assertEquals(true,character.equals(characters.get(0)));
 		assertEquals(true,character2.equals(characters.get(1)));
+		
+		dao.deleteCharacter(character2);
 	}
 	
 }
