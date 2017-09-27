@@ -59,7 +59,6 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public User addUser(UserDTO userDTO) {
 		User user = new User();
-		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
 		user.setUsername(userDTO.getUsername());
 		return daoimpl.addUser(user);
@@ -68,6 +67,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public User updateUser(UserDTO userDTO) {
 		User user = new User();
+		user.setId(userDTO.getId());
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
 		user.setUsername(userDTO.getUsername());

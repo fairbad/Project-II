@@ -51,6 +51,7 @@ public class DAOimpl implements DAO {
 
 	@Override
 	public User updateUser(User user) {
+		System.out.println("This is the user inside the User updateUser in the DAOimpl: " + user.toString());
 		sessionFactory.getCurrentSession().update(user);
 		return user;
 	}
