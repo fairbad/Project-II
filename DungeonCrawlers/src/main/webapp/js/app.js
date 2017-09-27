@@ -114,7 +114,7 @@ dndApp.service("UserService", function($http, $q) {
 	var service = this;
 
 	service.user = {
-		user_id : "",
+		id : "",
 		username : "",
 		password : "",
 		email : "",
@@ -126,7 +126,7 @@ dndApp.service("UserService", function($http, $q) {
 	};
 
 	service.setUser = function(data) {
-		service.user.user_id = data.id;
+		service.user.id = data.id;
 		service.user.username = data.username;
 		service.user.password = data.password;
 		service.user.email = data.email;

@@ -68,8 +68,8 @@ public class UserController {
          User u = (User) session.getAttribute("user");
         userDTO.setId(u.getId());
         u = serviceimpl.updateUser(userDTO);
-        System.out.println("User: " + u.toString());
-        session.setAttribute("user", u);
+        //System.out.println("User: " + u.toString());
+        //session.setAttribute("user", u);
         System.out.println("session: " + session.getAttribute("user"));
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
