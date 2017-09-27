@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dungeoncrawlers.beans.Campaign;
-import com.dungeoncrawlers.beans.Character;
-import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dto.CampaignDTO;
-import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
 
 @RestController
