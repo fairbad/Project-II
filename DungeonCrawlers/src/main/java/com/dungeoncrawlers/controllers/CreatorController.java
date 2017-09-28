@@ -1,8 +1,15 @@
 package com.dungeoncrawlers.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Enemy;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
@@ -37,8 +50,36 @@ public class CreatorController {
 	@RequestMapping(value="/createCharacter", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CharacterDTO> createCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
+	public ResponseEntity<CharacterDTO> createCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO) throws IOException{
 		System.out.println("creating new character");
+		System.out.println(characterDTO.getImage());
+		String sourceData = characterDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		characterDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
         User currentUser = (User) session.getAttribute("user");
         characterDTO.setUser(currentUser);
 		characterDTO.setId(serviceimpl.addCharacter(characterDTO).getId());
@@ -48,8 +89,36 @@ public class CreatorController {
 	@RequestMapping(value="/createNPC", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<NPCDTO> createNPC(HttpSession session, @RequestBody NPCDTO npcDTO){
+	public ResponseEntity<NPCDTO> createNPC(HttpSession session, @RequestBody NPCDTO npcDTO) throws IOException{
 		System.out.println("creating new NPC");
+		System.out.println(npcDTO.getImage());
+		String sourceData = npcDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		npcDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
         User currentUser = (User) session.getAttribute("user");
         npcDTO.setUser(currentUser);
         npcDTO.setId(serviceimpl.addNonPlayableCharacter(npcDTO).getId());
@@ -59,8 +128,36 @@ public class CreatorController {
 	@RequestMapping(value="/createEnemy", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<EnemyDTO> createEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO){
+	public ResponseEntity<EnemyDTO> createEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO) throws IOException{
 		System.out.println("creating new Enemy");
+		System.out.println(enemyDTO.getImage());
+		String sourceData = enemyDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		enemyDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
         User currentUser = (User) session.getAttribute("user");
         enemyDTO.setUser(currentUser);
         enemyDTO.setId(serviceimpl.addEnemy(enemyDTO).getId());

@@ -246,6 +246,39 @@ dndApp.service("CreatorService", function($http, $q){
 	service.getEnemy = function(){
 		return service.enemy;
 	};
+	
+	service.getBase64Char = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.character.image = reader.result;
+			console.log(reader.result);
+		};
+	}
+	
+	service.getBase64NPC = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.NPC.image = reader.result;
+			console.log(reader.result);
+		};
+	}
+	
+	service.getBase64En = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.enemy.image = reader.result;
+			console.log(reader.result);
+		};
+	}
 
 	service.createCharacter = function(){
 		var promise = $http.post('rest/creator/createCharacter',
@@ -672,6 +705,7 @@ dndApp.controller("CharacterCtrl", function(CreatorService, $state){
 	character.createCharacter = function(){
 		var promise = CreatorService.createCharacter();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64Char;
 });
 
 dndApp.controller("NPCCtrl", function(CreatorService, $state){
@@ -680,6 +714,7 @@ dndApp.controller("NPCCtrl", function(CreatorService, $state){
 	NPC.createNPC = function(){
 		var promise = CreatorService.createNPC();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64NPC;
 });
 
 dndApp.controller("EnemyCtrl", function(CreatorService, $state){
@@ -688,6 +723,7 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 	enemy.createEnemy = function(){
 		var promise = CreatorService.createEnemy();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64En;
 });
 
 dndApp.controller("ViewCharactersCtrl",function(CreatorService, $state, $scope){
