@@ -138,6 +138,11 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/viewPublicCampaigns",
 		templateUrl: "templates/viewPublicCampaigns.html",
 		controller: "ViewPublicCampaignsCtrl as viewPublicCampaigns"
+	})
+	.state("viewCampaigns",{
+		url:"/campaigns",
+		templateUrl: "templates/viewCampaigns.html",
+		controller: "ViewCampaignsCtrl as viewCampaigns"
 	});
 
 });
@@ -468,6 +473,19 @@ dndApp.service("CampaignService", function($http, $q){
 	
 	service.getEvent = function(){
 		return service.event;
+	};
+	
+	service.getCampaigns = function(){
+		var promise = $http.get('rest/campaign/getCampaigns',
+			service.campaigns).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all campaigns failed")
+				}
+			);
+		return promise;
 	};
 
 	service.setCampaign = function(data){
@@ -942,6 +960,14 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 	$scope.getCampaign = function(campaign){
 		console.log(campaign);
 	}
+});
+
+dndApp.controller("ViewCampaignsCtrl",function(CampaignService, $state, $scope){
+	var promise = CampaignService.getCampaigns();
+	promise.then(
+		function(response){
+			$scope.campaigns = response.data;
+	})
 });
 
 dndApp.controller("NavCtrl", function($state) {
