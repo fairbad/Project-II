@@ -23,10 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.Region;
 import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Enemy;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
@@ -68,7 +73,8 @@ public class CreatorController {
 		
 		Random r = new Random();
 		String key = r.nextInt(1000000)+1+"";
-		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAIZZD2JYRAVWSZBSA", "sgIoNXGueTjyHhcsqAZ/mrsAN1hLWR8h1GccCPAT");
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
 		try {
 		String bucketName = "project2bucketforrevatureportfoliostuff";
 			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
@@ -107,7 +113,8 @@ public class CreatorController {
 		
 		Random r = new Random();
 		String key = r.nextInt(1000000)+1+"";
-		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAIZZD2JYRAVWSZBSA", "sgIoNXGueTjyHhcsqAZ/mrsAN1hLWR8h1GccCPAT");
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
 		try {
 		String bucketName = "project2bucketforrevatureportfoliostuff";
 			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
@@ -146,7 +153,8 @@ public class CreatorController {
 		
 		Random r = new Random();
 		String key = r.nextInt(1000000)+1+"";
-		AmazonS3 s3 = new AmazonS3Client(new ProfileCredentialsProvider());
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAIZZD2JYRAVWSZBSA", "sgIoNXGueTjyHhcsqAZ/mrsAN1hLWR8h1GccCPAT");
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
 		try {
 		String bucketName = "project2bucketforrevatureportfoliostuff";
 			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
