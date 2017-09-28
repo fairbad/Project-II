@@ -1,5 +1,8 @@
 package com.dungeoncrawlers.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dungeoncrawlers.beans.Campaign;
 import com.dungeoncrawlers.beans.Chapter;
+import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Event;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.User;
+import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
+import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
+import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.dto.EventDTO;
+import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
 import com.dungeoncrawlers.dto.MapDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
@@ -98,6 +106,44 @@ public class CampaignController {
 		Event event = serviceimpl.addEvent(eventDTO);
         eventDTO.setId(event.getId());
 		return new ResponseEntity<EventDTO>(eventDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getCampaigns", method= {RequestMethod.GET},
+			produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<CampaignDTO>> getCampaigns(HttpSession session){
+		System.out.println("getting campaigns");
+        User currentUser = (User) session.getAttribute("user");
+        List<Campaign> campaigns = serviceimpl.getAllCampaignsByUser(currentUser);
+        List<CampaignDTO> campaignsDTO = new ArrayList<>();
+        for(Campaign c: campaigns) {
+        	CampaignDTO temp = new CampaignDTO(c.getId(), c.getName(), c.getDescription(), c.getImage(), c.getNumViews(), c.getRating(), c.isPublic(), currentUser, c.getMap());
+        	campaignsDTO.add(temp);
+        }
+		return new ResponseEntity<List<CampaignDTO>>(campaignsDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getCampaign", method= {RequestMethod.GET},
+			consumes= {MediaType.APPLICATION_JSON_VALUE},
+			produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<CampaignAndComponentsDTO> getCampaign(HttpSession session, @RequestBody int id){
+		System.out.println("getting campaign and its components");
+
+        Campaign campaign = serviceimpl.getCampaign(id);
+        List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
+        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
+        for (Chapter c : chapters) {
+        	List<Location> locations = serviceimpl.getAllLocationsByChapter(c);
+        	List<LocationAndEventsDTO> location_events = new ArrayList<LocationAndEventsDTO>();
+        	for (Location l : locations) {
+        		List<Event> events = serviceimpl.getAllEventsByLocation(l);
+        		LocationAndEventsDTO laeDTO = new LocationAndEventsDTO(l, events);
+        		location_events.add(laeDTO);
+        	}
+        	ChapterAndLocationsDTO calDTO = new ChapterAndLocationsDTO(c, location_events);
+        	chapters_locations.add(calDTO);
+        }
+        CampaignAndComponentsDTO cacDTO = new CampaignAndComponentsDTO(campaign, campaign.getMap(), chapters_locations);
+		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
 
 }

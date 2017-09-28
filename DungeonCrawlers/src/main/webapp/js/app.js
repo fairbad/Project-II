@@ -133,6 +133,11 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/event",
 		templateUrl: "templates/event.html",
 		controller: "EventCtrl as event"
+	})
+	.state("viewCampaigns",{
+		url:"/campaigns",
+		templateUrl: "templates/viewCampaigns.html",
+		controller: "ViewCampaignsCtrl as viewCampaigns"
 	});
 
 });
@@ -463,6 +468,19 @@ dndApp.service("CampaignService", function($http, $q){
 	
 	service.getEvent = function(){
 		return service.event;
+	};
+	
+	service.getCampaigns = function(){
+		var promise = $http.get('rest/campaign/getCampaigns',
+			service.campaigns).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all campaigns failed")
+				}
+			);
+		return promise;
 	};
 
 	service.setCampaign = function(data){
@@ -889,6 +907,14 @@ dndApp.controller("EventCtrl", function(CampaignService, $state){
 				console.log(error);
 			});
 	};
+});
+
+dndApp.controller("ViewCampaignsCtrl",function(CampaignService, $state, $scope){
+	var promise = CampaignService.getCampaigns();
+	promise.then(
+		function(response){
+			$scope.campaigns = response.data;
+	})
 });
 
 dndApp.controller("NavCtrl", function($state) {
