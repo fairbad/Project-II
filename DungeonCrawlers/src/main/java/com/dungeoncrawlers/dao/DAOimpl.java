@@ -37,6 +37,10 @@ public class DAOimpl implements DAO {
 	public User getUser(int id) {
 		return (User)sessionFactory.getCurrentSession().get(User.class, id);
 	}
+//	@Override
+//	public ArrayList<User> getAllUserByEmail(){
+//		return (ArrayList<User>).createCriteria(User.class).list();
+//	}
 
 	@Override
 	public User getUser(String email, String password) {
@@ -45,6 +49,7 @@ public class DAOimpl implements DAO {
 
 	@Override
 	public User addUser(User user) {
+		System.out.println("User in add User: " + user.toString());
 		sessionFactory.getCurrentSession().save(user);
 		return user;
 	}

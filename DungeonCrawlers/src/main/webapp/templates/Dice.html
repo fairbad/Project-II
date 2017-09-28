@@ -1,0 +1,22 @@
+<script src="js/Dice.js"></script>
+
+<div ng-app = "dPerventile" ng-controller = "AppController">
+<div class = "main-wrapper">
+<h3>
+Roll: D%
+</h3>
+<hr/>
+<div class ="dice-images" ng-if ="dOnes && dTens">
+<img ng-src = "{{dTens.img}}" alt = ""/>
+<img ng-src = "{{dOne.img}}" alt = ""/>
+<div class = "num-value" ng-if = "val">
+<hr />
+<h1>{{val}}</h1>
+<div>
+<button class = "roll-button" ng-click="roll()">
+<h1>ROLL</h1>
+</button>
+</div>
+</div>
+</div>
+</div>

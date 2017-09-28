@@ -31,8 +31,15 @@ public class UserController {
 	@RequestMapping(value="/register", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO){
-		serviceimpl.addUser(userDTO);
+	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO, HttpSession session){
+		System.out.println("User: " + userDTO.toString());
+		User u = serviceimpl.addUser(userDTO);
+		if(u != null){
+			session.setAttribute("user",u);
+			System.out.println("session attr: " + session.getAttribute("user"));
+		}
+		System.out.println("User inside the registerUser");
+		System.out.println("User: " + userDTO);
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 	
@@ -87,9 +94,14 @@ public class UserController {
     		produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO> logoutUser(@RequestBody UserDTO userDTO, HttpSession session){
     	System.out.println("Inside the logout Controller");
-    	serviceimpl.authenticateUser(userDTO);
+//    	if(userDTO != null){
+//    		
+//    	}
     	session.removeAttribute("user");
+    	System.out.println("sessionAttr: " + session.getAttribute("user"));
     	session.invalidate();
+    	
     	return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+    	
     }
 }

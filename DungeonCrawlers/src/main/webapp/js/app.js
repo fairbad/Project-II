@@ -10,8 +10,8 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: "LoginCtrl as login"
 	})
 	.state("logout",{
-		url:"/logout",
-		//templateUrl:"templates/login.html",
+		url:"/login",
+		templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
 	})
 	.state("register",{
@@ -114,7 +114,6 @@ dndApp.service("UserService", function($http, $q) {
 	var service = this;
 
 	service.user = {
-		id : "",
 		username : "",
 		password : "",
 		email : "",
@@ -126,7 +125,7 @@ dndApp.service("UserService", function($http, $q) {
 	};
 
 	service.setUser = function(data) {
-		service.user.id = data.id;
+		//service.user.id = data.id;
 		service.user.username = data.username;
 		service.user.password = data.password;
 		service.user.email = data.email;
@@ -168,7 +167,7 @@ dndApp.service("UserService", function($http, $q) {
 					return $q.reject(error);
 				});
 		return promise;
-	};
+	}
 	service.editUser = function(){
 		var promise;
 		console.log(service.user);
@@ -393,20 +392,23 @@ dndApp.controller("LogoutCtrl", function(UserService, $state) {
 	var logout = this;
 	logout.user = UserService.getUser();
 	console.log("Logging out user: ")
+	logout.user = UserService.logoutUser();
 	console.log(logout.user);
+	//$state.go("login");
+	//console.log(logout.user);
 
 	logout.doLogout = function() {
 		console.log("about to de-authenticate user");
-		var promise = UserService.authenticateUser(false);
+		var promise = UserService.logoutUser();
 
 		promise.then(function(response) {
-			if (logout.user && response.data) {
+			if (response.data) {
 				console.log("In the function")
 				logout.user.authenticated = false;
 				console.log(response.data);
-				UserService.setUser(null);
-				console.log("setting user in login ctrl")
-				console.log(UserService.getUser());
+				UserService.setUser("");
+				//console.log("setting user in login ctrl")
+				//console.log(UserService.getUser());
 				$state.go("login");
 			} else {
 				alert("Invalid login!");
@@ -429,19 +431,21 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 		// if()
 
 		promise.then(
-		/*
-		 * if(register.user && response.data){ alert("User Already Exist"); }
-		 */
+		
+
+		 
 		function(response) {
+			if(register.user && response.data){ alert("User Already Exist"); }
 			console.log("setting data");
 			console.log(response.data);
 			UserService.setUser(response.data);
 			$state.go("home");
 		}, function(error) {
+			//console.log(response.data);
 			console.log(error);
 		})
 	}
-});
+})
 dndApp.controller("EditCtrl", function(UserService, $state){
 	var edit = this;
 	edit.user = UserService.getUser();
