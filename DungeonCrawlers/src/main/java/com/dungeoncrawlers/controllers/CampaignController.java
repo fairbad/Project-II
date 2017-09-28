@@ -42,6 +42,7 @@ public class CampaignController {
 		System.out.println("creating new campaign");
         User currentUser = (User) session.getAttribute("user");
         campaignDTO.setUser(currentUser);
+        campaignDTO.setPublic(true);
         Campaign campaign = serviceimpl.addCampaign(campaignDTO);
         session.setAttribute("campaign", campaign);
         campaignDTO.setId(campaign.getId());

@@ -29,14 +29,12 @@ public class CommunityController {
 		this.serviceimpl = serviceImpl;
 	}
 	
-	@RequestMapping(value="/viewCampaigns", method= {RequestMethod.GET},
-			consumes= {MediaType.APPLICATION_JSON_VALUE},
+	@RequestMapping(value="/getPublicCampaigns", method= {RequestMethod.GET},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<CampaignDTO>> createCampaign(HttpSession session, @RequestBody CampaignDTO campaignDTO){
-		System.out.println("getting all campaign");
+	public ResponseEntity<List<CampaignDTO>> getPublicCampaigns(HttpSession session){
+		System.out.println("getting all public campaign");
         List<Campaign> campaigns = serviceimpl.getAllPublicCampaigns();
         List<CampaignDTO> campaignsDTO = new ArrayList<>();
-
         for(Campaign c: campaigns) {
         	CampaignDTO temp = new CampaignDTO();
         	temp.setId(c.getId());

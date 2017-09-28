@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="dndApp">
 <head>
-<meta charset="ISO-8859-1">
-<title>Dungeon Crawlers</title>
-<link
+	<meta charset="ISO-8859-1">
+	<title>Dungeon Crawlers</title>
+	<link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
-<script type="text/javascript"
+	<script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
-<script type="text/javascript"
+	<script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
-<script src="js/app.js"></script>
+	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+	<script src="js/app.js"></script>
 </head>
 <body>
 
@@ -25,6 +27,7 @@
 					<li><a ui-sref="editCreation">Edit Creations</a></li>
 					<li><a ui-sref="deleteCreation">Delete Creation</a></li>
 					<li><a ui-sref="campaign">Campaign</a></li>
+					<li><a ui-sref="viewPublicCampaigns">View Public Campaigns</a></li>
 					<li><a ui-sref="logout">Logout</a></li>
 				</ul>
 			</div>

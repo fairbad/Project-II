@@ -1,4 +1,4 @@
-var dndApp = angular.module("dndApp", [ "ui.router" ]);
+var dndApp = angular.module("dndApp", [ "ui.router", "ngTable" ]);
 
 dndApp.config(function($stateProvider, $urlRouterProvider) {
 	console.log("init app");
@@ -133,6 +133,11 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/event",
 		templateUrl: "templates/event.html",
 		controller: "EventCtrl as event"
+	})
+	.state("viewPublicCampaigns",{
+		url:"/viewPublicCampaigns",
+		templateUrl: "templates/viewPublicCampaigns.html",
+		controller: "ViewPublicCampaignsCtrl as viewPublicCampaigns"
 	});
 
 });
@@ -574,6 +579,28 @@ dndApp.service("CampaignService", function($http, $q){
 	};
 });
 
+
+dndApp.service("CommunityService", function($http, $q){
+	console.log("in CommunityService");
+
+	var service = this;
+
+	service.campaigns = [];
+
+	service.getPublicCampaigns = function(){
+		var promise = $http.get('rest/community/getPublicCampaigns',
+			service.campaigns).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("get all public campaigns failed")
+				}
+			);
+		return promise;
+	};
+});
+
 dndApp.controller("LoginCtrl", function(UserService, $state) {
 	console.log("in loginctrl");
 
@@ -889,6 +916,29 @@ dndApp.controller("EventCtrl", function(CampaignService, $state){
 				console.log(error);
 			});
 	};
+});
+
+dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){
+	var promise = CommunityService.getPublicCampaigns();
+	promise.then(
+		function(response){
+			console.log(response.data);
+			$scope.campaigns = response.data;
+			//$scope.publicCampaigns = new NgTableParams({sorting: {name: "asc"}}, {dataset: $scope.campaigns});
+			$scope.publicCampaigns = createUsingFullOptions();
+			function createUsingFullOptions(){
+				"use strict";
+				 var initialParams = {
+					sorting: {name: "asc"},
+        			count: 10
+      			};
+				var initialSettings = {
+					counts: [],
+					dataset: $scope.campaigns
+				};
+				return new NgTableParams(initialParams, initialSettings);
+			}
+	})
 });
 
 dndApp.controller("NavCtrl", function($state) {
