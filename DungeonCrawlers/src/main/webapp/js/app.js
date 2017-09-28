@@ -790,6 +790,17 @@ dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
 	})
 });
 
+dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
+	var promise = CreatorService.getCharacters();
+	promise.then(
+		function(response){
+			$scope.characters = response.data;
+	})
+	$scope.update = function(){
+		CreatorService.editCharacter($scope.character);
+	}
+});
+
 dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getNPCs();
 	promise.then(
