@@ -18,14 +18,14 @@ public class CampaignDTO {
 
 	private boolean isPublic;
 
-	private User author;
+	private User user;
 
 	private Map map;
 
 	public CampaignDTO() {}
 
 	public CampaignDTO(int id, String name, String description, String image, int numViews, float rating, boolean isPublic,
-			User author, Map map) {
+			User user, Map map) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,7 +34,7 @@ public class CampaignDTO {
 		this.numViews = numViews;
 		this.rating = rating;
 		this.isPublic = isPublic;
-		this.author = author;
+		this.user = user;
 		this.map = map;
 	}
 
@@ -102,11 +102,11 @@ public class CampaignDTO {
 		this.isPublic = isPublic;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

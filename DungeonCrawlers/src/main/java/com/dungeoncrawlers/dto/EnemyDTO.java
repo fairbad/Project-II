@@ -9,17 +9,17 @@ public class EnemyDTO {
 
 	private String image;
 
-	private User author;
+	private User user;
 
 	public EnemyDTO() {
 	}
 
-	public EnemyDTO(int id, String name, String image, User author) {
+	public EnemyDTO(int id, String name, String image, User user) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		this.author = author;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -46,11 +46,11 @@ public class EnemyDTO {
 		this.image = image;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User User) {
+		this.user = User;
 	}
 }

@@ -1,5 +1,7 @@
 package com.dungeoncrawlers.dto;
 
+import com.dungeoncrawlers.beans.User;
+
 public class MapDTO {
 	private int id;
 
@@ -8,16 +10,19 @@ public class MapDTO {
 	private String description;
 
 	private String image;
+	
+	private User user;
 
 	public MapDTO() {
 	}
 
-	public MapDTO(int id, String name, String description, String image) {
+	public MapDTO(int id, String name, String description, String image, User user) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -50,5 +55,13 @@ public class MapDTO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

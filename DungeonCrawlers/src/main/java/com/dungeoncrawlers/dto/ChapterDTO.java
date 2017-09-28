@@ -11,20 +11,19 @@ public class ChapterDTO {
 
 	private String image;
 
-	private int order;
+	//private int order;
 
 	private Campaign campaign;
 
 	public ChapterDTO() {
 	}
 
-	public ChapterDTO(int id, String name, String description, String image, int order, Campaign campaign) {
+	public ChapterDTO(int id, String name, String description, String image, Campaign campaign) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.order = order;
 		this.campaign = campaign;
 	}
 
@@ -60,6 +59,7 @@ public class ChapterDTO {
 		this.image = image;
 	}
 
+	/*
 	public int getOrder() {
 		return order;
 	}
@@ -67,6 +67,7 @@ public class ChapterDTO {
 	public void setOrder(int order) {
 		this.order = order;
 	}
+	*/
 
 	public Campaign getCampaign() {
 		return campaign;

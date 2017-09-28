@@ -36,7 +36,7 @@ public class Campaign implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="USER_ID", nullable=false)
-	private User author;
+	private User user;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="MAP_ID")
@@ -45,7 +45,7 @@ public class Campaign implements Serializable {
 	public Campaign() {}
 
 	public Campaign(int id, String name, String description, String image, int numViews, float rating, boolean isPublic,
-			User author, Map map) {
+			User user, Map map) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,7 +54,7 @@ public class Campaign implements Serializable {
 		this.numViews = numViews;
 		this.rating = rating;
 		this.isPublic = isPublic;
-		this.author = author;
+		this.user = user;
 		this.map = map;
 	}
 
@@ -122,11 +122,11 @@ public class Campaign implements Serializable {
 		this.isPublic = isPublic;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User author) {
+		this.user = author;
 	}
 }
