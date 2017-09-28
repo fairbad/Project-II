@@ -27,7 +27,7 @@ public class Map implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "USER_ID", nullable = false)
-	private User author;
+	private User user;
 	
 	public Map() {}
 	
@@ -37,7 +37,7 @@ public class Map implements Serializable {
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.author = author;
+		this.user = author;
 	}
 
 	public int getId() {
@@ -73,11 +73,11 @@ public class Map implements Serializable {
 	}
 
 	public User getAuthor() {
-		return author;
+		return user;
 	}
 
 	public void setAuthor(User author) {
-		this.author = author;
+		this.user = author;
 	}
 	
 }

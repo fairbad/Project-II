@@ -31,38 +31,29 @@ public class UserController {
 	@RequestMapping(value="/register", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserDTO>	registerUser(@RequestBody UserDTO userDTO, HttpSession session){
-		System.out.println("User: " + userDTO.toString());
+	public ResponseEntity<UserDTO>	registerUser(HttpSession session, @RequestBody UserDTO userDTO){
 		User u = serviceimpl.addUser(userDTO);
-		if(u != null){
-			session.setAttribute("user",u);
-			System.out.println("session attr: " + session.getAttribute("user"));
+		if (u != null) {
+			session.setAttribute("user", u);
 		}
-		System.out.println("User inside the registerUser");
-		System.out.println("User: " + userDTO);
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/auth", method= {RequestMethod.POST},
             consumes= {MediaType.APPLICATION_JSON_VALUE},
             produces= {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<UserDTO> 
-        authenticateUser(@RequestBody UserDTO userDTO, HttpSession session){ 
-        userDTO = serviceimpl.authenticateUser(userDTO);
-        if(userDTO != null){
-        	User user = new User();
-        	user.setId(userDTO.getId());
-        	user.setEmail(userDTO.getEmail());
-        	user.setPassword(userDTO.getPassword());
-        	user.setUsername(userDTO.getUsername());
-        	session.setAttribute("user", user);
-        	user = (User)session.getAttribute("user");
-        	System.out.println("This is my userDTO: " + userDTO.toString());
-        	System.out.println("This is my session: " + session.getId());
-            System.out.println("This is my session user: " + session.getAttribute("user"));
-        } 
-        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
-    }
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody UserDTO userDTO, HttpSession session) {
+		userDTO = serviceimpl.authenticateUser(userDTO);
+
+		if (userDTO != null) {
+			User u = new User(userDTO.getId(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword());
+			session.setAttribute("user", u);
+			u = (User) session.getAttribute("user");
+			System.out.println("This is my session: " + session.getId());
+			System.out.println("This is my session user: " + session.getAttribute("user"));
+		}
+		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+	}
 
     @RequestMapping(value="/editUser", method= {RequestMethod.POST},
             consumes= {MediaType.APPLICATION_JSON_VALUE},
@@ -89,19 +80,18 @@ public class UserController {
         serviceimpl.getUser(userDTO.getId());
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
+
     @RequestMapping(value ="/logout",method ={RequestMethod.POST},
     		consumes= {MediaType.APPLICATION_JSON_VALUE},
     		produces= {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<UserDTO> logoutUser(@RequestBody UserDTO userDTO, HttpSession session){
     	System.out.println("Inside the logout Controller");
-//    	if(userDTO != null){
-//    		
-//    	}
+
     	session.removeAttribute("user");
     	System.out.println("sessionAttr: " + session.getAttribute("user"));
     	session.invalidate();
     	
     	return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
-    	
     }
 }
+

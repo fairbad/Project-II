@@ -47,9 +47,11 @@ public interface ServiceInterface {
 	
 	public Campaign updateCampaign(CampaignDTO campaignDTO);
 	
+	public Campaign updateCampaignMap(Campaign campaign, MapDTO mapDTO);
+	
 	public void deleteCampaign(CampaignDTO campaignDTO);
 	
-	public List<Campaign> getAllCampaignsByUser(UserDTO userDTO);
+	public List<Campaign> getAllCampaignsByUser(User user);
 	
 	public List<Campaign> getAllPublicCampaigns();
 
@@ -67,7 +69,7 @@ public interface ServiceInterface {
 	
 	public void deleteChapter(ChapterDTO chapterDTO);
 	
-	public List<Chapter> getAllChaptersByCampaign(CampaignDTO campaignDTO);
+	public List<Chapter> getAllChaptersByCampaign(Campaign campaign);
 	
 	/*
 	 * Map Operations
@@ -93,7 +95,7 @@ public interface ServiceInterface {
 	
 	public void deleteLocation(LocationDTO locationDTO);
 	
-	public List<Location> getAllLocationsByChapter(ChapterDTO chapterDTO);
+	public List<Location> getAllLocationsByChapter(Chapter chapter);
 	
 	/*
 	 * Event Operations
@@ -106,7 +108,7 @@ public interface ServiceInterface {
 	
 	public void deleteEvent(EventDTO eventDTO);
 	
-	public List<Event> getAllEventsByLocation(LocationDTO locationDTO);
+	public List<Event> getAllEventsByLocation(Location location);
 	
 	/*
 	 * Event Type Operations
@@ -129,7 +131,7 @@ public interface ServiceInterface {
 	
 	public void deleteCharacter(CharacterDTO characterDTO);
 	
-	public List<Character> getAllCharactersByUser(UserDTO userDTO);
+	public List<Character> getAllCharactersByUser(User user);
 	
 	/*
 	 * Enemy Operations
@@ -144,7 +146,7 @@ public interface ServiceInterface {
 	
 	public List<Enemy> getAllEnemiesByEvent(EventDTO eventDTO);
 	
-	public List<Enemy> getAllEnemiesByUser(UserDTO userDTO);
+	public List<Enemy> getAllEnemiesByUser(User user);
 	
 	/*
 	 * NonPlayableCharacter Operations
@@ -159,7 +161,7 @@ public interface ServiceInterface {
 	
 	public List<NonPlayableCharacter> getAllNonPlayableCharactersByEvent(EventDTO eventDTO);
 	
-	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(UserDTO userDTO);
+	public List<NonPlayableCharacter> getAllNonPlayableCharactersByUser(User user);
 	
 	/*
 	 * Rating Operations
@@ -172,7 +174,7 @@ public interface ServiceInterface {
 	
 	public List<Rating> getAllRatingsByCampaign(CampaignDTO campaignDTO);
 	
-	public List<Rating> getAllRatingsByUser(UserDTO userDTO);
+	public List<Rating> getAllRatingsByUser(User user);
 	
 	public void updateAllCampaignRatings();
 	

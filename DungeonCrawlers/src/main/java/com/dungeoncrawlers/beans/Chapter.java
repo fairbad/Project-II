@@ -25,22 +25,23 @@ public class Chapter implements Serializable {
 	@Column
 	private String image;
 	
-	@Column
-	private int order;
-	
+	//@Column
+	//private int order;
+
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="CAMPAIGN_ID", nullable=false)
 	private Campaign campaign;
 
 	public Chapter() {}
 	
-	public Chapter(int id, String name, String description, String image, int order, Campaign campaign) {
+	
+
+	public Chapter(int id, String name, String description, String image, Campaign campaign) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.order = order;
 		this.campaign = campaign;
 	}
 
@@ -76,13 +77,14 @@ public class Chapter implements Serializable {
 		this.image = image;
 	}
 
+	/*
 	public int getOrder() {
 		return order;
 	}
 
 	public void setOrder(int order) {
 		this.order = order;
-	}
+	}*/
 
 	public Campaign getCampaign() {
 		return campaign;

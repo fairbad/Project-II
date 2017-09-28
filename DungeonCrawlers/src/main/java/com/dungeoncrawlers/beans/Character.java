@@ -22,26 +22,26 @@ public class Character implements Serializable {
 	@Column
 	private String image;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID", nullable = false)
-	private User author;
+	private User user;
 
 	public Character() {
 	}
 
-	public Character(int id, String name, String image, User author) {
+	public Character(int id, String name, String image, User User) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		this.author = author;
+		this.user = User;
 	}
 
-	public Character(String name, String image, User author) {
+	public Character(String name, String image, User User) {
 		super();
 		this.name = name;
 		this.image = image;
-		this.author = author;
+		this.user = User;
 	}
 
 	public int getId() {
@@ -68,19 +68,19 @@ public class Character implements Serializable {
 		this.image = image;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User User) {
+		this.user = User;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -89,7 +89,7 @@ public class Character implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Character [id=" + id + ", name=" + name + ", image=" + image + ", author=" + author + "]";
+		return "Character [id=" + id + ", name=" + name + ", image=" + image + ", User=" + user + "]";
 	}
 	
 	@Override
@@ -101,10 +101,10 @@ public class Character implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Character other = (Character) obj;
-		if (author == null) {
-			if (other.author != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!author.equals(other.author))
+		} else if (!user.equals(other.user))
 			return false;
 		if (id != other.id)
 			return false;
