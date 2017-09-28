@@ -51,4 +51,6 @@ public class CommunityController {
         
 		return new ResponseEntity<List<CampaignDTO>>(campaignsDTO, HttpStatus.OK);
 	}
+	
+	
 }
