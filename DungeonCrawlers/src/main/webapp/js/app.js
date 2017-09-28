@@ -24,84 +24,84 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
 	})
-	.state("home.create",{
-		url:"/create",
-		templateUrl: "templates/create.html"
-	})
 	.state("editUser",{
         url:"/editUser",
         templateUrl:"templates/editUser.html",
         controller:"EditCtrl as edit"
     })
-	.state("home.create.character",{
+	.state("home.creator",{
+		url:"/create",
+		templateUrl: "templates/creator.html"
+	})
+	.state("home.creator.character",{
 		url:"/character",
-		templateUrl: "templates/character.html",
+		templateUrl: "templates/character.html"
+	})
+	.state("home.creator.character.create",{
+		url:"/create",
+		templateUrl: "templates/createCharacter.html",
 		controller: "CharacterCtrl as character"
 	})
-	.state("home.create.NPC",{
-		url:"/NPC",
-		templateUrl: "templates/NPC.html",
-		controller: "NPCCtrl as NPC"
-	})
-	.state("home.create.enemy",{
-		url:"/enemy",
-		templateUrl: "templates/enemy.html",
-		controller: "EnemyCtrl as enemy"
-	})
-	.state("home.viewCreations",{
-		url:"/viewCreations",
-		templateUrl: "templates/viewCreations.html"
-	})
-	.state("home.viewCreations.characters",{
-		url:"/characters",
-		templateUrl: "templates/viewCharacters.html",
-		controller: "ViewCharactersCtrl as viewCharacters"
-	})
-	.state("home.viewCreations.NPCs",{
-		url:"/NPCs",
-		templateUrl: "templates/viewNPCs.html",
-		controller: "ViewNPCsCtrl as viewNPCs"
-	})
-	.state("home.viewCreations.enemies",{
-		url:"/enemies",
-		templateUrl: "templates/viewEnemies.html",
-		controller: "ViewEnemiesCtrl as viewEnemies"
-	})
-	.state("home.editCreation",{
-		url:"/editCreation",
-		templateUrl: "templates/editCreation.html"
-	})
-	.state("home.editCreation.character",{
-		url:"/character",
+	.state("home.creator.character.edit",{
+		url:"/edit",
 		templateUrl: "templates/editCharacter.html",
 		controller: "EditCharacterCtrl as editCharacter"
 	})
-	.state("home.editCreation.NPC",{
-		url:"/NPC",
-		templateUrl: "templates/editNPC.html",
-		controller: "EditNPCCtrl as editNPC"
+	.state("home.creator.character.view",{
+		url:"/view",
+		templateUrl: "templates/viewCharacters.html",
+		controller: "ViewCharactersCtrl as viewCharacters"
 	})
-	.state("home.editCreation.enemy",{
-		url:"/enemy",
-		templateUrl: "templates/editEnemy.html",
-		controller: "EditEnemyCtrl as editEnemy"
-	})
-	.state("home.deleteCreation",{
-		url:"/deleteCreation",
-		templateUrl: "templates/deleteCreation.html"
-	})
-	.state("home.deleteCreation.character",{
-		url:"/character",
+	.state("home.creator.character.delete",{
+		url:"/delete",
 		templateUrl: "templates/deleteCharacter.html",
 		controller: "DeleteCharacterCtrl as deleteCharacter"
 	})
-	.state("home.deleteCreation.NPC",{
+	.state("home.creator.NPC",{
 		url:"/NPC",
+		templateUrl: "templates/NPC.html"
+	})
+	.state("home.creator.NPC.create",{
+		url:"/create",
+		templateUrl: "templates/createNPC.html",
+		controller: "NPCCtrl as NPC"
+	})
+	.state("home.creator.NPC.edit",{
+		url:"/edit",
+		templateUrl: "templates/editNPC.html",
+		controller: "EditNPCCtrl as editNPC"
+	})
+	.state("home.creator.NPC.view",{
+		url:"/view",
+		templateUrl: "templates/viewNPCs.html",
+		controller: "ViewNPCsCtrl as viewNPCs"
+	})
+	.state("home.creator.NPC.delete",{
+		url:"/delete",
 		templateUrl: "templates/deleteNPC.html",
 		controller: "DeleteNPCCtrl as deleteNPC"
 	})
-	.state("home.deleteCreation.enemy",{
+	.state("home.creator.enemy",{
 		url:"/enemy",
+		templateUrl: "templates/enemy.html"
+	})
+	.state("home.creator.enemy.create",{
+		url:"/create",
+		templateUrl: "templates/createEnemy.html",
+		controller: "EnemyCtrl as enemy"
+	})
+	.state("home.creator.enemy.edit",{
+		url:"/edit",
+		templateUrl: "templates/editEnemy.html",
+		controller: "EditEnemyCtrl as editEnemy"
+	})
+	.state("home.creator.enemy.view",{
+		url:"/view",
+		templateUrl: "templates/viewEnemies.html",
+		controller: "ViewEnemiesCtrl as viewEnemies"
+	})
+	.state("home.creator.enemy.delete",{
+		url:"/delete",
 		templateUrl: "templates/deleteEnemy.html",
 		controller: "DeleteEnemyCtrl as deleteEnemy"
 	})
@@ -718,6 +718,7 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 		})
 	}
 })
+
 dndApp.controller("EditCtrl", function(UserService, $state){
 	var edit = this;
 	edit.user = UserService.getUser();
