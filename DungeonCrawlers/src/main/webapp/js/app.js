@@ -933,7 +933,7 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
         			count: 10
       			};
 				var initialSettings = {
-					counts: [],
+					//counts: [],
 					dataset: $scope.campaigns
 				};
 				return new NgTableParams(initialParams, initialSettings);
