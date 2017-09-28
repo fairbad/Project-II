@@ -939,6 +939,9 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 				return new NgTableParams(initialParams, initialSettings);
 			}
 	})
+	$scope.getCampaign = function(campaign){
+		console.log(campaign);
+	}
 });
 
 dndApp.controller("NavCtrl", function($state) {

@@ -1,5 +1,5 @@
 <table ng-table="publicCampaigns" class="table table-condensed table-bordered table-striped">
-  <tr ng-repeat="campaign in $data track by $index">
+  <tr ng-repeat="campaign in $data track by $index" ng-model="campaign"	ng-click="getCampaign(campaign)">
     <td data-title="'Campaign Name'" sortable="'name'" filter="{name: 'text'}">{{campaign.name}}</td>
     <td data-title="'Author'" sortable="'user.username'" filter="{'user.username': 'text'}">{{campaign.user.username}}</td>
     <td data-title="'Description'" filter="{description: 'text'}">{{campaign.description}}</td>
