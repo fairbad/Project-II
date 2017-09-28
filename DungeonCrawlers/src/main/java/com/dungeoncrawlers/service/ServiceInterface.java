@@ -38,6 +38,8 @@ public interface ServiceInterface {
 	
 	public UserDTO authenticateUser(UserDTO userDto);
 	
+	public List<String> getEmails();
+	
 	/*
 	 * Campaign Operations
 	 */

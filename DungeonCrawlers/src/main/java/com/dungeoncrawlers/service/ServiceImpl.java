@@ -55,19 +55,33 @@ public class ServiceImpl implements ServiceInterface{
 		return daoimpl.getUser(id);
 		
 	}
+	@Override
+	public List<String> getEmails(){
+		List<String> emails = daoimpl.getAllUsersEmail();
+		for(String e: emails){
+			System.out.println(e);
+		}
+		return emails;
+	}
+	
 	
 	@Override
 	public User addUser(UserDTO userDTO) {
 		User user = new User();
+		List<String> emails = daoimpl.getAllUsersEmail();
 		
-		user.setEmail(userDTO.getEmail());
-//		if(user.getEmail() =! null){
-//			
-//		}
-		user.setPassword(userDTO.getPassword());
-		user.setUsername(userDTO.getUsername());
-		return daoimpl.addUser(user);
+
+		if(emails.contains(userDTO.getEmail())){
+			System.out.println("Email Taken");
+			return null;
+		}else{
+			user.setEmail(userDTO.getEmail());
+			user.setPassword(userDTO.getPassword());
+			user.setUsername(userDTO.getUsername());
+			return daoimpl.addUser(user);
+		}
 	}
+	
 	
 	@Override
 	public User updateUser(UserDTO userDTO) {

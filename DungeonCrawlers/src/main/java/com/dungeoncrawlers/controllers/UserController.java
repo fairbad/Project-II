@@ -89,8 +89,9 @@ public class UserController {
 
     	session.removeAttribute("user");
     	System.out.println("sessionAttr: " + session.getAttribute("user"));
+    	userDTO =null;
     	session.invalidate();
-    	
+    	System.out.println("at end of logout controller");
     	return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 }
