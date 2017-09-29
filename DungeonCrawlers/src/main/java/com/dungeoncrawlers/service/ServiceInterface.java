@@ -38,6 +38,12 @@ public interface ServiceInterface {
 	
 	public UserDTO authenticateUser(UserDTO userDto);
 	
+	public UserDTO checkIfUAndP(UserDTO userDTO);
+	
+	//public List<String> getEmails();
+	
+	//public List<String> getUserName();
+	
 	/*
 	 * Campaign Operations
 	 */

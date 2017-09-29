@@ -55,19 +55,34 @@ public class ServiceImpl implements ServiceInterface{
 		return daoimpl.getUser(id);
 		
 	}
+	@Override
+	public UserDTO checkIfUAndP(UserDTO userDTO){
+		List<String> usernames = daoimpl.getAllUserNames();
+		List<String> emails = daoimpl.getAllUsersEmail();
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
+			return null;
+		}
+		return userDTO;
+	}
+	
 	
 	@Override
 	public User addUser(UserDTO userDTO) {
 		User user = new User();
-		
-		user.setEmail(userDTO.getEmail());
-//		if(user.getEmail() =! null){
-//			
-//		}
-		user.setPassword(userDTO.getPassword());
-		user.setUsername(userDTO.getUsername());
-		return daoimpl.addUser(user);
+		List<String> emails = daoimpl.getAllUsersEmail();
+		List<String> usernames = daoimpl.getAllUserNames();
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
+			return null;
+		}else{
+			user.setEmail(userDTO.getEmail());
+			user.setPassword(userDTO.getPassword());
+			user.setUsername(userDTO.getUsername());
+			return daoimpl.addUser(user);
+		}
 	}
+	
 	
 	@Override
 	public User updateUser(UserDTO userDTO) {
