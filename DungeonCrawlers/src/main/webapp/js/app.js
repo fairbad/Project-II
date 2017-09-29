@@ -109,6 +109,11 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
 	})
+	.state("home.editCampaign",{
+		url:"/editCampaign",
+		templateUrl: "templates/editCampaign.html",
+		controller: "EditCampaignCtrl as editCampaign"
+	})
 	.state("home.campaign.details",{
 		url:"/details",
 		templateUrl: "templates/details.html",
@@ -440,6 +445,8 @@ dndApp.service("CampaignService", function($http, $q){
 
 	var service = this;
 
+	service.campaignInfo=[];
+	
 	service.campaign={
 		name : "",
 		desc : "",
@@ -488,6 +495,17 @@ dndApp.service("CampaignService", function($http, $q){
 	
 	service.getEvent = function(){
 		return service.event;
+	};
+	
+	service.gotoCampaign = function() {
+		var promise = $http.post('rest/campaign/getCampaign', service.campaign).then(
+			function(response) {
+				console.log(response);
+				return response;
+			}, function(error) {
+				console.log('goto promise fail');
+			});
+		return promise;
 	};
 	
 	service.getCampaigns = function(){
@@ -609,6 +627,17 @@ dndApp.service("CampaignService", function($http, $q){
 				}
 			);
 			return promise;
+	};
+	
+	service.editCampaign = function(){
+		var promise = $http.post('rest/campaign/getCampaign', service.campaign).then(
+			function(response) {
+				console.log(response);
+				return response;
+			}, function(error) {
+				console.log('editCampaign promise fail');
+			});
+		return promise;
 	};
 });
 
@@ -969,6 +998,21 @@ dndApp.controller("EventCtrl", function(CampaignService, $state){
 	};
 });
 
+dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
+	console.log("in EditCampaignCtrl");
+
+	var campaign = this;
+	campaign.campaign = CampaignService.getCampaign();
+	
+	var promise = CampaignService.editCampaign();
+	promise.then(function(response) {
+		if (campaign.campaign && response.data) {
+			$scope.campaignInfo = response.data;
+			console.log($scope.campaignInfo);
+		}
+	});
+});
+
 dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){
 	var promise = CommunityService.getPublicCampaigns();
 	promise.then(
@@ -995,12 +1039,30 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 	}
 });
 
-dndApp.controller("ViewCampaignsCtrl",function(CampaignService, $state, $scope){
+dndApp.controller("ViewCampaignsCtrl",function(NgTableParams, CampaignService, $state, $scope){
 	var promise = CampaignService.getCampaigns();
 	promise.then(
 		function(response){
+			console.log(response.data);
 			$scope.campaigns = response.data;
+			$scope.myCampaigns = createUsingFullOptions();
+			function createUsingFullOptions(){
+				"use strict";
+				 var initialParams = {
+					sorting: {name: "asc"},
+        			count: 10
+      			};
+				var initialSettings = {
+					dataset: $scope.campaigns
+				};
+				return new NgTableParams(initialParams, initialSettings);
+			}
 	})
+
+	$scope.getCampaign = function(campaign){
+		CampaignService.campaign = campaign;
+		$state.go("home.editCampaign");
+	};
 });
 
 dndApp.controller("NavCtrl", function($state) {

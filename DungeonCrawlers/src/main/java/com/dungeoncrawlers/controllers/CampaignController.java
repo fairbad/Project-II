@@ -123,13 +123,13 @@ public class CampaignController {
 		return new ResponseEntity<List<CampaignDTO>>(campaignsDTO, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/getCampaign", method= {RequestMethod.GET},
+	@RequestMapping(value="/getCampaign", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CampaignAndComponentsDTO> getCampaign(HttpSession session, @RequestBody int id){
+	public ResponseEntity<CampaignAndComponentsDTO> getCampaign(HttpSession session, @RequestBody CampaignDTO campaignDTO){
 		System.out.println("getting campaign and its components");
-
-        Campaign campaign = serviceimpl.getCampaign(id);
+		System.out.println(campaignDTO.toString());
+        Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
         List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
         List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
         for (Chapter c : chapters) {
