@@ -1,28 +1,29 @@
-<form name="editCampaignName" ng-submit="details.editCampaignName()">
+{{campaignInfo.campaign}}
+<form name="editCampaignName" ng-submit="editCampaign.editCampaignName()">
 	Name
 	<input id="name" type="text" placeholder="Name" ng-model="details.campaign.name">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editCampaignDescription" ng-submit="details.editCampaignDescription()">
+<form name="editCampaignDescription" ng-submit="editCampaign.editCampaignDescription()">
 	Description
 	<input id="desc" type="text" placeholder="Description" ng-model="details.campaign.description">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editCampaignImage" ng-submit="details.editCampaignImage()">
+<form name="editCampaignImage" ng-submit="editCampaign.editCampaignImage()">
 	Image
 	<input id="image" type="text" placeholder="Image" ng-model="details.campaign.image">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editIsPublic" ng-submit="details.editIsPublic()">
+<form name="editIsPublic" ng-submit="editCampaign.editIsPublic()">
 	Public
 	<input id="isPublic" type="checkbox" ng-model="details.campaign.isPublic">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="setMap" ng-submit="map.createMap()">
+<form name="setMap" ng-submit="editCampaign.createMap()">
 	World Map
 	<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
 	<button type="submit" class="btn btn-primary">Save</button>
