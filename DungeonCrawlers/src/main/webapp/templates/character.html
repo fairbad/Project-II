@@ -1,6 +1,9 @@
-<form name="createCharacter" ng-submit="character.createCharacter()">
-	<h1>Character</h1>
-	<input id="name" type="text" placeholder="Name" ng-model="character.character.name">
-	<input id="image" type="text" placeholder="Image" ng-model="character.character.image">
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+<div class="jumbotron text-center">
+    <h1>Character</h1>
+    <a ui-sref="home.character.create" class="btn btn-primary">Create Character</a>
+    <a ui-sref="home.character.edit" class="btn btn-primary">Edit Character</a>
+    <a ui-sref="home.character.view" class="btn btn-primary">View Characters</a>
+    <a ui-sref="home.character.delete" class="btn btn-danger">Delete Character</a>
+</div>
+
+<div ui-view></div>
