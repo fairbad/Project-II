@@ -29,6 +29,7 @@ public interface DAO {
 	public User updateUser(User user);
 	
 	public List<String> getAllUsersEmail();
+	public List<String> getAllUserNames();
 	
 	/*
 	 * Campaign Operations

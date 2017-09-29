@@ -42,6 +42,11 @@ public class DAOimpl implements DAO {
 		List<String> emails = sessionFactory.getCurrentSession().createQuery("select email from User").list();
 		return emails;
 	}
+	@Override
+	public List<String> getAllUserNames(){
+		List<String> username = sessionFactory.getCurrentSession().createQuery("select username from User").list();
+		return username;
+	}
 
 	@Override
 	public User getUser(String email, String password) {

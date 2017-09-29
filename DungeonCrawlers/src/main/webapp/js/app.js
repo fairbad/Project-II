@@ -10,8 +10,8 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		controller: "LoginCtrl as login"
 	})
 	.state("logout",{
-		url:"/login",
-		templateUrl:"templates/login.html",
+		//url:"/login",
+		//templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
 	})
 	.state("register",{
@@ -678,26 +678,15 @@ dndApp.controller("LogoutCtrl", function(UserService, $state) {
 	console.log(logout.user);
 	//UserService.setUser(null);
 	logout.user = UserService.logoutUser();
+	console.log("We are here at line 681");
 
 	console.log("about to de-authenticate user");
+	//$state.go("login")
 	var promise = UserService.logoutUser();
 
 	promise.then(function(response) {
-		if (response.data) {
 			console.log("In the function")
-			logout.user.authenticated = false;
-			logout.user.email = "";
-			logout.user.username = "";
-			logout.user.password = "";
-			UserService.setUser(logout.user);
-			console.log(response.data);
-			delete logout.user.email;
-
-
-//			$state.go("login");
-		} else {
-			alert("Invalid login!");
-		}
+			$state.go("login");
 	}, function(error) {
 		console.log(error);
 	});
@@ -709,12 +698,16 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 	var register = this;
 
 	register.user = UserService.getUser();
+	console.log("User to register: " + register.user);
 	register.doRegister = function() {
+	
 
 		var promise = UserService.registerUser();
 		promise.then( 
 				function(response) {
-					if(register.user === response.data){
+					if(register.user && response.data){
+						console.log("This is the response inside the register controller");
+						console.log(response.data);
 						console.log("setting data");
 						console.log(response.data);
 						UserService.setUser(response.data);

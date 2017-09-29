@@ -56,12 +56,14 @@ public class ServiceImpl implements ServiceInterface{
 		
 	}
 	@Override
-	public List<String> getEmails(){
+	public UserDTO checkIfUAndP(UserDTO userDTO){
+		List<String> usernames = daoimpl.getAllUserNames();
 		List<String> emails = daoimpl.getAllUsersEmail();
-		for(String e: emails){
-			System.out.println(e);
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
+			return null;
 		}
-		return emails;
+		return userDTO;
 	}
 	
 	
@@ -69,10 +71,9 @@ public class ServiceImpl implements ServiceInterface{
 	public User addUser(UserDTO userDTO) {
 		User user = new User();
 		List<String> emails = daoimpl.getAllUsersEmail();
-		
-
-		if(emails.contains(userDTO.getEmail())){
-			System.out.println("Email Taken");
+		List<String> usernames = daoimpl.getAllUserNames();
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
 			return null;
 		}else{
 			user.setEmail(userDTO.getEmail());
