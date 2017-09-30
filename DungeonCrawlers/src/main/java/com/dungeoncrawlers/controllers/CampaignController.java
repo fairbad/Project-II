@@ -170,9 +170,9 @@ public class CampaignController {
 	public ResponseEntity<CampaignAndComponentsDTO> editChapters(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
 		System.out.println("editing chapter");
 		List<ChapterAndLocationsDTO> calDTO = cacDTO.getChapters();
-		for (ChapterAndLocationsDTO c : calDTO) {
-			c.getChapter()
-		}
+		//for (ChapterAndLocationsDTO c : calDTO) {
+			//c.getChapter()
+		//}
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
