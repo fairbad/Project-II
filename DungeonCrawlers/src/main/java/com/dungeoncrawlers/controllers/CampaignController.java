@@ -159,7 +159,7 @@ public class CampaignController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CampaignAndComponentsDTO> editCampaignDetails(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
-		System.out.println("creating editing campaign");
+		System.out.println("editing campaign");
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
@@ -168,8 +168,11 @@ public class CampaignController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CampaignAndComponentsDTO> editChapters(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
-		System.out.println("creating editing chapter");
+		System.out.println("editing chapter");
 		List<ChapterAndLocationsDTO> calDTO = cacDTO.getChapters();
+		for (ChapterAndLocationsDTO c : calDTO) {
+			c.getChapter()
+		}
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}

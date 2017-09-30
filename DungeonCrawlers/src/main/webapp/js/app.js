@@ -786,6 +786,20 @@ dndApp.service("CampaignService", function($http, $q){
 			);
 		return promise;
 	};
+	
+	service.editChapterDetails = function(){
+		var promise = $http.post('rest/campaign/editChapterDetails', service.chapter).then(
+					function(response){
+						console.log("response service.editChapterInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('editCampaignInfo promise fail');
+					}
+			);
+		return promise;
+	};
 });
 
 
