@@ -1,29 +1,65 @@
-<form name="editCampaignName" ng-submit="details.editCampaignName()">
-	Name
-	<input id="name" type="text" placeholder="Name" ng-model="details.campaign.name">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div style="width:50%; height:50%; float:left">
+	<img src="dsc.jpg" alt="image" width="90%" height="90%"><br><br>
+	<form name="editCampaignImage" ng-submit="details.editCampaignImage()">
+		Image
+		<input id="image" type="text" placeholder="Image" ng-model="details.campaign.image">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+	
+	<form name="editIsPublic" ng-submit="details.editIsPublic()">
+		Public
+		<input id="isPublic" type="checkbox" ng-model="details.campaign.isPublic">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
 
-<form name="editCampaignDescription" ng-submit="details.editCampaignDescription()">
-	Description
-	<input id="desc" type="text" placeholder="Description" ng-model="details.campaign.description">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div style="width:50%; height:50%; float:right">
+	<form name="editCampaignName" ng-submit="details.editCampaignName()">
+		Name
+		<input id="name" type="text" placeholder="Name" ng-model="details.campaign.name">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+	
+	<form name="editCampaignDescription" ng-submit="details.editCampaignDescription()">
+		Description
+		<textarea id="desc" name="desc" rows="4" cols="50" placeholder="Description" ng-model="details.campaign.description"></textarea>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
 
-<form name="editCampaignImage" ng-submit="details.editCampaignImage()">
-	Image
-	<input id="image" type="text" placeholder="Image" ng-model="details.campaign.image">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
 
-<form name="editIsPublic" ng-submit="details.editIsPublic()">
-	Public
-	<input id="isPublic" type="checkbox" ng-model="details.campaign.isPublic">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
 
-<form name="setMap" ng-submit="map.createMap()">
-	World Map
-	<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div>
+	<br><br>
+	<img src="map.jpg" alt="image" width="90%" height="90%" style="margin:20px"><br>
+	<form name="setMap" ng-submit="map.createMap()">
+		World Map
+		<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
+
+<br>
+
+
+<div>
+	<div class="container"><h1>Story</h1></div>
+		<div id="theStory" class="container">	
+		<ul  class="nav nav-pills">
+			<li class="active">
+		        <a href="#tableOfContents" data-toggle="tab">Contents</a>
+			</li>
+			<li>
+				<a ng-repeat="chs in chapters" data-toggle="tab">{{chs.title}}</a>
+			</li>
+		</ul>
+			<div class="tab-content clearfix">
+				<div class="tab-pane active" id="1a">
+					<h3>This is the Table for where the drag and drop of chapters locations is going to be</h3>
+				</div>
+				<div class="tab-pane" ng-repeat="locs in chapterlocations">
+					This is going to be where the chapters individual info is located
+				</div>
+			</div>
+	</div>
+</div>
