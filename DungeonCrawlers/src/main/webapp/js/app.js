@@ -148,7 +148,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-dndApp.service("UserService", function($http, $q) {
+dndApp.service("UserService", function($http, $q,$rootScope) {
 	console.log("in userService");
 
 	var service = this;
@@ -186,7 +186,8 @@ dndApp.service("UserService", function($http, $q) {
 	service.logoutUser = function(){
 		var promise = $http.post('rest/user/logout', service.user).then(
 				function(response) {
-					console.log("The response in service.authenticateUser");
+					console.log("The response in service.logoutUser");
+					$rootScope.loggedIn = null; //Add this
 					console.log(response);
 					return response;
 				}, function(error) {
