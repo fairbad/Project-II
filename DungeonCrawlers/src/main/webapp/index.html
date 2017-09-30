@@ -13,6 +13,63 @@
 	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 	<script src="js/app.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Almendra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+<style>
+body{
+	background-image: url(images/marble.jpg);
+}
+.container{
+	background:transparent;
+}
+.well{
+	background-image: url(images/rustyleather.jpeg);
+	border:transparent;
+	color:ivory;
+}
+.jumbotron{
+	background-image: url(images/paper.jpg);
+	color:#341207;
+}
+.navbar{
+	background-image: url(images/darkbrownleather.jpg);
+	border:transparent;
+	font-family: Metamorphous;
+	font-size:90%;
+}
+.btn{
+	background-color:#EFAC58;
+	margin:5px;
+	border:transparent;
+}
+.btn:hover{
+	background-image:url(images/paperflip.gif);
+}
+.btn:active{
+	background-image:url(images/paperflip.gif);
+}
+.navbar-default .navbar-nav > li > a:link, .navbar-default .navbar-nav > li > a:focus {
+	color:ivory;
+}
+.navbar-default .navbar-nav > li > a:visited, .navbar-default .navbar-nav > li > a:focus {
+	color:ivory;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color:#EFAC58;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #451A06;
+   border-color:black;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+   border: 0.5px solid #000000;
+}
+</style>
 </head>
 <body>
 
@@ -31,8 +88,8 @@
 		</div>
 	</nav>
 	
-	<div class="container">
-		<div class="row well" ui-view></div>
+	<div class="container-fluid">
+		<div ui-view></div>
 	</div>
 
 </body>
