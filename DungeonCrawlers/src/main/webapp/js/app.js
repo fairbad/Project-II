@@ -111,7 +111,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
 	})
-	.state("home.editCampaign",{
+	.state("editCampaign",{
 		url:"/editCampaign",
 		templateUrl: "templates/editCampaign.html",
 		controller: "EditCampaignCtrl as editCampaign"
@@ -1090,7 +1090,7 @@ dndApp.controller("ViewCampaignsCtrl",function(NgTableParams, CampaignService, $
 
 	$scope.getCampaign = function(campaign){
 		CampaignService.campaign = campaign;
-		$state.go("home.editCampaign");
+		$state.go("editCampaign");
 	};
 });
 
