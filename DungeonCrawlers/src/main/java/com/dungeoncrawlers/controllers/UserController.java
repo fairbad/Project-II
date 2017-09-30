@@ -32,11 +32,16 @@ public class UserController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO>	registerUser(HttpSession session, @RequestBody UserDTO userDTO){
-		User u = serviceimpl.addUser(userDTO);
-		if (u != null) {
+		userDTO = serviceimpl.checkIfUAndP(userDTO);
+		//System.out.println("User: " + userDTO.toString());
+		if (userDTO != null) {
+			System.out.println("User Is still trying to be added");
+			User u = serviceimpl.addUser(userDTO);
 			session.setAttribute("user", u);
+			System.out.println("User sessATR: " + session.getAttribute("user"));
 		}
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+		
 	}
 	
 	@RequestMapping(value="/auth", method= {RequestMethod.POST},
@@ -89,8 +94,9 @@ public class UserController {
 
     	session.removeAttribute("user");
     	System.out.println("sessionAttr: " + session.getAttribute("user"));
+    	//userDTO = null;
     	session.invalidate();
-    	
+    	System.out.println("at end of logout controller");
     	return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 }
