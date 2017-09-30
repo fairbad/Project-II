@@ -1,30 +1,31 @@
-{{campaignInfo.campaign}}
-<form name="editCampaignName" ng-submit="editCampaign.editCampaignName()">
+{{campaignInfo.campaign.name}}
+
+<form name="editCampaignName" ng-submit="editCampaign.editCampaignDetails()">
 	Name
-	<input id="name" type="text" placeholder="Name" ng-model="details.campaign.name">
+	<input id="name" type="text" placeholder="name" ng-model="campaignInfo.campaign.name">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editCampaignDescription" ng-submit="editCampaign.editCampaignDescription()">
+<form name="editCampaignDescription" ng-submit="editCampaign.editCampaignDetails()">
 	Description
-	<input id="desc" type="text" placeholder="Description" ng-model="details.campaign.description">
+	<input id="desc" type="text" placeholder="Description" ng-model="campaignInfo.campaign.description">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editCampaignImage" ng-submit="editCampaign.editCampaignImage()">
+<form name="editCampaignImage" ng-submit="editCampaign.editCampaignDetails()">
 	Image
-	<input id="image" type="text" placeholder="Image" ng-model="details.campaign.image">
+	<input id="image" type="text" placeholder="Image" ng-model="campaignInfo.campaign.image">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="editIsPublic" ng-submit="editCampaign.editIsPublic()">
+<form name="editIsPublic" ng-submit="editCampaign.editCampaignDetails()">
 	Public
-	<input id="isPublic" type="checkbox" ng-model="details.campaign.isPublic">
+	<input id="isPublic" type="checkbox" ng-model="campaignInfo.campaign.public">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<form name="setMap" ng-submit="editCampaign.createMap()">
+<form name="setMap" ng-submit="editCampaign.editCampaignDetails()">
 	World Map
-	<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
+	<input id="image" type="text" placeholder="Image" ng-model="campaignInfo.campaign.map.image">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>

@@ -5,7 +5,7 @@
 <!-- 		<li>{{ x.description }}</li> -->
 <!-- 	</ul> -->
 <!-- </div> -->
-
+<button type="button" ui-sref="home.editCampaign" class="btn btn-primary">New Campaign</button>
 <table ng-table="myCampaigns" class="table table-condensed table-bordered table-striped" datatable="ng">
   <tr ng-repeat="campaign in $data track by $index" ng-model="campaign"	ng-click="getCampaign(campaign)">
     <td data-title="'Campaign Name'" sortable="'name'" filter="{name: 'text'}">{{campaign.name}}</td>

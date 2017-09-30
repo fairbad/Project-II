@@ -472,13 +472,15 @@ dndApp.service("CampaignService", function($http, $q){
 	service.location={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			chapter_id : ""
 	};
 
 	service.event={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			location_id : ""
 	};
 
 	service.getCampaign = function(){
@@ -546,7 +548,7 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.createCampaign = function(){
 		var promise = $http.post('rest/campaign/details',
-				service.campaign).then(
+				service.campaignInfo).then(
 						function(response){
 							console.log("response service.createCampaign")
 							console.log(response);
@@ -630,6 +632,20 @@ dndApp.service("CampaignService", function($http, $q){
 			}, function(error) {
 				console.log('editCampaign promise fail');
 			});
+		return promise;
+	};
+	
+	service.editCampaignDetails = function(){
+		var promise = $http.post('rest/campaign/editCampaignDetails', service.campaignInfo).then(
+					function(response){
+						console.log("response service.editCampaignInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('editCampaignInfo promise fail');
+					}
+			);
 		return promise;
 	};
 });
@@ -999,10 +1015,28 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 	var promise = CampaignService.editCampaign();
 	promise.then(function(response) {
 		if (campaign.campaign && response.data) {
+			CampaignService.campaignInfo = response.data;
 			$scope.campaignInfo = response.data;
 			console.log($scope.campaignInfo);
 		}
 	});
+	
+	campaign.editCampaignDetails = function(){
+
+		var promise = CampaignService.editCampaignDetails();
+		console.log(promise);
+
+		promise.then(
+				function(response){
+					console.log("setting campaign data");
+					console.log(response.data);
+					CampaignService.campaignInfo = response.data;
+					$scope.campaignInfo = response.data;
+					//CampaignService.campaign.name = response.data
+				}, function(error){
+					console.log(error);
+				});
+	};
 });
 
 dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){
