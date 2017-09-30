@@ -148,7 +148,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-dndApp.service("UserService", function($http, $q,$rootScope) {
+dndApp.service("UserService", function($http, $q, $rootScope) {
 	console.log("in userService");
 
 	var service = this;
@@ -187,12 +187,14 @@ dndApp.service("UserService", function($http, $q,$rootScope) {
 		var promise = $http.post('rest/user/logout', service.user).then(
 				function(response) {
 					console.log("The response in service.logoutUser");
-					$rootScope.loggedIn = null; //Add this
+					$rootScope.loggedIn = null;//Add this
+					
 					console.log(response);
 					return response;
 				}, function(error) {
 					console.log('logout promise fail');
 				});
+		service.user = null;
 		return promise;
 	};
 
@@ -640,9 +642,10 @@ dndApp.controller("LoginCtrl", function(UserService, $state, $rootScope) {
 	console.log("in loginctrl");
 
 	var login = this;
+	login.user = null;
 	login.user = UserService.getUser();
 	console.log("Logged in user: ")
-	console.log(login.user);
+	//console.log(login.user);
 
 	login.doLogin = function() {
 		console.log("about to authenticate user");
@@ -671,7 +674,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state, $rootScope) {
 	};
 });
 
-dndApp.controller("LogoutCtrl", function(UserService, $state) {
+dndApp.controller("LogoutCtrl", function(UserService, $state,$scope) {
 	console.log("in logoutctrl");
 
 	var logout = this;
@@ -685,15 +688,11 @@ dndApp.controller("LogoutCtrl", function(UserService, $state) {
 		var promise = UserService.logoutUser();
 
 		promise.then(function(response) {
-			if (response.data) {
 				console.log("In the function")
 				logout.user.authenticated = false;
 				console.log(response.data);
-				UserService.setUser("");
+				$scope.logoutUser = null;
 				$state.go("login");
-			} else {
-				alert("Invalid login!");
-			}
 		}, function(error) {
 			console.log(error);
 		});
@@ -715,7 +714,7 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 			console.log("setting data");
 			console.log(response.data);
 			UserService.setUser(response.data);
-			$state.go("home");
+			$state.go("login");
 		}, function(error) {
 			console.log(error);
 		})
@@ -980,6 +979,7 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 			$scope.campaigns = response.data;
 			//$scope.publicCampaigns = new NgTableParams({sorting: {name: "asc"}}, {dataset: $scope.campaigns});
 			$scope.publicCampaigns = createUsingFullOptions();
+			//$scope.Search = response.data;
 			function createUsingFullOptions(){
 				"use strict";
 				 var initialParams = {

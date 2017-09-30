@@ -51,7 +51,7 @@ public class UserController {
 			u = (User) session.getAttribute("user");
 			System.out.println("This is my session: " + session.getId());
 			System.out.println("This is my session user: " + session.getAttribute("user"));
-		}
+		}else{System.out.println("User Is null");}
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 
