@@ -2,7 +2,8 @@ var dndApp = angular.module("dndApp", [ "ui.router", "ngTable" ]);
 
 dndApp.config(function($stateProvider, $urlRouterProvider) {
 	console.log("init app");
-	
+	//This loads a page on start
+	$urlRouterProvider.otherwise('/login');
 	$stateProvider
 	.state("login",{
 		url:"/login",
@@ -19,7 +20,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl:"templates/home.html",
 		controller:"HomeCtrl as home"
 	})
-	.state("home.logout",{
+	.state("logout",{
 		url:"/login",
 		templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
@@ -29,117 +30,117 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
         templateUrl:"templates/editUser.html",
         controller:"EditCtrl as edit"
     })
-	.state("home.creator",{
+	.state("creator",{
 		url:"/create",
 		templateUrl: "templates/creator.html"
 	})
-	.state("home.character",{
+	.state("character",{
 		url:"/character",
 		templateUrl: "templates/character.html"
 	})
-	.state("home.character.create",{
+	.state("character.create",{
 		url:"/create",
 		templateUrl: "templates/createCharacter.html",
 		controller: "CharacterCtrl as character"
 	})
-	.state("home.character.edit",{
+	.state("character.edit",{
 		url:"/edit",
 		templateUrl: "templates/editCharacter.html",
 		controller: "EditCharacterCtrl as editCharacter"
 	})
-	.state("home.character.view",{
+	.state("character.view",{
 		url:"/view",
 		templateUrl: "templates/viewCharacters.html",
 		controller: "ViewCharactersCtrl as viewCharacters"
 	})
-	.state("home.character.delete",{
+	.state("character.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteCharacter.html",
 		controller: "DeleteCharacterCtrl as deleteCharacter"
 	})
-	.state("home.NPC",{
+	.state("NPC",{
 		url:"/NPC",
 		templateUrl: "templates/NPC.html"
 	})
-	.state("home.NPC.create",{
+	.state("NPC.create",{
 		url:"/create",
 		templateUrl: "templates/createNPC.html",
 		controller: "NPCCtrl as NPC"
 	})
-	.state("home.NPC.edit",{
+	.state("NPC.edit",{
 		url:"/edit",
 		templateUrl: "templates/editNPC.html",
 		controller: "EditNPCCtrl as editNPC"
 	})
-	.state("home.NPC.view",{
+	.state("NPC.view",{
 		url:"/view",
 		templateUrl: "templates/viewNPCs.html",
 		controller: "ViewNPCsCtrl as viewNPCs"
 	})
-	.state("home.NPC.delete",{
+	.state("NPC.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteNPC.html",
 		controller: "DeleteNPCCtrl as deleteNPC"
 	})
-	.state("home.enemy",{
+	.state("enemy",{
 		url:"/enemy",
 		templateUrl: "templates/enemy.html"
 	})
-	.state("home.enemy.create",{
+	.state("enemy.create",{
 		url:"/create",
 		templateUrl: "templates/createEnemy.html",
 		controller: "EnemyCtrl as enemy"
 	})
-	.state("home.enemy.edit",{
+	.state("enemy.edit",{
 		url:"/edit",
 		templateUrl: "templates/editEnemy.html",
 		controller: "EditEnemyCtrl as editEnemy"
 	})
-	.state("home.enemy.view",{
+	.state("enemy.view",{
 		url:"/view",
 		templateUrl: "templates/viewEnemies.html",
 		controller: "ViewEnemiesCtrl as viewEnemies"
 	})
-	.state("home.enemy.delete",{
+	.state("enemy.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteEnemy.html",
 		controller: "DeleteEnemyCtrl as deleteEnemy"
 	})
-	.state("home.campaign",{
+	.state("campaign",{
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
 	})
-	.state("home.campaign.details",{
+	.state("campaign.details",{
 		url:"/details",
 		templateUrl: "templates/details.html",
 		controller: "DetailsCtrl as details"
 	})
-	.state("home.campaign.map",{
+	.state("campaign.map",{
 		url:"/map",
 		templateUrl: "templates/map.html",
 		controller: "MapCtrl as map"
 	})
-	.state("home.campaign.chapter",{
+	.state("campaign.chapter",{
 		url:"/chapter",
 		templateUrl: "templates/chapter.html",
 		controller: "ChapterCtrl as chapter"
 	})
-	.state("home.campaign.location",{
+	.state("campaign.location",{
 		url:"/lochome.ation",
 		templateUrl: "templates/location.html",
 		controller: "LocationCtrl as location"
 	})
-	.state("home.campaign.event",{
+	.state("campaign.event",{
 		url:"/event",
 		templateUrl: "templates/event.html",
 		controller: "EventCtrl as event"
 	})
-	.state("home.viewPublicCampaigns",{
+	.state("viewPublicCampaigns",{
 		url:"/viewPublicCampaigns",
 		templateUrl: "templates/viewPublicCampaigns.html",
 		controller: "ViewPublicCampaignsCtrl as viewPublicCampaigns"
 	})
-	.state("home.viewCampaigns",{
+	.state("viewCampaigns",{
 		url:"/campaigns",
 		templateUrl: "templates/viewCampaigns.html",
 		controller: "ViewCampaignsCtrl as viewCampaigns"
@@ -634,7 +635,7 @@ dndApp.service("CommunityService", function($http, $q){
 	};
 });
 
-dndApp.controller("LoginCtrl", function(UserService, $state) {
+dndApp.controller("LoginCtrl", function(UserService, $state, $rootScope) {
 	console.log("in loginctrl");
 
 	var login = this;
@@ -657,6 +658,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
 				console.log(UserService.getUser());
 				console.log("setting user in login ctrl")
 				console.log(UserService.getUser());
+				$rootScope.loggedIn = login.user;
 				$state.go("home");
 			} else {
 				alert("Invalid login!");
@@ -716,7 +718,7 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 		}, function(error) {
 			console.log(error);
 		})
-	}
+	};
 })
 
 dndApp.controller("EditCtrl", function(UserService, $state){

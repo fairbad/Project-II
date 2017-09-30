@@ -14,13 +14,18 @@
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
-<body>
+<body onload = "login">
 
 	<nav class="navbar navbar-default" ng-controller="NavCtrl as nav">
 		<div class="container-fluid">
 			<div id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a ui-sref="login">Login</a></li>
+					<li ng-hide = "loggedIn"><a ui-sref="login">Login</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="home">Home</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="creator">Creator</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewPublicCampaigns">View Public Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewCampaigns">View My Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="logout" ng-click="logout.doLogout()">Logout</a></li>
 				</ul>
 			</div>
 		</div>
