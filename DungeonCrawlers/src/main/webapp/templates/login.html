@@ -1,7 +1,11 @@
 <form name="userForm" ng-submit="login.doLogin()">
-	<h1>User Login</h1>
-	<input id="email" type="email" placeholder="Email" ng-model="login.user.email">
-	<input id="password" type="password" placeholder="pass" ng-model="login.user.password">
-	<button type="submit" class="btn btn-primary"> Submit</button>
-	<a ui-sref="register">Register</a>  
+	<h1 style="text-align:center"><font face="Metamorphous" color="#2B0905">User Login</font></h1>
+	<div style="text-align:center">
+		<font face="Almendra" color="black">
+		<input id="email" type="email" placeholder="Email" ng-model="login.user.email">
+		<input id="password" type="password" placeholder="Password" ng-model="login.user.password">
+		<button type="submit" class="btn btn-primary">Submit</button><br><br>
+		<a ui-sref="register">Register</a>
+		</font>
+	</div>
 </form>
