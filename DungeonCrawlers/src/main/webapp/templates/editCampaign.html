@@ -1,32 +1,59 @@
-<form name="editCampaignName" ng-submit="details.editCampaignName()">
-	Name
-	<input id="name" type="text" placeholder="Name" ng-model="details.campaign.name">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div class="container">
+	<div class="row well">
+		<div style="width: 50%; height: 50%; float: left">
+			<img src="dsc.jpg" alt="image" width="90%" height="90%"><br>
+			<br>
+			<form name="editCampaignImage"
+				ng-submit="editCampaign.editCampaignDetails()">
+				Image <input id="image" type="text" placeholder="Image"
+					ng-model="campaignInfo.campaign.image">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
 
-<form name="editCampaignDescription" ng-submit="details.editCampaignDescription()">
-	Description
-	<input id="desc" type="text" placeholder="Description" ng-model="details.campaign.description">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+			<form name="editIsPublic"
+				ng-submit="editCampaign.editCampaignDetails()">
+				Public <input id="isPublic" type="checkbox"
+					ng-model="campaignInfo.campaign.public">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
+		</div>
 
-<form name="editCampaignImage" ng-submit="details.editCampaignImage()">
-	Image
-	<input id="image" type="text" placeholder="Image" ng-model="details.campaign.image">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+		<div style="width: 50%; height: 50%; float: right">
+			<form name="editCampaignName"
+				ng-submit="editCampaign.editCampaignDetails()">
+				Name <input id="name" type="text" placeholder="Name"
+					ng-model="campaignInfo.campaign.name">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
 
-<form name="editIsPublic" ng-submit="details.editIsPublic()">
-	Public
-	<input id="isPublic" type="checkbox" ng-model="details.campaign.isPublic">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+			<form name="editCampaignDescription"
+				ng-submit="editCampaign.editCampaignDetails()">
+				Description
+				<textarea id="desc" name="desc" rows="4" cols="50"
+					placeholder="Description"
+					ng-model="campaignInfo.campaign.description"></textarea>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
+		</div>
+		
+		<div>
+			<br>
+			<br> <img src="map.jpg" alt="image" width="90%" height="90%"
+				style="margin: 20px"><br>
+			<form name="setMap" ng-submit="editCampaign.editCampaignDetails()">
+				World Map <input id="image" type="text" placeholder="Image"
+					ng-model="campaignInfo.campaign.map.image">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
+		</div>
 
-<form name="setMap" ng-submit="map.createMap()">
-	World Map
-	<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
-	<button type="submit" class="btn btn-primary">Save</button>
-</form>
+		<br>
+
+
+		<div>
+			<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
+			<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
+
 <div class="container-fluid">
 		<div id="content">
 			<div style="padding-left:15px; padding-top:10px">
@@ -42,5 +69,14 @@
   					</div>
 				</div>
 			</div>
-
 	</div>
+
+			<br>
+			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
+			<div ng-repeat="ch in campaignInfo.chapters">
+				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
+				<button type="button" ng-click="dummyNG" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
+			</div>
+		</div>
+	</div>
+</div>

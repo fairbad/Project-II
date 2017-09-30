@@ -47,13 +47,13 @@ public class Event implements Serializable{
     @JoinColumn(name="LOCATION_ID")
     private Location location;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name="EVENT_NPC",
     joinColumns=@JoinColumn(name="EVENT_ID"),
     inverseJoinColumns=@JoinColumn(name="NPC_ID"))
     private List<NonPlayableCharacter> nonPlayableCharacters;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name="EVENT_ENEMY",
     joinColumns=@JoinColumn(name="EVENT_ID"),
     inverseJoinColumns=@JoinColumn(name="ENEMY_ID"))
