@@ -122,7 +122,7 @@ public class CreatorController {
 		img = ImageIO.read(bis);
 		bis.close();
 		
-		File outputFile = new File("image.png");
+		File outputFile = new File("image.png\\");
 		ImageIO.write(img, "png", outputFile);
 		
 		Random r = new Random();

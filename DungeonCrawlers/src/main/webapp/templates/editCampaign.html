@@ -51,25 +51,13 @@
 
 
 		<div>
-			<div class="container">
-				<h1>Story</h1>
-			</div>
-			<div id="theStory" class="container">
-				<ul class="nav nav-pills">
-					<li class="active"><a href="#tableOfContents"
-						data-toggle="tab">Contents</a></li>
-					<li><a ng-repeat="ch in campaignInfo.chapters" data-toggle="tab">{{ch.chapter.name}}</a>
-					</li>
-				</ul>
-				<div class="tab-content clearfix">
-					<div class="tab-pane active" id="1a">
-						<h3>This is the Table for where the drag and drop of chapters
-							locations is going to be</h3>
-					</div>
-					<div class="tab-pane" ng-repeat="locs in chapterlocations">
-						This is going to be where the chapters individual info is located
-					</div>
-				</div>
+			<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
+			<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
+			<br>
+			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
+			<div ng-repeat="ch in campaignInfo.chapters">
+				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
+				<button type="button" ng-click="dummyNG" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
 			</div>
 		</div>
 	</div>
