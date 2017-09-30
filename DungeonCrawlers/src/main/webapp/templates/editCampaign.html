@@ -63,8 +63,8 @@
 					<div class="panel-body" ngmodel="chapter.locations" data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
 	  					drop here
 	  					<br>
-	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.name">
-							{{location.name}}
+	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.location.name">
+							{{location.location.name}}
 	  					</div>
   					</div>
 				</div>
