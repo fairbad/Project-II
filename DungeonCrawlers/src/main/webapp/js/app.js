@@ -2,15 +2,14 @@ var dndApp = angular.module("dndApp", [ "ui.router", "ngTable" ]);
 
 dndApp.config(function($stateProvider, $urlRouterProvider) {
 	console.log("init app");
+	//This loads a page on start
+	$urlRouterProvider.otherwise('/login');
 
 	$stateProvider
 	.state("login",{
 		url:"/login",
 		templateUrl:"templates/login.html",
 		controller: "LoginCtrl as login"
-	})
-	.state("logout",{
-		controller:"LogoutCtrl as logout"
 	})
 	.state("register",{
 		url:"/register",
@@ -22,7 +21,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl:"templates/home.html",
 		controller:"HomeCtrl as home"
 	})
-	.state("home.logout",{
+	.state("logout",{
 		url:"/login",
 		templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
@@ -32,83 +31,83 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
         templateUrl:"templates/editUser.html",
         controller:"EditCtrl as edit"
     })
-	.state("home.creator",{
+	.state("creator",{
 		url:"/create",
 		templateUrl: "templates/creator.html"
 	})
-	.state("home.character",{
+	.state("character",{
 		url:"/character",
 		templateUrl: "templates/character.html"
 	})
-	.state("home.character.create",{
+	.state("character.create",{
 		url:"/create",
 		templateUrl: "templates/createCharacter.html",
 		controller: "CharacterCtrl as character"
 	})
-	.state("home.character.edit",{
+	.state("character.edit",{
 		url:"/edit",
 		templateUrl: "templates/editCharacter.html",
 		controller: "EditCharacterCtrl as editCharacter"
 	})
-	.state("home.character.view",{
+	.state("character.view",{
 		url:"/view",
 		templateUrl: "templates/viewCharacters.html",
 		controller: "ViewCharactersCtrl as viewCharacters"
 	})
-	.state("home.character.delete",{
+	.state("character.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteCharacter.html",
 		controller: "DeleteCharacterCtrl as deleteCharacter"
 	})
-	.state("home.NPC",{
+	.state("NPC",{
 		url:"/NPC",
 		templateUrl: "templates/NPC.html"
 	})
-	.state("home.NPC.create",{
+	.state("NPC.create",{
 		url:"/create",
 		templateUrl: "templates/createNPC.html",
 		controller: "NPCCtrl as NPC"
 	})
-	.state("home.NPC.edit",{
+	.state("NPC.edit",{
 		url:"/edit",
 		templateUrl: "templates/editNPC.html",
 		controller: "EditNPCCtrl as editNPC"
 	})
-	.state("home.NPC.view",{
+	.state("NPC.view",{
 		url:"/view",
 		templateUrl: "templates/viewNPCs.html",
 		controller: "ViewNPCsCtrl as viewNPCs"
 	})
-	.state("home.NPC.delete",{
+	.state("NPC.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteNPC.html",
 		controller: "DeleteNPCCtrl as deleteNPC"
 	})
-	.state("home.enemy",{
+	.state("enemy",{
 		url:"/enemy",
 		templateUrl: "templates/enemy.html"
 	})
-	.state("home.enemy.create",{
+	.state("enemy.create",{
 		url:"/create",
 		templateUrl: "templates/createEnemy.html",
 		controller: "EnemyCtrl as enemy"
 	})
-	.state("home.enemy.edit",{
+	.state("enemy.edit",{
 		url:"/edit",
 		templateUrl: "templates/editEnemy.html",
 		controller: "EditEnemyCtrl as editEnemy"
 	})
-	.state("home.enemy.view",{
+	.state("enemy.view",{
 		url:"/view",
 		templateUrl: "templates/viewEnemies.html",
 		controller: "ViewEnemiesCtrl as viewEnemies"
 	})
-	.state("home.enemy.delete",{
+	.state("enemy.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteEnemy.html",
 		controller: "DeleteEnemyCtrl as deleteEnemy"
 	})
-	.state("home.campaign",{
+	.state("campaign",{
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
 	})
@@ -117,37 +116,37 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: "templates/editCampaign.html",
 		controller: "EditCampaignCtrl as editCampaign"
 	})
-	.state("home.campaign.details",{
+	.state("campaign.details",{
 		url:"/details",
 		templateUrl: "templates/details.html",
 		controller: "DetailsCtrl as details"
 	})
-	.state("home.campaign.map",{
+	.state("campaign.map",{
 		url:"/map",
 		templateUrl: "templates/map.html",
 		controller: "MapCtrl as map"
 	})
-	.state("home.campaign.chapter",{
+	.state("campaign.chapter",{
 		url:"/chapter",
 		templateUrl: "templates/chapter.html",
 		controller: "ChapterCtrl as chapter"
 	})
-	.state("home.campaign.location",{
+	.state("campaign.location",{
 		url:"/lochome.ation",
 		templateUrl: "templates/location.html",
 		controller: "LocationCtrl as location"
 	})
-	.state("home.campaign.event",{
+	.state("campaign.event",{
 		url:"/event",
 		templateUrl: "templates/event.html",
 		controller: "EventCtrl as event"
 	})
-	.state("home.viewPublicCampaigns",{
+	.state("viewPublicCampaigns",{
 		url:"/viewPublicCampaigns",
 		templateUrl: "templates/viewPublicCampaigns.html",
 		controller: "ViewPublicCampaignsCtrl as viewPublicCampaigns"
 	})
-	.state("home.viewCampaigns",{
+	.state("viewCampaigns",{
 		url:"/campaigns",
 		templateUrl: "templates/viewCampaigns.html",
 		controller: "ViewCampaignsCtrl as viewCampaigns"
@@ -155,7 +154,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-dndApp.service("UserService", function($http, $q) {
+dndApp.service("UserService", function($http, $q,$rootScope) {
 	console.log("in userService");
 
 	var service = this;
@@ -190,16 +189,18 @@ dndApp.service("UserService", function($http, $q) {
 				});
 		return promise;
 	};
+	
 	service.logoutUser = function(){
 		var promise = $http.post('rest/user/logout', service.user).then(
 				function(response) {
-					console.log("The response in Logout");
+					console.log("The response in service.logoutUser");
+					$rootScope.loggedIn = null; //Add this
 					console.log(response);
 					return response;
 				}, function(error) {
 					console.log('logout promise fail');
 				});
-		service.user = null;
+		//service.user = null;
 		return promise;
 	};
 
@@ -508,13 +509,15 @@ dndApp.service("CampaignService", function($http, $q){
 	service.location={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			chapter_id : ""
 	};
 
 	service.event={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			location_id : ""
 	};
 
 	service.getCampaign = function(){
@@ -582,7 +585,7 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.createCampaign = function(){
 		var promise = $http.post('rest/campaign/details',
-				service.campaign).then(
+				service.campaignInfo).then(
 						function(response){
 							console.log("response service.createCampaign")
 							console.log(response);
@@ -668,6 +671,20 @@ dndApp.service("CampaignService", function($http, $q){
 			});
 		return promise;
 	};
+	
+	service.editCampaignDetails = function(){
+		var promise = $http.post('rest/campaign/editCampaignDetails', service.campaignInfo).then(
+					function(response){
+						console.log("response service.editCampaignInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('editCampaignInfo promise fail');
+					}
+			);
+		return promise;
+	};
 });
 
 
@@ -692,7 +709,7 @@ dndApp.service("CommunityService", function($http, $q){
 	};
 });
 
-dndApp.controller("LoginCtrl", function(UserService, $state) {
+dndApp.controller("LoginCtrl", function(UserService, $state, $rootScope) {
 	console.log("in loginctrl");
 
 	var login = this;
@@ -715,6 +732,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
 				console.log(UserService.getUser());
 				console.log("setting user in login ctrl")
 				console.log(UserService.getUser());
+				$rootScope.loggedIn = login.user;
 				$state.go("home");
 			} else {
 				alert("Invalid login!");
@@ -730,24 +748,30 @@ dndApp.controller("LogoutCtrl", function(UserService, $state) {
 	console.log("in logoutctrl");
 
 	var logout = this;
-	//logout.user = UserService.getUser();
+	logout.user = UserService.getUser();
 	console.log("Logging out user: ")
-	console.log(logout.user);
-	//UserService.setUser(null);
 	logout.user = UserService.logoutUser();
-	console.log("We are here at line 681");
+	console.log(logout.user);
 
-	console.log("about to de-authenticate user");
-	//$state.go("login")
-	var promise = UserService.logoutUser();
+	logout.doLogout = function() {
+		console.log("about to de-authenticate user");
+		var promise = UserService.logoutUser();
 
-	promise.then(function(response) {
-			console.log("In the function")
-			$state.go("login");
-	}, function(error) {
-		console.log(error);
-	});
+		promise.then(function(response) {
+			if (response.data) {
+				console.log("In the function")
+				logout.user.authenticated = false;
+				console.log(response.data);
+				UserService.setUser("");
+				$state.go("login");
+			} else {
+				alert("Invalid login!");
+			}
+		}, function(error) {
+			console.log(error);
+		});
 
+	};
 });
 
 dndApp.controller("RegisterCtrl", function(UserService, $state) {
@@ -755,26 +779,21 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 	var register = this;
 
 	register.user = UserService.getUser();
-	console.log("User to register: " + register.user);
 	register.doRegister = function() {
-	
 
 		var promise = UserService.registerUser();
 		promise.then( 
-				function(response) {
-					if(register.user && response.data){
-						console.log("This is the response inside the register controller");
-						console.log(response.data);
-						console.log("setting data");
-						console.log(response.data);
-						UserService.setUser(response.data);
-						$state.go("home");
-					}else{ alert("User Already Exist"); }
-				}, function(error) {
-					console.log(error);
-				})
+		function(response) {
+			//if(register.user && response.data){ alert("User Already Exist"); }
+			console.log("setting data");
+			console.log(response.data);
+			UserService.setUser(response.data);
+			$state.go("home");
+		}, function(error) {
+			console.log(error);
+		});
 	};
-})
+});
 
 dndApp.controller("EditCtrl", function(UserService, $state){
 	var edit = this;
@@ -1041,10 +1060,28 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 	var promise = CampaignService.editCampaign();
 	promise.then(function(response) {
 		if (campaign.campaign && response.data) {
+			CampaignService.campaignInfo = response.data;
 			$scope.campaignInfo = response.data;
 			console.log($scope.campaignInfo);
 		}
 	});
+	
+	campaign.editCampaignDetails = function(){
+
+		var promise = CampaignService.editCampaignDetails();
+		console.log(promise);
+
+		promise.then(
+				function(response){
+					console.log("setting campaign data");
+					console.log(response.data);
+					CampaignService.campaignInfo = response.data;
+					$scope.campaignInfo = response.data;
+					//CampaignService.campaign.name = response.data
+				}, function(error){
+					console.log(error);
+				});
+	};
 });
 
 dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){

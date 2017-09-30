@@ -17,12 +17,15 @@ import com.dungeoncrawlers.beans.NonPlayableCharacter;
 import com.dungeoncrawlers.beans.Rating;
 import com.dungeoncrawlers.beans.User;
 import com.dungeoncrawlers.dao.DAO;
+import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
+import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
 import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.dto.EnemyDTO;
 import com.dungeoncrawlers.dto.EventDTO;
 import com.dungeoncrawlers.dto.EventTypeDTO;
+import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
 import com.dungeoncrawlers.dto.MapDTO;
 import com.dungeoncrawlers.dto.NPCDTO;
@@ -116,18 +119,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public Campaign updateCampaign(CampaignDTO campaignDTO) {
-		Campaign campaign = new Campaign();
-		campaign.setId(campaignDTO.getId());
-		campaign.setUser(campaignDTO.getUser());
-		campaign.setDescription(campaignDTO.getDescription());
-		campaign.setImage(campaignDTO.getImage());
-		campaign.setMap(campaignDTO.getMap());
-		campaign.setName(campaignDTO.getName());
-		campaign.setNumViews(campaignDTO.getNumViews());
-		campaign.setPublic(campaignDTO.isPublic());
-		campaign.setRating(campaignDTO.getRating());
-		
+	public Campaign updateCampaign(Campaign campaign) {	
 		return daoimpl.updateCampaign(campaign);
 	}
 	
@@ -140,6 +132,23 @@ public class ServiceImpl implements ServiceInterface{
 		campaign.setMap(map);
 		
 		return daoimpl.updateCampaign(campaign);
+	}
+	
+	@Override
+	public CampaignAndComponentsDTO updateCampaignInfo(CampaignAndComponentsDTO cacDTO) {
+		Campaign campaign = cacDTO.getCampaign();
+		List<ChapterAndLocationsDTO> calDTO = cacDTO.getChapters();
+		for (ChapterAndLocationsDTO c : calDTO) {
+			c.getChapter();
+			List<LocationAndEventsDTO> laeDTO = c.getLocations();
+			for (LocationAndEventsDTO l : laeDTO) {
+				l.getLocation();
+				l.getEvents();
+			}
+			
+		}
+		//List<Chapter> chapters = calDTO.getChapter();
+		return cacDTO;
 	}
 
 	@Override
