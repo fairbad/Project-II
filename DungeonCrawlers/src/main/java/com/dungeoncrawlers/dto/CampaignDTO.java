@@ -109,4 +109,11 @@ public class CampaignDTO {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "CampaignDTO [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
+				+ ", numViews=" + numViews + ", rating=" + rating + ", isPublic=" + isPublic + ", user=" + user
+				+ ", map=" + map + "]";
+	}
 }

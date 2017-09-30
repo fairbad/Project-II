@@ -1,6 +1,9 @@
-<form name="createNPC" ng-submit="NPC.createNPC()">
-	<h1>Non-Player Character</h1>
-	<input id="name" type="text" placeholder="Name" ng-model="NPC.NPC.name">
-	<input id="image" type="file" placeholder="Image">
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+<div class="jumbotron text-center">
+    <h1>NPC</h1>
+    <a ui-sref="home.NPC.create" class="btn btn-primary">Create NPC</a>
+    <a ui-sref="home.NPC.edit" class="btn btn-primary">Edit NPC</a>
+    <a ui-sref="home.NPC.view" class="btn btn-primary">View NPC</a>
+    <a ui-sref="home.NPC.delete" class="btn btn-danger">Delete NPC</a>
+</div>
+
+<div ui-view></div>

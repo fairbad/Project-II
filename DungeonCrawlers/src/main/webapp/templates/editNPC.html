@@ -3,6 +3,6 @@
 	<select ng-model="NPC" ng-options="NPC as NPC.name for NPC in NPCs">
 	</select>
 	<input id="name" type="text" placeholder="Name" ng-model="NPC.name">
-	<input id="image" type="text" placeholder="Image" ng-model="NPC.image">
+	<input id="image" type="file" placeholder="Image">
 	<button type="submit" class="btn btn-primary" ng-click="update()">Update</button>
 </div>

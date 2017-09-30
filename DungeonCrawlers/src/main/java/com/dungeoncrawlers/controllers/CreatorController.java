@@ -235,8 +235,42 @@ public class CreatorController {
 	@RequestMapping(value="/editCharacter", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CharacterDTO> editCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO){
+	public ResponseEntity<CharacterDTO> editCharacter(HttpSession session, @RequestBody CharacterDTO characterDTO) throws IOException{
 		System.out.println("editing character");
+		
+		System.out.println(characterDTO.getImage());
+		String sourceData = characterDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+	    
+		String[] keys = getKeyString();
+		
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		characterDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+		
 		serviceimpl.updateCharacter(characterDTO);
 		return new ResponseEntity<CharacterDTO>(characterDTO, HttpStatus.OK);
 	}
@@ -244,8 +278,42 @@ public class CreatorController {
 	@RequestMapping(value="/editNPC", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<NPCDTO> editNPC(HttpSession session, @RequestBody NPCDTO npcDTO){
+	public ResponseEntity<NPCDTO> editNPC(HttpSession session, @RequestBody NPCDTO npcDTO) throws IOException{
 		System.out.println("editing NPC");
+		
+		System.out.println(npcDTO.getImage());
+		String sourceData = npcDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+	    
+		String[] keys = getKeyString();
+		
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		npcDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+		
 		serviceimpl.updateNonPlayableCharacter(npcDTO);
 		return new ResponseEntity<NPCDTO>(npcDTO, HttpStatus.OK);
 	}
@@ -253,8 +321,42 @@ public class CreatorController {
 	@RequestMapping(value="/editEnemy", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<EnemyDTO> editEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO){
+	public ResponseEntity<EnemyDTO> editEnemy(HttpSession session, @RequestBody EnemyDTO enemyDTO) throws IOException{
 		System.out.println("editing Enemy");
+		
+		System.out.println(enemyDTO.getImage());
+		String sourceData = enemyDTO.getImage();
+		String[] parts = sourceData.split(",");
+		String imageString = parts[1];
+		
+		BufferedImage img = null;
+		byte[] imageByte = Base64.getDecoder().decode(imageString);
+		ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+		img = ImageIO.read(bis);
+		bis.close();
+		
+		File outputFile = new File("image.png");
+		ImageIO.write(img, "png", outputFile);
+		
+		Random r = new Random();
+		String key = r.nextInt(1000000)+1+"";
+	    
+		String[] keys = getKeyString();
+		
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+		try {
+		String bucketName = "project2bucketforrevatureportfoliostuff";
+			s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+		}
+		catch(AmazonServiceException ase) {
+			ase.printStackTrace();
+		}
+		catch(AmazonClientException ace) {
+			ace.printStackTrace();
+		}
+		enemyDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+		
 		serviceimpl.updateEnemy(enemyDTO);
 		return new ResponseEntity<EnemyDTO>(enemyDTO, HttpStatus.OK);
 	}

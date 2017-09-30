@@ -38,6 +38,12 @@ public interface ServiceInterface {
 	
 	public UserDTO authenticateUser(UserDTO userDto);
 	
+	public UserDTO checkIfUAndP(UserDTO userDTO);
+	
+	//public List<String> getEmails();
+	
+	//public List<String> getUserName();
+	
 	/*
 	 * Campaign Operations
 	 */
@@ -69,7 +75,7 @@ public interface ServiceInterface {
 	
 	public void deleteChapter(ChapterDTO chapterDTO);
 	
-	public List<Chapter> getAllChaptersByCampaign(CampaignDTO campaignDTO);
+	public List<Chapter> getAllChaptersByCampaign(Campaign campaign);
 	
 	/*
 	 * Map Operations
@@ -95,7 +101,7 @@ public interface ServiceInterface {
 	
 	public void deleteLocation(LocationDTO locationDTO);
 	
-	public List<Location> getAllLocationsByChapter(ChapterDTO chapterDTO);
+	public List<Location> getAllLocationsByChapter(Chapter chapter);
 	
 	/*
 	 * Event Operations
@@ -108,7 +114,7 @@ public interface ServiceInterface {
 	
 	public void deleteEvent(EventDTO eventDTO);
 	
-	public List<Event> getAllEventsByLocation(LocationDTO locationDTO);
+	public List<Event> getAllEventsByLocation(Location location);
 	
 	/*
 	 * Event Type Operations

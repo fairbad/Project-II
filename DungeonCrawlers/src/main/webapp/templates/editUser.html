@@ -1,0 +1,14 @@
+
+{{edit.user.username}}
+{{edit.user.email}}
+
+
+
+<form name="userForm" ng-submit="edit.doEdit()">
+	<h1>Edit User</h1>
+	<!-- <input id="id" type="text" placeholder="ID" ng-model="edit.user.id"> -->
+	<input id="email" type="email" placeholder="Email" ng-model="edit.user.email">
+	<input id="username" type="text" placeholder="Username" ng-model="edit.user.username"> 
+	<input id="password" type="password" ng-model="edit.user.password">
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>

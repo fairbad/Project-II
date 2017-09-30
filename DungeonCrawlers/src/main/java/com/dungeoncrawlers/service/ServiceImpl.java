@@ -55,15 +55,34 @@ public class ServiceImpl implements ServiceInterface{
 		return daoimpl.getUser(id);
 		
 	}
+	@Override
+	public UserDTO checkIfUAndP(UserDTO userDTO){
+		List<String> usernames = daoimpl.getAllUserNames();
+		List<String> emails = daoimpl.getAllUsersEmail();
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
+			return null;
+		}
+		return userDTO;
+	}
+	
 	
 	@Override
 	public User addUser(UserDTO userDTO) {
 		User user = new User();
-		user.setEmail(userDTO.getEmail());
-		user.setPassword(userDTO.getPassword());
-		user.setUsername(userDTO.getUsername());
-		return daoimpl.addUser(user);
+		List<String> emails = daoimpl.getAllUsersEmail();
+		List<String> usernames = daoimpl.getAllUserNames();
+		if(emails.contains(userDTO.getEmail())|| usernames.contains(userDTO.getUsername())){
+			System.out.println("Email or Username taken");
+			return null;
+		}else{
+			user.setEmail(userDTO.getEmail());
+			user.setPassword(userDTO.getPassword());
+			user.setUsername(userDTO.getUsername());
+			return daoimpl.addUser(user);
+		}
 	}
+	
 	
 	@Override
 	public User updateUser(UserDTO userDTO) {
@@ -191,17 +210,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Chapter> getAllChaptersByCampaign(CampaignDTO campaignDTO) {
-		Campaign campaign = new Campaign();
-		campaign.setUser(campaignDTO.getUser());
-		campaign.setDescription(campaignDTO.getDescription());
-		campaign.setImage(campaignDTO.getImage());
-		campaign.setMap(campaignDTO.getMap());
-		campaign.setName(campaignDTO.getName());
-		campaign.setNumViews(campaignDTO.getNumViews());
-		campaign.setPublic(campaignDTO.isPublic());
-		campaign.setRating(campaignDTO.getRating());
-		
+	public List<Chapter> getAllChaptersByCampaign(Campaign campaign) {
 		return daoimpl.getAllChaptersByCampaign(campaign);
 	}
 
@@ -293,13 +302,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Location> getAllLocationsByChapter(ChapterDTO chapterDTO) {
-		Chapter chapter = new Chapter();
-		chapter.setCampaign(chapterDTO.getCampaign());
-		chapter.setDescription(chapterDTO.getDescription());
-		chapter.setImage(chapterDTO.getImage());
-		chapter.setName(chapterDTO.getName());
-		
+	public List<Location> getAllLocationsByChapter(Chapter chapter) {
 		return daoimpl.getAllLocationsByChapter(chapter);
 	}
 
@@ -353,13 +356,7 @@ public class ServiceImpl implements ServiceInterface{
 	}
 
 	@Override
-	public List<Event> getAllEventsByLocation(LocationDTO locationDTO) {
-		Location location = new Location();
-		location.setChapter(locationDTO.getChapter());
-		location.setDescription(locationDTO.getDescription());
-		location.setImage(locationDTO.getImage());
-		location.setName(locationDTO.getName());
-		
+	public List<Event> getAllEventsByLocation(Location location) {
 		return daoimpl.getAllEventsByLocation(location);
 	}
 
