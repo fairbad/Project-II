@@ -1,5 +1,6 @@
 package com.dungeoncrawlers.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dungeoncrawlers.beans.Campaign;
@@ -26,6 +27,10 @@ public interface DAO {
 	public User addUser(User user);
 	
 	public User updateUser(User user);
+	
+	public List<String> getAllUsersEmail();
+	
+	public List<String> getAllUserNames();
 	
 	/*
 	 * Campaign Operations

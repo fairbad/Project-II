@@ -77,7 +77,12 @@ body{
 		<div class="container-fluid">
 			<div id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a ui-sref="login">Login</a></li>
+					<li ng-hide = "loggedIn"><a ui-sref="login">Login</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="home">Home</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="creator">Creator</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewPublicCampaigns">View Public Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewCampaigns">View My Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="logout" ng-click="logout.doLogout()">Logout</a></li>
 				</ul>
 			</div>
 		</div>

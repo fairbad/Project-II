@@ -15,6 +15,9 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 	/*
 	 * Login
 	 */
+	//This loads a page on start
+	$urlRouterProvider.otherwise('/login');
+
 	$stateProvider
 	.state("login",{
 		url:"/login",
@@ -40,7 +43,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 	/*
 	 * Home Logout
 	 */
-	.state("home.logout",{
+	.state("logout",{
 		url:"/login",
 		templateUrl:"templates/login.html",
 		controller:"LogoutCtrl as logout"
@@ -53,181 +56,166 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
         templateUrl:"templates/editUser.html",
         controller:"EditCtrl as edit"
     })
-    /*
-     * Home Creator
-     */
-	.state("home.creator",{
+	.state("creator",{
 		url:"/create",
 		templateUrl: "templates/creator.html"
 	})
-	/*
-	 * Home Character
-	 */
-	.state("home.character",{
+	.state("character",{
 		url:"/character",
 		templateUrl: "templates/character.html"
 	})
-	/*
-	 * Home Character Create
-	 */
-	.state("home.character.create",{
+	.state("character.create",{
 		url:"/create",
 		templateUrl: "templates/createCharacter.html",
 		controller: "CharacterCtrl as character"
 	})
 	/*
-	 * Home Character Edit
+	 * Character Edit
 	 */
-	.state("home.character.edit",{
+	.state("character.edit",{
 		url:"/edit",
 		templateUrl: "templates/editCharacter.html",
 		controller: "EditCharacterCtrl as editCharacter"
 	})
 	/*
-	 * Home Character View
+	 * Character View
 	 */
-	.state("home.character.view",{
+	.state("character.view",{
 		url:"/view",
 		templateUrl: "templates/viewCharacters.html",
 		controller: "ViewCharactersCtrl as viewCharacters"
 	})
 	/*
-	 * Home Character Delete
+	 * Character Delete
 	 */
-	.state("home.character.delete",{
+	.state("character.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteCharacter.html",
 		controller: "DeleteCharacterCtrl as deleteCharacter"
 	})
 	/*
-	 * Home NPC
+	 * NPC
 	 */
-	.state("home.NPC",{
+	.state("NPC",{
 		url:"/NPC",
 		templateUrl: "templates/NPC.html"
 	})
-	/*
-	 * Home NPC Create
-	 */
-	.state("home.NPC.create",{
+	.state("NPC.create",{
 		url:"/create",
 		templateUrl: "templates/createNPC.html",
 		controller: "NPCCtrl as NPC"
 	})
 	/*
-	 * Home NPC Edit
+	 * NPC Edit
 	 */
-	.state("home.NPC.edit",{
+	.state("NPC.edit",{
 		url:"/edit",
 		templateUrl: "templates/editNPC.html",
 		controller: "EditNPCCtrl as editNPC"
 	})
 	/*
-	 * Home NPC View
+	 * NPC View
 	 */
-	.state("home.NPC.view",{
+	.state("NPC.view",{
 		url:"/view",
 		templateUrl: "templates/viewNPCs.html",
 		controller: "ViewNPCsCtrl as viewNPCs"
 	})
 	/*
-	 * Home NPC Delete
+	 * NPC Delete
 	 */
-	.state("home.NPC.delete",{
+	.state("NPC.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteNPC.html",
 		controller: "DeleteNPCCtrl as deleteNPC"
 	})
 	/*
-	 * Home Enemy
+	 * Enemy
 	 */
-	.state("home.enemy",{
+	.state("enemy",{
 		url:"/enemy",
 		templateUrl: "templates/enemy.html"
 	})
-	/*
-	 * Home Enemy Create
-	 */
-	.state("home.enemy.create",{
+	.state("enemy.create",{
 		url:"/create",
 		templateUrl: "templates/createEnemy.html",
 		controller: "EnemyCtrl as enemy"
 	})
 	/*
-	 * Home Enemy Edit
+	 * Enemy Edit
 	 */
-	.state("home.enemy.edit",{
+	.state("enemy.edit",{
 		url:"/edit",
 		templateUrl: "templates/editEnemy.html",
 		controller: "EditEnemyCtrl as editEnemy"
 	})
 	/*
-	 * Home Enemy View
+	 * Enemy View
 	 */
-	.state("home.enemy.view",{
+	.state("enemy.view",{
 		url:"/view",
 		templateUrl: "templates/viewEnemies.html",
 		controller: "ViewEnemiesCtrl as viewEnemies"
 	})
 	/*
-	 * Home Enemy Delete
+	 * Enemy Delete
 	 */
-	.state("home.enemy.delete",{
+	.state("enemy.delete",{
 		url:"/delete",
 		templateUrl: "templates/deleteEnemy.html",
 		controller: "DeleteEnemyCtrl as deleteEnemy"
 	})
 	/*
-	 * Home Campaign
+	 * Campaign
 	 */
-	.state("home.campaign",{
+	.state("campaign",{
 		url:"/campaign",
 		templateUrl: "templates/campaign.html"
 	})
 	/*
-	 * Home Edit Campaign
+	 * Edit Campaign
 	 */
-	.state("home.editCampaign",{
+	.state("editCampaign",{
 		url:"/editCampaign",
 		templateUrl: "templates/editCampaign.html",
 		controller: "EditCampaignCtrl as editCampaign"
 	})
 	/*
-	 * Home Campaign Details
+	 * Campaign Details
 	 */
-	.state("home.campaign.details",{
+	.state("campaign.details",{
 		url:"/details",
 		templateUrl: "templates/details.html",
 		controller: "DetailsCtrl as details"
 	})
 	/*
-	 * Home Campaign Map
+	 * Campaign Map
 	 */
-	.state("home.campaign.map",{
+	.state("campaign.map",{
 		url:"/map",
 		templateUrl: "templates/map.html",
 		controller: "MapCtrl as map"
 	})
 	/*
-	 * Home Campaign Chapter
+	 * Campaign Chapter
 	 */
-	.state("home.campaign.chapter",{
+	.state("campaign.chapter",{
 		url:"/chapter",
 		templateUrl: "templates/chapter.html",
 		controller: "ChapterCtrl as chapter"
 	})
 	/*
-	 * Home Campaign Location
+	 * Campaign Location
 	 */
-	.state("home.campaign.location",{
-		url:"/lochome.ation",
+	.state("campaign.location",{
+		url:"/location",
 		templateUrl: "templates/location.html",
 		controller: "LocationCtrl as location"
 	})
 	/*
-	 * Home Campaign Event
+	 * Campaign Event
 	 */
-	.state("home.campaign.event",{
+	.state("campaign.event",{
 		url:"/event",
 		templateUrl: "templates/event.html",
 		controller: "EventCtrl as event"
@@ -235,7 +223,7 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 	/*
 	 * View Public Campaigns
 	 */
-	.state("home.viewPublicCampaigns",{
+	.state("viewPublicCampaigns",{
 		url:"/viewPublicCampaigns",
 		templateUrl: "templates/viewPublicCampaigns.html",
 		controller: "ViewPublicCampaignsCtrl as viewPublicCampaigns"
@@ -243,15 +231,13 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 	/*
 	 * View Campaigns
 	 */
-	.state("home.viewCampaigns",{
+	.state("viewCampaigns",{
 		url:"/campaigns",
 		templateUrl: "templates/viewCampaigns.html",
 		controller: "ViewCampaignsCtrl as viewCampaigns"
 	});
 
 });
-
-
 
 /**
  * User Service
@@ -260,16 +246,16 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
  * @param $q
  * 		A promise
  */
-dndApp.service("UserService", function($http, $q) {
+dndApp.service("UserService", function($http, $q,$rootScope) {
 	console.log("in userService");
 
 	var service = this;
 
 	service.user = {
-		username : "",
-		password : "",
-		email : "",
-		authenticated : false
+			username : "",
+			password : "",
+			email : "",
+			authenticated : false
 	};
 
 	service.getUser = function() {
@@ -295,15 +281,18 @@ dndApp.service("UserService", function($http, $q) {
 				});
 		return promise;
 	};
+	
 	service.logoutUser = function(){
 		var promise = $http.post('rest/user/logout', service.user).then(
 				function(response) {
-					console.log("The response in service.authenticateUser");
+					console.log("The response in service.logoutUser");
+					$rootScope.loggedIn = null; //Add this
 					console.log(response);
 					return response;
 				}, function(error) {
 					console.log('logout promise fail');
 				});
+		//service.user = null;
 		return promise;
 	};
 
@@ -364,18 +353,18 @@ dndApp.service("CreatorService", function($http, $q){
 	var service = this;
 
 	service.character={
-		name : "",
-		image : ""
+			name : "",
+			image : ""
 	};
 
 	service.NPC={
-		name : "",
-		image : ""
+			name : "",
+			image : ""
 	};
 
 	service.enemy={
-		name : "",
-		image : ""
+			name : "",
+			image : ""
 	};
 
 	service.characters = [];
@@ -396,163 +385,163 @@ dndApp.service("CreatorService", function($http, $q){
 
 	service.createCharacter = function(){
 		var promise = $http.post('rest/creator/createCharacter',
-			service.character).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('createCharacter promise fail');
-				}
-			);
+				service.character).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('createCharacter promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.createNPC = function(){
 		var promise = $http.post('rest/creator/createNPC',
-			service.NPC).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('createNPC promise fail');
-				}
-			);
+				service.NPC).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('createNPC promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.createEnemy = function(){
 		var promise = $http.post('rest/creator/createEnemy',
-			service.enemy).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('createEnemy promise fail');
-				}
-			);
+				service.enemy).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('createEnemy promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.getCharacters = function(){
 		var promise = $http.get('rest/creator/getCharacters',
-			service.characters).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("get all characters failed")
-				}
-			);
+				service.characters).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all characters failed")
+						}
+				);
 		return promise;
 	};
 
 	service.getNPCs = function(){
 		var promise = $http.get('rest/creator/getNPCs',
-			service.NPCs).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("get all NPC failed")
-				}
-			);
+				service.NPCs).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all NPC failed")
+						}
+				);
 		return promise;
 	}
 
 	service.getEnemies = function(){
 		var promise = $http.get('rest/creator/getEnemies',
-			service.enemies).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("get all enemies failed")
-				}
-			);
+				service.enemies).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all enemies failed")
+						}
+				);
 		return promise;
 	}
 
 	service.editCharacter = function(character){
 		service.character = character;
 		var promise = $http.post('rest/creator/editCharacter',
-			service.character).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('editCharacter promise fail');
-				}
-			);
+				service.character).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('editCharacter promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.editNPC = function(NPC){
 		service.NPC = NPC;
 		var promise = $http.post('rest/creator/editNPC',
-			service.NPC).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('editNPC promise fail');
-				}
-			);
+				service.NPC).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('editNPC promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.editEnemy = function(enemy){
 		service.enemy = enemy;
 		var promise = $http.post('rest/creator/editEnemy',
-			service.enemy).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log('editEnemy promise fail');
-				}
-			);
+				service.enemy).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log('editEnemy promise fail');
+						}
+				);
 		return promise;
 	};
 
 	service.deleteCharacter = function(character){
 		service.character = character;
 		var promise = $http.post('rest/creator/deleteCharacter',
-			service.character).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("failed to delete")
-				}
-			);	
+				service.character).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("failed to delete")
+						}
+				);	
 		return promise;
 	}
 
 	service.deleteNPC = function(NPC){
 		service.NPC = NPC;
 		var promise = $http.post('rest/creator/deleteNPC',
-			service.NPC).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("failed to delete")
-				}
-			);	
+				service.NPC).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("failed to delete")
+						}
+				);	
 		return promise;
 	}
 
 	service.deleteEnemy = function(enemy){
 		service.enemy = enemy;
 		var promise = $http.post('rest/creator/deleteEnemy',
-			service.enemy).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("failed to delete")
-				}
-			);	
+				service.enemy).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("failed to delete")
+						}
+				);	
 		return promise;
 	}
 });
@@ -565,33 +554,35 @@ dndApp.service("CampaignService", function($http, $q){
 	service.campaignInfo=[];
 	
 	service.campaign={
-		name : "",
-		desc : "",
-		image : ""
+			name : "",
+			desc : "",
+			image : ""
 	};
 
 	service.map={
-		name : "",
-		desc : "",
-		image : ""
+			name : "",
+			desc : "",
+			image : ""
 	};
 
 	service.chapter={
-		name : "",
-		desc : "",
-		image : ""
+			name : "",
+			desc : "",
+			image : ""
 	};
-	
+
 	service.location={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			chapter_id : ""
 	};
-	
+
 	service.event={
 			name : "",
 			desc : "",
-			image : ""
+			image : "",
+			location_id : ""
 	};
 
 	service.getCampaign = function(){
@@ -605,36 +596,25 @@ dndApp.service("CampaignService", function($http, $q){
 	service.getChapter = function(){
 		return service.chapter;
 	};
-	
+
 	service.getLocation = function(){
 		return service.location;
 	};
-	
+
 	service.getEvent = function(){
 		return service.event;
 	};
 	
-	service.gotoCampaign = function() {
-		var promise = $http.post('rest/campaign/getCampaign', service.campaign).then(
-			function(response) {
-				console.log(response);
-				return response;
-			}, function(error) {
-				console.log('goto promise fail');
-			});
-		return promise;
-	};
-	
 	service.getCampaigns = function(){
 		var promise = $http.get('rest/campaign/getCampaigns',
-			service.campaigns).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("get all campaigns failed")
-				}
-			);
+				service.campaigns).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all campaigns failed")
+						}
+				);
 		return promise;
 	};
 
@@ -655,13 +635,13 @@ dndApp.service("CampaignService", function($http, $q){
 		service.chapter.desc = data.description;
 		service.chapter.image = data.image;
 	};
-	
+
 	service.setLocation = function(data){
 		service.location.name = data.name;
 		service.location.desc = data.description;
 		service.location.image = data.image;
 	};
-	
+
 	service.setEvent = function(data){
 		service.event.name = data.name;
 		service.event.desc = data.description;
@@ -670,80 +650,80 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.createCampaign = function(){
 		var promise = $http.post('rest/campaign/details',
-			service.campaign).then(
-				function(response){
-					console.log("response service.createCampaign")
-					console.log(response);
-					return response;
-				},
-				function(error){
-					console.log('createCampaign promise fail');
-				}
-			);
-			return promise;
+				service.campaignInfo).then(
+						function(response){
+							console.log("response service.createCampaign")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createCampaign promise fail');
+						}
+				);
+		return promise;
 	};
 
 	service.createMap = function(){
 		var promise = $http.post('rest/campaign/map',
-			service.map).then(
-				function(response){
-					console.log("response service.createMap")
-					console.log(response);
-					return response;
-				},
-				function(error){
-					console.log('createMap promise fail');
-				}
-			);
-			return promise;
+				service.map).then(
+						function(response){
+							console.log("response service.createMap")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createMap promise fail');
+						}
+				);
+		return promise;
 	};
 
 	service.createChapter = function(){
 		console.log(service.chapter);
 		var promise = $http.post('rest/campaign/chapter',
-			service.chapter).then(
-				function(response){
-					console.log("response service.createChapter")
-					console.log(response);
-					return response;
-				},
-				function(error){
-					console.log('createChapter promise fail');
-				}
-			);
-			return promise;
+				service.chapter).then(
+						function(response){
+							console.log("response service.createChapter")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createChapter promise fail');
+						}
+				);
+		return promise;
 	};
-	
+
 	service.createLocation = function(){
 		console.log(service.location);
 		var promise = $http.post('rest/campaign/location',
-			service.location).then(
-				function(response){
-					console.log("response service.createLocation")
-					console.log(response);
-					return response;
-				},
-				function(error){
-					console.log('createLocation promise fail');
-				}
-			);
-			return promise;
+				service.location).then(
+						function(response){
+							console.log("response service.createLocation")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createLocation promise fail');
+						}
+				);
+		return promise;
 	};
-	
+
 	service.createEvent = function(){
 		console.log(service.event);
 		var promise = $http.post('rest/campaign/event',
-			service.event).then(
-				function(response){
-					console.log("response service.createEvent")
-					console.log(response);
-					return response;
-				},
-				function(error){
-					console.log('createEvent promise fail');
-				}
-			);
-			return promise;
+				service.event).then(
+						function(response){
+							console.log("response service.createEvent")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createEvent promise fail');
+						}
+				);
+		return promise;
 	};
 	
 	service.editCampaign = function(){
@@ -754,6 +734,20 @@ dndApp.service("CampaignService", function($http, $q){
 			}, function(error) {
 				console.log('editCampaign promise fail');
 			});
+		return promise;
+	};
+	
+	service.editCampaignDetails = function(){
+		var promise = $http.post('rest/campaign/editCampaignDetails', service.campaignInfo).then(
+					function(response){
+						console.log("response service.editCampaignInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('editCampaignInfo promise fail');
+					}
+			);
 		return promise;
 	};
 });
@@ -776,19 +770,17 @@ dndApp.service("CommunityService", function($http, $q){
 
 	service.getPublicCampaigns = function(){
 		var promise = $http.get('rest/community/getPublicCampaigns',
-			service.campaigns).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("get all public campaigns failed")
-				}
-			);
+				service.campaigns).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all public campaigns failed")
+						}
+				);
 		return promise;
 	};
 });
-
-
 
 /**
  * Login Controller
@@ -797,7 +789,7 @@ dndApp.service("CommunityService", function($http, $q){
  * @param $state
  * 		The State
  */
-dndApp.controller("LoginCtrl", function(UserService, $state) {
+dndApp.controller("LoginCtrl", function(UserService, $state, $rootScope) {
 	console.log("in loginctrl");
 
 	var login = this;
@@ -820,6 +812,7 @@ dndApp.controller("LoginCtrl", function(UserService, $state) {
 				console.log(UserService.getUser());
 				console.log("setting user in login ctrl")
 				console.log(UserService.getUser());
+				$rootScope.loggedIn = login.user;
 				$state.go("home");
 			} else {
 				alert("Invalid login!");
@@ -896,9 +889,9 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 			$state.go("home");
 		}, function(error) {
 			console.log(error);
-		})
-	}
-})
+		});
+	};
+});
 
 
 
@@ -912,8 +905,8 @@ dndApp.controller("RegisterCtrl", function(UserService, $state) {
 dndApp.controller("EditCtrl", function(UserService, $state){
 	var edit = this;
 	edit.user = UserService.getUser();
-	console.log("Inside the Edit user Contontroller")
-	console.log(edit.user)
+	console.log("Inside the Edit user Contontroller");
+	console.log(edit.user);
 	edit.doEdit = function(){
 		var promise = UserService.editUser();
 		promise.then(function(response){
@@ -924,7 +917,7 @@ dndApp.controller("EditCtrl", function(UserService, $state){
 		}, function(error){
 			console.log(error);
 		})
-	}
+	};
 });
 
 
@@ -1007,9 +1000,9 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 dndApp.controller("ViewCharactersCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getCharacters();
 	promise.then(
-		function(response){
-			$scope.characters = response.data;
-	})
+			function(response){
+				$scope.characters = response.data;
+			})
 });
 
 
@@ -1026,9 +1019,9 @@ dndApp.controller("ViewCharactersCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("ViewNPCsCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getNPCs();
 	promise.then(
-		function(response){
-			$scope.NPCs = response.data;
-	})
+			function(response){
+				$scope.NPCs = response.data;
+			})
 });
 
 
@@ -1043,9 +1036,9 @@ dndApp.controller("ViewNPCsCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getEnemies();
 	promise.then(
-		function(response){
-			$scope.enemies = response.data;
-	})
+			function(response){
+				$scope.enemies = response.data;
+			})
 });
 
 
@@ -1062,10 +1055,10 @@ dndApp.controller("ViewEnemiesCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getCharacters();
 	promise.then(
-		function(response){
-			$scope.characters = response.data;
-	})
-	$scope.update = function(){
+			function(response){
+				$scope.characters = response.data;
+			})
+			$scope.update = function(){
 		CreatorService.editCharacter($scope.character);
 	}
 });
@@ -1084,10 +1077,10 @@ dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getNPCs();
 	promise.then(
-		function(response){
-			$scope.NPCs = response.data;
-	})
-	$scope.update = function(){
+			function(response){
+				$scope.NPCs = response.data;
+			})
+			$scope.update = function(){
 		CreatorService.editNPC($scope.NPC);
 	}
 });
@@ -1106,10 +1099,10 @@ dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("EditEnemyCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getEnemies();
 	promise.then(
-		function(response){
-			$scope.enemies = response.data;
-	})
-	$scope.update = function(){
+			function(response){
+				$scope.enemies = response.data;
+			})
+			$scope.update = function(){
 		CreatorService.editEnemy($scope.enemy);
 	}
 });
@@ -1128,14 +1121,14 @@ dndApp.controller("EditEnemyCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getCharacters();
 	promise.then(
-		function(response){
-			$scope.characters = response.data;
-	})
-	$scope.delete = function(){
-		CreatorService.deleteCharacter($scope.character);
-		var index = $scope.characters.indexOf($scope.character);
-		$scope.characters.splice(index, 1);
-	}
+			function(response){
+				$scope.characters = response.data;
+			})
+//			$scope.delete = function(){
+//			CreatorService.deleteCharacter($scope.character);
+//			var index = $scope.characters.indexOf($scope.character);
+//			$scope.characters.splice(index, 1);
+//			}
 });
 
 
@@ -1152,14 +1145,14 @@ dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope)
 dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getNPCs();
 	promise.then(
-		function(response){
-			$scope.NPCs = response.data;
-	})
-	$scope.delete = function(){
-		CreatorService.deleteNPC($scope.NPC);
-		var index = $scope.NPCs.indexOf($scope.NPC);
-		$scope.NPCs.splice(index, 1);
-	}
+			function(response){
+				$scope.NPCs = response.data;
+			})
+//			$scope.delete = function(){
+//			CreatorService.deleteNPC($scope.NPC);
+//			var index = $scope.NPCs.indexOf($scope.NPC);
+//			$scope.NPCs.splice(index, 1);
+//			}
 });
 
 
@@ -1176,14 +1169,14 @@ dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
 dndApp.controller("DeleteEnemyCtrl",function(CreatorService, $state, $scope){
 	var promise = CreatorService.getEnemies();
 	promise.then(
-		function(response){
-			$scope.enemies = response.data;
-	})
-	$scope.delete = function(){
-		CreatorService.deleteEnemy($scope.enemy);
-		var index = $scope.enemies.indexOf($scope.enemy);
-		$scope.enemies.splice(index, 1);
-	}
+			function(response){
+				$scope.enemies = response.data;
+			})
+//			$scope.delete = function(){
+//			CreatorService.deleteEnemy($scope.enemy);
+//			var index = $scope.enemies.indexOf($scope.enemy);
+//			$scope.enemies.splice(index, 1);
+//			}
 });
 
 
@@ -1201,18 +1194,18 @@ dndApp.controller("DetailsCtrl", function(CampaignService, $state){
 	var campaign = this;
 	campaign.campaign = CampaignService.getCampaign();
 	campaign.createCampaign = function(){
-		
+
 		var promise = CampaignService.createCampaign();
 		console.log(promise);
 
 		promise.then(
-			function(response){
-				console.log("setting campaign data");
-				console.log(response.data);
-				CampaignService.setCampaign(response.data);
-			}, function(error){
-				console.log(error);
-			});
+				function(response){
+					console.log("setting campaign data");
+					console.log(response.data);
+					CampaignService.setCampaign(response.data);
+				}, function(error){
+					console.log(error);
+				});
 	};
 });
 
@@ -1227,22 +1220,22 @@ dndApp.controller("DetailsCtrl", function(CampaignService, $state){
  */
 dndApp.controller("MapCtrl", function(CampaignService, $state){
 	console.log("in MapCtrl");
-	
+
 	var map = this;
 	map.map = CampaignService.getMap();
 	map.createMap = function(){
-		
+
 		var promise = CampaignService.createMap();
 		console.log(promise);
 
 		promise.then(
-			function(response){
-				console.log("setting map data");
-				console.log(response.data);
-				CampaignService.setMap(response.data);
-			}, function(error){
-				console.log(error);
-			});
+				function(response){
+					console.log("setting map data");
+					console.log(response.data);
+					CampaignService.setMap(response.data);
+				}, function(error){
+					console.log(error);
+				});
 	};
 });
 
@@ -1257,22 +1250,22 @@ dndApp.controller("MapCtrl", function(CampaignService, $state){
  */
 dndApp.controller("ChapterCtrl", function(CampaignService, $state){
 	console.log("in ChapterCtrl");
-	
+
 	var chapter = this;
 	chapter.chapter = CampaignService.getChapter();
 	chapter.createChapter = function(){
-		
+
 		var promise = CampaignService.createChapter();
 		console.log(promise);
 
 		promise.then(
-			function(response){
-				console.log("setting chapter data");
-				console.log(response.data);
-				CampaignService.setChapter(response.data);
-			}, function(error){
-				console.log(error);
-			});
+				function(response){
+					console.log("setting chapter data");
+					console.log(response.data);
+					CampaignService.setChapter(response.data);
+				}, function(error){
+					console.log(error);
+				});
 	};
 });
 
@@ -1287,22 +1280,22 @@ dndApp.controller("ChapterCtrl", function(CampaignService, $state){
  */
 dndApp.controller("LocationCtrl", function(CampaignService, $state){
 	console.log("in LocationCtrl");
-	
+
 	var location = this;
 	location.location = CampaignService.getLocation();
 	location.createLocation = function(){
-		
+
 		var promise = CampaignService.createLocation();
 		console.log(promise);
 
 		promise.then(
-			function(response){
-				console.log("setting location data");
-				console.log(response.data);
-				CampaignService.setLocation(response.data);
-			}, function(error){
-				console.log(error);
-			});
+				function(response){
+					console.log("setting location data");
+					console.log(response.data);
+					CampaignService.setLocation(response.data);
+				}, function(error){
+					console.log(error);
+				});
 	};
 });
 
@@ -1317,22 +1310,22 @@ dndApp.controller("LocationCtrl", function(CampaignService, $state){
  */
 dndApp.controller("EventCtrl", function(CampaignService, $state){
 	console.log("in EventCtrl");
-	
+
 	var event = this;
 	event.event = CampaignService.getEvent();
 	event.createEvent = function(){
-		
+
 		var promise = CampaignService.createEvent();
 		console.log(promise);
 
 		promise.then(
-			function(response){
-				console.log("setting event data");
-				console.log(response.data);
-				CampaignService.setEvent(response.data);
-			}, function(error){
-				console.log(error);
-			});
+				function(response){
+					console.log("setting event data");
+					console.log(response.data);
+					CampaignService.setEvent(response.data);
+				}, function(error){
+					console.log(error);
+				});
 	};
 });
 
@@ -1356,10 +1349,28 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 	var promise = CampaignService.editCampaign();
 	promise.then(function(response) {
 		if (campaign.campaign && response.data) {
+			CampaignService.campaignInfo = response.data;
 			$scope.campaignInfo = response.data;
 			console.log($scope.campaignInfo);
 		}
 	});
+	
+	campaign.editCampaignDetails = function(){
+
+		var promise = CampaignService.editCampaignDetails();
+		console.log(promise);
+
+		promise.then(
+				function(response){
+					console.log("setting campaign data");
+					console.log(response.data);
+					CampaignService.campaignInfo = response.data;
+					$scope.campaignInfo = response.data;
+					//CampaignService.campaign.name = response.data
+				}, function(error){
+					console.log(error);
+				});
+	};
 });
 
 
@@ -1376,25 +1387,25 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){
 	var promise = CommunityService.getPublicCampaigns();
 	promise.then(
-		function(response){
-			console.log(response.data);
-			$scope.campaigns = response.data;
-			//$scope.publicCampaigns = new NgTableParams({sorting: {name: "asc"}}, {dataset: $scope.campaigns});
-			$scope.publicCampaigns = createUsingFullOptions();
-			function createUsingFullOptions(){
-				"use strict";
-				 var initialParams = {
-					sorting: {name: "asc"},
-        			count: 10
-      			};
-				var initialSettings = {
-					//counts: [],
-					dataset: $scope.campaigns
-				};
-				return new NgTableParams(initialParams, initialSettings);
-			}
-	})
-	$scope.getCampaign = function(campaign){
+			function(response){
+				console.log(response.data);
+				$scope.campaigns = response.data;
+				//$scope.publicCampaigns = new NgTableParams({sorting: {name: "asc"}}, {dataset: $scope.campaigns});
+				$scope.publicCampaigns = createUsingFullOptions();
+				function createUsingFullOptions(){
+					"use strict";
+					var initialParams = {
+							sorting: {name: "asc"},
+							count: 10
+					};
+					var initialSettings = {
+							//counts: [],
+							dataset: $scope.campaigns
+					};
+					return new NgTableParams(initialParams, initialSettings);
+				}
+			})
+			$scope.getCampaign = function(campaign){
 		console.log(campaign);
 	}
 });
@@ -1432,7 +1443,7 @@ dndApp.controller("ViewCampaignsCtrl",function(NgTableParams, CampaignService, $
 
 	$scope.getCampaign = function(campaign){
 		CampaignService.campaign = campaign;
-		$state.go("home.editCampaign");
+		$state.go("editCampaign");
 	};
 });
 
