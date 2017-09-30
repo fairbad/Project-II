@@ -16,18 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dungeoncrawlers.beans.Campaign;
 import com.dungeoncrawlers.beans.Chapter;
-import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Event;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.User;
-import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
+import com.dungeoncrawlers.dto.CampaignChapterDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
-import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
-import com.dungeoncrawlers.dto.CharacterDTO;
+import com.dungeoncrawlers.dto.ChapterLocationDTO;
 import com.dungeoncrawlers.dto.EventDTO;
-import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
 import com.dungeoncrawlers.dto.MapDTO;
 import com.dungeoncrawlers.service.ServiceInterface;
@@ -126,12 +123,29 @@ public class CampaignController {
 	@RequestMapping(value="/getCampaign", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CampaignAndComponentsDTO> getCampaign(HttpSession session, @RequestBody CampaignDTO campaignDTO){
+	public ResponseEntity<CampaignChapterDTO> getCampaign(HttpSession session, @RequestBody CampaignDTO campaignDTO){
 		System.out.println("getting campaign and its components");
 		System.out.println(campaignDTO.toString());
         Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
+        
+        CampaignChapterDTO campaignChapterDTO = new CampaignChapterDTO();
+        campaignChapterDTO.setCampaign(campaign);
+        
+        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
+        List<ChapterLocationDTO> chapterLocationsDTO = new ArrayList<ChapterLocationDTO>();
+        for(Chapter c: chapters) {
+        	ChapterLocationDTO chapterLocationDTO = new ChapterLocationDTO();
+        	chapterLocationDTO.setChapter(c);
+        	chapterLocationDTO.setLocations(serviceimpl.getAllLocationsByChapter(c));
+        	chapterLocationsDTO.add(chapterLocationDTO);
+        }
+        
+        campaignChapterDTO.setChapters(chapterLocationsDTO);
+        
+        /*
         List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
         List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
+        
         for (Chapter c : chapters) {
         	List<Location> locations = serviceimpl.getAllLocationsByChapter(c);
         	List<LocationAndEventsDTO> location_events = new ArrayList<LocationAndEventsDTO>();
@@ -144,7 +158,8 @@ public class CampaignController {
         	chapters_locations.add(calDTO);
         }
         CampaignAndComponentsDTO cacDTO = new CampaignAndComponentsDTO(campaign, campaign.getMap(), chapters_locations);
-		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
+		*/
+        return new ResponseEntity<CampaignChapterDTO>(campaignChapterDTO, HttpStatus.OK);
 	}
 
 }

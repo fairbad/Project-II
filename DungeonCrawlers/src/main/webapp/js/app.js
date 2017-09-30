@@ -1,4 +1,4 @@
-var dndApp = angular.module("dndApp", [ "ui.router", "ngTable" ]);
+var dndApp = angular.module("dndApp", [ "ui.router", "ngTable", "ngDragDrop" ]);
 
 dndApp.config(function($stateProvider, $urlRouterProvider) {
 	console.log("init app");
@@ -1003,6 +1003,74 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 			console.log($scope.campaignInfo);
 		}
 	});
+
+	$scope.updateArray = function(evt,ui,chapter){
+		//var obj = ui.draggable.scope().dndDragItem;
+		
+		// the Location object which has the chapter relationship that it was in
+		var location = ui.draggable.scope().location;
+		console.log(location);
+		//console.log(ui.draggable.scope().location);
+		// the Chapter that it was dropped into
+		console.log(chapter);
+
+		//var oldChapter = $scope.campaignInfo.
+
+		console.log("CHAPTERSSSSSSSSSS")
+		console.log($scope.campaignInfo.chapters);
+		$scope.campaignInfo.chapters.forEach(function(scopechapter){
+			if(scopechapter == chapter){
+				console.log("YRES");
+				// the chapter which the location relationship should be changed to
+				// send an update to the server to update location's chapter id
+				console.log(scopechapter);
+			}
+		});
+
+		/*
+		console.log(list);
+		//var index = list.indexOf(obj);
+		var index = $scope.list1.indexOf(obj);
+		console.log(index);
+		$scope.list1.splice(index,1);
+		console.log($scope.list1);
+		/*
+		console.log(stuff);
+		console.log(list);
+		var index = list.indexOf(stuff);
+		console.log(index);
+		$scope.list.splice(index,1);*/
+	}
+
+/*
+	$scope.models = {
+        selected: null,
+        lists: {
+	    "A": [
+	      {
+	        "label": "Item A1"
+	      },
+	      {
+	        "label": "Item A2"
+	      },
+	      {
+	        "label": "Item A3"
+	      }
+	    ],
+	    "B": [
+	      {
+	        "label": "Item B1"
+	      },
+	      {
+	        "label": "Item B2"
+	      },
+	      {
+	        "label": "Item B3"
+	      }
+	    ]
+	  }
+    };
+    */
 });
 
 dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunityService, $state, $scope){

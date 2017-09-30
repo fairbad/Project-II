@@ -27,3 +27,20 @@
 	<input id="image" type="text" placeholder="Image" ng-model="map.map.image">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
+<div class="container-fluid">
+		<div id="content">
+			<div style="padding-left:15px; padding-top:10px">
+				<div class="panel panel-default" ng-repeat="chapter in campaignInfo.chapters track by $index" ng-model="chapters">
+	  				<div class="panel-heading-custom panel-heading heading" >
+					{{chapter.chapter.name}}</div>
+					<div class="panel-body" ngmodel="chapter.locations" data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
+	  					drop here
+	  					<br>
+	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.name">
+							{{location.name}}
+	  					</div>
+  					</div>
+				</div>
+			</div>
+
+	</div>
