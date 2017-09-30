@@ -382,6 +382,36 @@ dndApp.service("CreatorService", function($http, $q){
 	service.getEnemy = function(){
 		return service.enemy;
 	};
+	
+	service.getBase64Char = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.character.image = reader.result;
+		};
+	}
+	
+	service.getBase64NPC = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.NPC.image = reader.result;
+		};
+	}
+	
+	service.getBase64En = function() {
+		var fileChooser = document.getElementById('image');
+		var file = fileChooser.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			service.enemy.image = reader.result;
+		};
+	}
 
 	service.createCharacter = function(){
 		var promise = $http.post('rest/creator/createCharacter',
@@ -462,7 +492,9 @@ dndApp.service("CreatorService", function($http, $q){
 	}
 
 	service.editCharacter = function(character){
-		service.character = character;
+		service.character.name = character.name;
+		service.character.id = character.id;
+		service.character.user = character.user;
 		var promise = $http.post('rest/creator/editCharacter',
 				service.character).then(
 						function(response){
@@ -476,7 +508,9 @@ dndApp.service("CreatorService", function($http, $q){
 	};
 
 	service.editNPC = function(NPC){
-		service.NPC = NPC;
+		service.NPC.name = NPC.name;
+		service.NPC.id = NPC.id;
+		service.NPC.user = NPC.user;
 		var promise = $http.post('rest/creator/editNPC',
 				service.NPC).then(
 						function(response){
@@ -490,7 +524,9 @@ dndApp.service("CreatorService", function($http, $q){
 	};
 
 	service.editEnemy = function(enemy){
-		service.enemy = enemy;
+		service.enemy.name = enemy.name;
+		service.enemy.id = enemy.id;
+		service.enemy.user = enemy.user
 		var promise = $http.post('rest/creator/editEnemy',
 				service.enemy).then(
 						function(response){
@@ -950,6 +986,7 @@ dndApp.controller("CharacterCtrl", function(CreatorService, $state){
 	character.createCharacter = function(){
 		var promise = CreatorService.createCharacter();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64Char;
 });
 
 
@@ -967,6 +1004,7 @@ dndApp.controller("NPCCtrl", function(CreatorService, $state){
 	NPC.createNPC = function(){
 		var promise = CreatorService.createNPC();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64NPC;
 });
 
 
@@ -984,6 +1022,7 @@ dndApp.controller("EnemyCtrl", function(CreatorService, $state){
 	enemy.createEnemy = function(){
 		var promise = CreatorService.createEnemy();
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64En;
 });
 
 
@@ -1061,6 +1100,7 @@ dndApp.controller("EditCharacterCtrl",function(CreatorService, $state, $scope){
 			$scope.update = function(){
 		CreatorService.editCharacter($scope.character);
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64Char;
 });
 
 
@@ -1083,6 +1123,7 @@ dndApp.controller("EditNPCCtrl",function(CreatorService, $state, $scope){
 			$scope.update = function(){
 		CreatorService.editNPC($scope.NPC);
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64NPC;
 });
 
 
@@ -1105,6 +1146,7 @@ dndApp.controller("EditEnemyCtrl",function(CreatorService, $state, $scope){
 			$scope.update = function(){
 		CreatorService.editEnemy($scope.enemy);
 	}
+	document.getElementById('image').onchange = CreatorService.getBase64En;
 });
 
 
