@@ -5,13 +5,22 @@
 <!-- 		<li>{{ x.description }}</li> -->
 <!-- 	</ul> -->
 <!-- </div> -->
-<button type="button" ui-sref="editCampaign" class="btn btn-primary">New Campaign</button>
-<table ng-table="myCampaigns" class="table table-condensed table-bordered table-striped" datatable="ng">
-  <tr ng-repeat="campaign in $data track by $index" ng-model="campaign"	ng-click="getCampaign(campaign)">
-    <td data-title="'Campaign Name'" sortable="'name'" filter="{name: 'text'}">{{campaign.name}}</td>
-<!--     <td data-title="'Author'" sortable="'user.username'" filter="{'user.username': 'text'}">{{campaign.user.username}}</td> -->
-    <td data-title="'Description'" filter="{description: 'text'}">{{campaign.description}}</td>
-    <td data-title="'Views'" sortable="'numViews'">{{campaign.numViews}}<td>
-    <td data-title="'Rating'" sortable="'rating'">{{campaign.rating}}<td>
-  </tr>
-</table>
+<div class="container-fluid">
+	<div class="jumbotron" style="background-image:url(images/lightbrownleather.jpg)">
+		<font face="Almendra">
+		
+		<table ng-table="myCampaigns" class="table table-condensed table-bordered table-striped" datatable="ng">
+		  <tr ng-repeat="campaign in $data track by $index" ng-model="campaign"	ng-click="getCampaign(campaign)">
+		    <td data-title="'Campaign Name'" sortable="'name'" filter="{name: 'text'}">{{campaign.name}}</td>
+		<!--     <td data-title="'Author'" sortable="'user.username'" filter="{'user.username': 'text'}">{{campaign.user.username}}</td> -->
+		    <td data-title="'Description'" filter="{description: 'text'}">{{campaign.description}}</td>
+		    <td data-title="'Views'" sortable="'numViews'">{{campaign.numViews}}<td>
+		    <td data-title="'Rating'" sortable="'rating'">{{campaign.rating}}<td>
+		  </tr>
+		</table>
+		<div style="text-align:right">
+			<button type="button" ui-sref="editCampaign" class="btn btn-primary">New Campaign</button>
+		</div>
+		</font>
+	</div>
+</div>
