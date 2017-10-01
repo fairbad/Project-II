@@ -1626,6 +1626,17 @@ dndApp.controller("ViewCampaignsCtrl",function(NgTableParams, CampaignService, $
 		CampaignService.campaign = campaign;
 		$state.go("editCampaign");
 	};
+	
+	$scope.newCampaign = function(){
+		CampaignService.campaign = {
+				name : "",
+				description : "",
+				image : ""
+		};
+		$state.go("editCampaign");
+	};
+	
+	
 });
 
 
