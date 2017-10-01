@@ -73,8 +73,8 @@ public class CampaignController {
         campaignDTO.setId(campaign.getId());
 		return new ResponseEntity<CampaignDTO>(campaignDTO, HttpStatus.OK);
 	}
-	/*
-	@RequestMapping(value="/map", method= {RequestMethod.POST},
+	
+	/*@RequestMapping(value="/map", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<MapDTO> createMap(HttpSession session, @RequestBody MapDTO mapDTO){

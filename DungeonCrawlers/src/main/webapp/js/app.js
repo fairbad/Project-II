@@ -1518,7 +1518,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 		promise.then(
 				function(response){
 					console.log("setting campaign data");
-					console.log(response.data);
+					console.log(response);
 					CampaignService.campaignInfo = response.data;
 					$scope.campaignInfo = response.data;
 					//CampaignService.campaign.name = response.data
