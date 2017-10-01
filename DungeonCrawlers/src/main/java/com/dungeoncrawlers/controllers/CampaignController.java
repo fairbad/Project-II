@@ -31,7 +31,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dungeoncrawlers.beans.Campaign;
 import com.dungeoncrawlers.beans.Chapter;
-import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Event;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
@@ -40,7 +39,6 @@ import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
-import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.dto.EventDTO;
 import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
@@ -150,7 +148,26 @@ public class CampaignController {
 		System.out.println("getting campaign and its components");
 		System.out.println(campaignDTO.toString());
 		CampaignAndComponentsDTO cacDTO;
-        Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
+		
+		Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
+        /*
+        CampaignChapterDTO campaignChapterDTO = new CampaignChapterDTO();
+        campaignChapterDTO.setCampaign(campaign);
+        
+        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
+        List<ChapterLocationDTO> chapterLocationsDTO = new ArrayList<ChapterLocationDTO>();
+        for(Chapter c: chapters) {
+        	ChapterLocationDTO chapterLocationDTO = new ChapterLocationDTO();
+        	chapterLocationDTO.setChapter(c);
+        	chapterLocationDTO.setLocations(serviceimpl.getAllLocationsByChapter(c));
+        	chapterLocationsDTO.add(chapterLocationDTO);
+        }
+        
+        campaignChapterDTO.setChapters(chapterLocationsDTO);
+        
+        return new ResponseEntity<CampaignChapterDTO>(campaignChapterDTO, HttpStatus.OK);
+        
+        */
         if (campaign != null) {
 	        List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
 	        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
@@ -207,10 +224,22 @@ public class CampaignController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CampaignAndComponentsDTO> editChapters(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
-		System.out.println("creating editing chapter");
+		System.out.println("editing chapter");
 		List<ChapterAndLocationsDTO> calDTO = cacDTO.getChapters();
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/dndLocation", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Void> dndLocation(@RequestBody LocationDTO locationDTO){
+		
+		System.out.println(serviceimpl.updateLocation(locationDTO).toString());
+		
+		//serviceimpl.updateChapter(chapterDTO);
+		//serviceimpl.updateLocation(locationDTO);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }
