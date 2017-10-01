@@ -70,7 +70,7 @@ public class CampaignController {
         campaignDTO.setUser(currentUser);
         campaignDTO.setPublic(true);
         Campaign campaign = serviceimpl.addCampaign(campaignDTO);
-        session.setAttribute("campaign", campaign);
+        //session.setAttribute("campaign", campaign);
         campaignDTO.setId(campaign.getId());
 		return new ResponseEntity<CampaignDTO>(campaignDTO, HttpStatus.OK);
 	}
@@ -90,7 +90,7 @@ public class CampaignController {
         campaignDTO.setMap(map);
         campaignDTO.setUser(currentCampaign.getUser());
         //currentCampaign = serviceimpl.updateCampaign(campaignDTO);
-        session.setAttribute("campaign", currentCampaign);
+        //session.setAttribute("campaign", currentCampaign);
         mapDTO.setId(map.getId());
 		return new ResponseEntity<MapDTO>(mapDTO, HttpStatus.OK);
 	}
@@ -100,8 +100,6 @@ public class CampaignController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ChapterDTO> createChapter(HttpSession session, @RequestBody ChapterDTO chapterDTO){
 		System.out.println("creating new chapter");
-        Campaign currentCampaign = (Campaign) session.getAttribute("campaign");
-        chapterDTO.setCampaign(currentCampaign);
         Chapter chapter = serviceimpl.addChapter(chapterDTO);
         chapterDTO.setId(chapter.getId());
 		return new ResponseEntity<ChapterDTO>(chapterDTO, HttpStatus.OK);
