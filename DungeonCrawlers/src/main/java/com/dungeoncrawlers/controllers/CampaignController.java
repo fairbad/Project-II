@@ -24,6 +24,7 @@ import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
+import com.dungeoncrawlers.dto.ChapterLocationDTO;
 import com.dungeoncrawlers.dto.EventDTO;
 import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
@@ -191,4 +192,16 @@ public class CampaignController {
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/dndLocation", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Void> dndLocation(@RequestBody LocationDTO locationDTO){
+		
+		System.out.println(serviceimpl.updateLocation(locationDTO).toString());
+		
+		//serviceimpl.updateChapter(chapterDTO);
+		//serviceimpl.updateLocation(locationDTO);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }

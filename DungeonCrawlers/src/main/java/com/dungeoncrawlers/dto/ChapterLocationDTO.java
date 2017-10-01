@@ -1,43 +1,36 @@
 package com.dungeoncrawlers.dto;
 
-import java.util.List;
-
-import com.dungeoncrawlers.beans.Chapter;
-import com.dungeoncrawlers.beans.Location;
-
 public class ChapterLocationDTO {
 
-	private Chapter chapter;
+	private ChapterDTO chapterDTO;
 	
-	private List<Location> locations;
+	private LocationDTO locationDTO;
 
 	public ChapterLocationDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChapterLocationDTO(Chapter chapter, List<Location> locations) {
+	public ChapterLocationDTO(ChapterDTO chapterDTO, LocationDTO locationDTO) {
 		super();
-		this.chapter = chapter;
-		this.locations = locations;
+		this.chapterDTO = chapterDTO;
+		this.locationDTO = locationDTO;
 	}
 
-	public Chapter getChapter() {
-		return chapter;
+	public ChapterDTO getChapterDTO() {
+		return chapterDTO;
 	}
 
-	public void setChapter(Chapter chapter) {
-		this.chapter = chapter;
+	public void setChapterDTO(ChapterDTO chapterDTO) {
+		this.chapterDTO = chapterDTO;
 	}
 
-	public List<Location> getLocations() {
-		return locations;
+	public LocationDTO getLocationDTO() {
+		return locationDTO;
 	}
 
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
+	public void setLocationDTO(LocationDTO locationDTO) {
+		this.locationDTO = locationDTO;
 	}
-	
-	
 	
 }
