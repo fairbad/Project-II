@@ -52,5 +52,10 @@ public class CommunityController {
 		return new ResponseEntity<List<CampaignDTO>>(campaignsDTO, HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value="/addRating", method = {RequestMethod.POST}, consumes= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Void> addRating(@RequestBody int id){
+		System.out.println("adding a rating");
+		//serviceimpl.addRating();
+		return null;
+	}
 }

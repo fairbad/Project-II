@@ -1,8 +1,15 @@
 package com.dungeoncrawlers.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dungeoncrawlers.beans.Campaign;
 import com.dungeoncrawlers.beans.Chapter;
-import com.dungeoncrawlers.beans.Character;
 import com.dungeoncrawlers.beans.Event;
 import com.dungeoncrawlers.beans.Location;
 import com.dungeoncrawlers.beans.Map;
@@ -25,7 +39,6 @@ import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
-import com.dungeoncrawlers.dto.CharacterDTO;
 import com.dungeoncrawlers.dto.EventDTO;
 import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
@@ -48,6 +61,11 @@ public class CampaignController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CampaignDTO> createCampaign(HttpSession session, @RequestBody CampaignDTO campaignDTO){
 		System.out.println("creating new campaign");
+		if(campaignDTO.getMap() == null) {
+			campaignDTO.setMap(new Map());
+			campaignDTO.getMap().setImage("MissingMapImage.png");
+		}
+		campaignDTO.setImage("MissingCampaignImage.png");
         User currentUser = (User) session.getAttribute("user");
         campaignDTO.setUser(currentUser);
         campaignDTO.setPublic(true);
@@ -130,7 +148,26 @@ public class CampaignController {
 		System.out.println("getting campaign and its components");
 		System.out.println(campaignDTO.toString());
 		CampaignAndComponentsDTO cacDTO;
-        Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
+		
+		Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
+        /*
+        CampaignChapterDTO campaignChapterDTO = new CampaignChapterDTO();
+        campaignChapterDTO.setCampaign(campaign);
+        
+        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
+        List<ChapterLocationDTO> chapterLocationsDTO = new ArrayList<ChapterLocationDTO>();
+        for(Chapter c: chapters) {
+        	ChapterLocationDTO chapterLocationDTO = new ChapterLocationDTO();
+        	chapterLocationDTO.setChapter(c);
+        	chapterLocationDTO.setLocations(serviceimpl.getAllLocationsByChapter(c));
+        	chapterLocationsDTO.add(chapterLocationDTO);
+        }
+        
+        campaignChapterDTO.setChapters(chapterLocationsDTO);
+        
+        return new ResponseEntity<CampaignChapterDTO>(campaignChapterDTO, HttpStatus.OK);
+        
+        */
         if (campaign != null) {
 	        List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
 	        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
@@ -149,6 +186,13 @@ public class CampaignController {
         }
         else {
         	campaignDTO.setUser((User) session.getAttribute("user")); 
+        	if(campaignDTO.getMap() == null) {
+        		MapDTO tempMap = new MapDTO();
+        		tempMap.setImage("MissingMapImage.png");
+        		tempMap.setUser(campaignDTO.getUser());
+        		campaignDTO.setMap(serviceimpl.addMap(tempMap));
+    		}
+    		campaignDTO.setImage("MissingCampaignImage.png");
         	campaign = serviceimpl.addCampaign(campaignDTO);
         	cacDTO = new CampaignAndComponentsDTO(campaign, null, null);
         }
@@ -158,8 +202,20 @@ public class CampaignController {
 	@RequestMapping(value="/editCampaignDetails", method= {RequestMethod.POST},
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CampaignAndComponentsDTO> editCampaignDetails(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
+	public ResponseEntity<CampaignAndComponentsDTO> editCampaignDetails(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO) throws IOException{
 		System.out.println("creating editing campaign");
+		
+		KeyDecoder dec = new KeyDecoder();
+		dec.HandleCampaignImages(cacDTO);
+		
+		MapDTO tempMap = new MapDTO();
+		tempMap.setId(cacDTO.getCampaign().getMap().getId());
+		tempMap.setImage(cacDTO.getCampaign().getMap().getImage());
+		tempMap.setName(cacDTO.getCampaign().getMap().getName());
+		tempMap.setDescription(cacDTO.getCampaign().getMap().getDescription());
+		tempMap.setUser(cacDTO.getCampaign().getUser());
+		
+		cacDTO.getCampaign().setMap(serviceimpl.updateMap(tempMap));
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
@@ -168,10 +224,22 @@ public class CampaignController {
 			consumes= {MediaType.APPLICATION_JSON_VALUE},
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<CampaignAndComponentsDTO> editChapters(HttpSession session, @RequestBody CampaignAndComponentsDTO cacDTO){
-		System.out.println("creating editing chapter");
+		System.out.println("editing chapter");
 		List<ChapterAndLocationsDTO> calDTO = cacDTO.getChapters();
 		cacDTO.setCampaign(serviceimpl.updateCampaign(cacDTO.getCampaign()));
 		return new ResponseEntity<CampaignAndComponentsDTO>(cacDTO, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/dndLocation", method= {RequestMethod.POST},
+			consumes= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Void> dndLocation(@RequestBody LocationDTO locationDTO){
+		
+		System.out.println(serviceimpl.updateLocation(locationDTO).toString());
+		
+		//serviceimpl.updateChapter(chapterDTO);
+		//serviceimpl.updateLocation(locationDTO);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }

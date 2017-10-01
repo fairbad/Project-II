@@ -1,9 +1,31 @@
 package com.dungeoncrawlers.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
+import com.dungeoncrawlers.dto.CharacterDTO;
+import com.dungeoncrawlers.dto.EnemyDTO;
+import com.dungeoncrawlers.dto.NPCDTO;
+
 public class KeyDecoder {
 
 	//Used to decode encoded AWS Keys
-		public String deCode(String str) {
+		private String deCode(String str) {
 			String tempstr = "";
 			for (int i = 0; i < str.length(); i++) {
 				switch (str.charAt(i)) {
@@ -207,4 +229,193 @@ public class KeyDecoder {
 			return tempstr;
 		}
 	
+		//Used to get decoded string of encoded AWS keys
+		private String[] getKeyString() {
+			String[] keys = new String[2];
+			keys[0] = deCode("ZJHZIS1GST53ZKRPD6VZ");
+			keys[1] = deCode("LZG6/Cqzm+okF2lYoFyLV5WlsJRezI7Zte+ee2qx");
+			return keys;
+		}
+		
+		public CharacterDTO HandleCharImages(CharacterDTO characterDTO) throws IOException{
+			System.out.println(characterDTO.getImage());
+			String sourceData = characterDTO.getImage();
+			String[] parts = sourceData.split(",");
+			String imageString = parts[1];
+			
+			BufferedImage img = null;
+			byte[] imageByte = Base64.getDecoder().decode(imageString);
+			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+			img = ImageIO.read(bis);
+			bis.close();
+			
+			File outputFile = new File("image.png");
+			ImageIO.write(img, "png", outputFile);
+			
+			Random r = new Random();
+			String key = r.nextInt(1000000)+1+"";
+		    
+			String[] keys = getKeyString();
+			
+			BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+			AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+			try {
+			String bucketName = "project2bucketforrevatureportfoliostuff";
+				s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+			}
+			catch(AmazonServiceException ase) {
+				ase.printStackTrace();
+			}
+			catch(AmazonClientException ace) {
+				ace.printStackTrace();
+			}
+			characterDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+			return characterDTO;
+		}
+		
+		public NPCDTO HandleNPCImages(NPCDTO npcDTO) throws IOException{
+			System.out.println(npcDTO.getImage());
+			String sourceData = npcDTO.getImage();
+			String[] parts = sourceData.split(",");
+			String imageString = parts[1];
+			
+			BufferedImage img = null;
+			byte[] imageByte = Base64.getDecoder().decode(imageString);
+			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+			img = ImageIO.read(bis);
+			bis.close();
+			
+			File outputFile = new File("image.png");
+			ImageIO.write(img, "png", outputFile);
+			
+			Random r = new Random();
+			String key = r.nextInt(1000000)+1+"";
+		    
+			String[] keys = getKeyString();
+			
+			BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+			AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+			try {
+			String bucketName = "project2bucketforrevatureportfoliostuff";
+				s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+			}
+			catch(AmazonServiceException ase) {
+				ase.printStackTrace();
+			}
+			catch(AmazonClientException ace) {
+				ace.printStackTrace();
+			}
+			npcDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+			return npcDTO;
+		}
+		
+		public EnemyDTO HandleEnemyImages(EnemyDTO enemyDTO) throws IOException{
+			System.out.println(enemyDTO.getImage());
+			String sourceData = enemyDTO.getImage();
+			String[] parts = sourceData.split(",");
+			String imageString = parts[1];
+			
+			BufferedImage img = null;
+			byte[] imageByte = Base64.getDecoder().decode(imageString);
+			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+			img = ImageIO.read(bis);
+			bis.close();
+			
+			File outputFile = new File("image.png");
+			ImageIO.write(img, "png", outputFile);
+			
+			Random r = new Random();
+			String key = r.nextInt(1000000)+1+"";
+			String[] keys = getKeyString();
+			
+			BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+			AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+			try {
+			String bucketName = "project2bucketforrevatureportfoliostuff";
+				s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+			}
+			catch(AmazonServiceException ase) {
+				ase.printStackTrace();
+			}
+			catch(AmazonClientException ace) {
+				ace.printStackTrace();
+			}
+			enemyDTO.setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+			return enemyDTO;
+		}
+		
+		public CampaignAndComponentsDTO HandleCampaignImages(CampaignAndComponentsDTO cacDTO) throws IOException{
+			//Campaign stuff
+			if(cacDTO.getCampaign().getImage() != null && cacDTO.getCampaign().getImage().length() > 100) {
+				System.out.println(cacDTO.getCampaign().getImage());
+				String sourceData = cacDTO.getCampaign().getImage();
+				String[] parts = sourceData.split(",");
+				String imageString = parts[1];
+				
+				BufferedImage img = null;
+				byte[] imageByte = Base64.getDecoder().decode(imageString);
+				ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+				img = ImageIO.read(bis);
+				bis.close();
+				
+				File outputFile = new File("image.png");
+				ImageIO.write(img, "png", outputFile);
+				
+				Random r = new Random();
+				String key = r.nextInt(1000000)+1+"";
+				String[] keys = getKeyString();
+				
+				BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+				AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+				try {
+				String bucketName = "project2bucketforrevatureportfoliostuff";
+					s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+				}
+				catch(AmazonServiceException ase) {
+					ase.printStackTrace();
+				}
+				catch(AmazonClientException ace) {
+					ace.printStackTrace();
+				}
+				cacDTO.getCampaign().setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+			}
+			
+			//Map stuff
+			if(cacDTO.getCampaign().getMap().getImage() != null && cacDTO.getCampaign().getMap().getImage().length() > 100) {
+				System.out.println(cacDTO.getCampaign().getMap().getImage());
+				String sourceData = cacDTO.getCampaign().getMap().getImage();
+				String[] parts = sourceData.split(",");
+				String imageString = parts[1];
+				
+				BufferedImage img = null;
+				byte[] imageByte = Base64.getDecoder().decode(imageString);
+				ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+				img = ImageIO.read(bis);
+				bis.close();
+				
+				File outputFile = new File("image.png");
+				ImageIO.write(img, "png", outputFile);
+				
+				Random r = new Random();
+				String key = r.nextInt(1000000)+1+"";
+				String[] keys = getKeyString();
+				
+				BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys[0], keys[1]);
+				AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(Regions.US_EAST_2).build();
+				try {
+				String bucketName = "project2bucketforrevatureportfoliostuff";
+					s3.putObject(new PutObjectRequest(bucketName, key, outputFile));
+				}
+				catch(AmazonServiceException ase) {
+					ase.printStackTrace();
+				}
+				catch(AmazonClientException ace) {
+					ace.printStackTrace();
+				}
+				cacDTO.getCampaign().getMap().setImage("https://s3.us-east-2.amazonaws.com/project2bucketforrevatureportfoliostuff/"+key);
+			}
+			
+			return cacDTO;
+		}
+		
 }
