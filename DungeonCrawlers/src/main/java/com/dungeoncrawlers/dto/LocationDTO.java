@@ -12,8 +12,6 @@ public class LocationDTO {
 	private String image;
 
 	private Chapter chapter;
-
-	//private int chapter_id;
 	
 	public LocationDTO() {
 	}
@@ -24,7 +22,6 @@ public class LocationDTO {
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		//this.chapter_id = chapter_id;
 		this.chapter = chapter;
 	}
 

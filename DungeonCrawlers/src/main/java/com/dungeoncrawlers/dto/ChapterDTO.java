@@ -11,22 +11,23 @@ public class ChapterDTO {
 
 	private String image;
 
-	private int campaign_id;
-	//private int order;
+	private int order;
 
 	private Campaign campaign;
 
-	public ChapterDTO() {
-	}
-
-	public ChapterDTO(int id, String name, String description, String image, Campaign campaign) {
+	public ChapterDTO(int id, String name, String description, String image, int order, Campaign campaign) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		//this.campaign_id = campaign_id;
+		this.order = order;
 		this.campaign = campaign;
+	}
+
+	public ChapterDTO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -61,8 +62,6 @@ public class ChapterDTO {
 		this.image = image;
 	}
 
-	
-	/*
 	public int getOrder() {
 		return order;
 	}
@@ -70,7 +69,6 @@ public class ChapterDTO {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	*/
 
 	public Campaign getCampaign() {
 		return campaign;
@@ -79,5 +77,6 @@ public class ChapterDTO {
 	public void setCampaign(Campaign campaign) {
 		this.campaign = campaign;
 	}
+
 	
 }
