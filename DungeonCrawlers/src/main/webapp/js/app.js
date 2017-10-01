@@ -1,7 +1,8 @@
+var dndApp = angular.module("dndApp", [ "ui.router", "ngTable", "ngDragDrop" ]);
+
 /**
  * Angular App Module
  */
-var dndApp = angular.module("dndApp", [ "ui.router", "ngTable" ]);
 /**
  * Configuration
  * @param $stateProvider
@@ -620,6 +621,41 @@ dndApp.service("CampaignService", function($http, $q){
 			image : "",
 			location_id : ""
 	};
+	
+	service.getBase64 = function(loc) {
+		switch(loc) {
+		case "Campaign":
+			var fileChooser = document.getElementById('CamImage');
+			var file = fileChooser.files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function () {
+				service.campaignInfo.campaign.image = reader.result;
+				console.log('this is in campaign');
+			};
+			break;
+		case "Map":
+			var fileChooser = document.getElementById('MapImage');
+			var file = fileChooser.files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function () {
+				service.campaignInfo.campaign.map.image = reader.result;
+				console.log(service.map.image);
+				console.log('this is in map');
+			};
+			break;
+		case "Chapter":
+			service.chapter.image = reader.result;
+			break;
+		case "Location":
+			service.location.image = reader.result;
+			break;
+		case "Event":
+			service.event.image = reader.result;
+			break;
+		}
+	}
 
 	service.getCampaign = function(){
 		return service.campaign;
@@ -774,6 +810,7 @@ dndApp.service("CampaignService", function($http, $q){
 	};
 	
 	service.editCampaignDetails = function(){
+		console.log(service.campaignInfo);
 		var promise = $http.post('rest/campaign/editCampaignDetails', service.campaignInfo).then(
 					function(response){
 						console.log("response service.editCampaignInfo")
@@ -786,6 +823,33 @@ dndApp.service("CampaignService", function($http, $q){
 			);
 		return promise;
 	};
+	
+	service.editChapterDetails = function(){
+		var promise = $http.post('rest/campaign/editChapterDetails', service.chapter).then(
+					function(response){
+						console.log("response service.editChapterInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('editCampaignInfo promise fail');
+					}
+			);
+		return promise;
+	};
+
+	service.dndLocation = function(passback){
+		var promise = $http.post('rest/campaign/dndLocation', passback).then(
+			function(response){
+				console.log(response);
+				return response;
+			},
+			function(error){
+				console.log('dndlocation promise failed');
+			}
+		);
+		return promise;
+	}
 });
 
 
@@ -1396,6 +1460,32 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 			console.log($scope.campaignInfo);
 		}
 	});
+
+	$scope.updateArray = function(evt,ui,chapter){
+		//var obj = ui.draggable.scope().dndDragItem;
+		
+		// the Location object which has the chapter relationship that it was in
+		var location = ui.draggable.scope().location;
+		console.log(location);
+
+		//console.log(ui.draggable.scope().location);
+		// the Chapter that it was dropped into
+		console.log(chapter);
+
+		location.location.chapter = chapter.chapter;
+
+		var passback = location.location
+
+		console.log(passback);
+
+		var promise = CampaignService.dndLocation(passback);
+		promise.then(
+			function(response){
+				console.log(response);
+			}, function(error){
+				console.log(error);
+			});
+	}
 	
 	campaign.editCampaignDetails = function(){
 
@@ -1413,6 +1503,8 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 					console.log(error);
 				});
 	};
+	document.getElementById('CamImage').onchange = function() { CampaignService.getBase64("Campaign") };
+	document.getElementById('MapImage').onchange = function() { CampaignService.getBase64("Map") };
 });
 
 
