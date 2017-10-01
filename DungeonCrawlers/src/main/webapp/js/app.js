@@ -604,20 +604,21 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.chapter={
 			name : "",
-			desc : "",
-			image : ""
+			description : "",
+			image : "",
+			campaign_id : ""
 	};
 
 	service.location={
 			name : "",
 			description : "",
 			image : "",
-			chapter : []
+			chapter_id : ""
 	};
 
 	service.event={
 			name : "",
-			desc : "",
+			description : "",
 			image : "",
 			location_id : ""
 	};
@@ -1465,6 +1466,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 	
 	var promise = CampaignService.editCampaign();
 	promise.then(function(response) {
+		console.log(response);
 		if (campaign.campaign && response.data) {
 			CampaignService.campaignInfo = response.data;
 			$scope.campaignInfo = response.data;
@@ -1524,6 +1526,21 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 					console.log(error);
 				});
 	};
+	
+	$scope.addChapter = function(campaign){
+		//CampaignService.chapter = chapter;
+		console.log("In add chapter!");
+		console.log(campaign);
+		CampaignService.chapter={
+				name : "New Chapter",
+				description : "Add a description",
+				image : "",
+				campaign_id : campaign.id
+		};
+		console.log(CampaignService.chapter);
+		CampaignService.createChapter();
+	
+	};
 
 	$scope.getChapter = function(chapter){
 		//CampaignService.chapter = chapter;
@@ -1533,10 +1550,25 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 				name : "New Location",
 				description : "Add a description",
 				image : "",
-				chapter : chapter.chapter
+				chapter_id : chapter.chapter.id
 		};
 		console.log(CampaignService.location);
 		CampaignService.createLocation();
+	
+	};
+	
+	$scope.getLocation = function(location){
+		//CampaignService.chapter = chapter;
+		console.log("In get location!");
+		console.log(location);
+		CampaignService.event={
+				name : "New Event",
+				description : "Add a description",
+				image : "",
+				location_id : location.id
+		};
+		console.log(CampaignService.event);
+		CampaignService.createEvent();
 	
 	};
 	

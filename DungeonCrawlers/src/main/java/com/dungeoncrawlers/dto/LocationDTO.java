@@ -11,18 +11,21 @@ public class LocationDTO {
 
 	private String image;
 
-	private Chapter chapter;
+	//private Chapter chapter;
 
+	private int chapter_id;
+	
 	public LocationDTO() {
 	}
 
-	public LocationDTO(int id, String name, String description, String image, Chapter chapter) {
+	public LocationDTO(int id, String name, String description, String image, int chapter_id) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.chapter = chapter;
+		this.chapter_id = chapter_id;
+		//this.chapter = chapter;
 	}
 
 	public int getId() {
@@ -57,6 +60,16 @@ public class LocationDTO {
 		this.image = image;
 	}
 
+	public int getChapter_id() {
+		return chapter_id;
+	}
+
+	public void setChapter_id(int chapter_id) {
+		this.chapter_id = chapter_id;
+	}
+	
+	
+/*
 	public Chapter getChapter() {
 		return chapter;
 	}
@@ -64,12 +77,5 @@ public class LocationDTO {
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
-
-	@Override
-	public String toString() {
-		return "LocationDTO [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
-				+ ", chapter=" + chapter + "]";
-	}
-	
-	
+*/
 }
