@@ -1,0 +1,13 @@
+<div style="background-image: url(images/stone2.jpg); padding:50px; border-radius:20px;margin-top:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;background-image:url(images/darkwood.png)">
+		<form name="createCharacter" ng-submit="character.createCharacter()">
+			<h1><font face="Metamorphous" color="ivory">Create Character</font></h1>
+			<font face="Almendra"><input id="name" type="text" placeholder="Name" ng-model="character.character.name"></font>
+			<font face="Almendra" color="ivory"><br><br>
+			<label for="image" class="custom-file-upload"><span class="glyphicon glyphicon-open" aria-hidden="true"></span>  Upload  Image</label>
+			<input id="image" type="file" placeholder="Image">
+			<br>
+			<button type="submit" class="btn btn-primary">Create</button></font>
+		</form>
+	</div>
+</div>

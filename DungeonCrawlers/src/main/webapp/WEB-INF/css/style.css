@@ -1,0 +1,123 @@
+@CHARSET "ISO-8859-1";
+@linkColorDark: #003399;
+@linkColorLight: RGB(255, 208, 128);
+
+.boxSizing(@sizing:border-box) {
+    -webkit-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    box-sizing: @sizing;
+}
+
+.border-radius (@radius: 1em) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+/* Global Style */
+
+body {
+    font-family: "myriad-pro", sans-serif;
+    font-size: 100%;
+    /*
+        Default Font size is 16px
+        Users with low vision–like myself–have a habbit of increasing the default font size.
+        Measuring touch targets at 48px >≈ 9mm bound to em's will increase
+        with font size (3em).
+    */
+    font-size: 100%;
+    margin:0 auto;
+    padding:0;
+    
+    background-color:#333333;
+    color:#EEEEEE;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4, p, a {
+    font-size: 1em;
+}
+
+/* Class Style */
+.main-wrapper {
+    padding: 0.5em;
+    margin:0 auto;
+    text-align:center;
+    width: 100%;
+    max-width: 18em;
+}
+
+.dice-images {
+    text-align:center;
+    /* background-color:#EEEEEE; */
+    margin:1em auto;
+    /*
+    .boxSizing();
+    .border-radius();
+    */
+    img {
+        width:5em;
+        height:auto;
+        display:inline-table;
+        margin:0.2em 1em 0.2em 1em;
+    }
+}
+
+hr {
+        border-color:@linkColorLight;
+}
+
+.num-value {
+    margin:1em auto;
+    color: @linkColorLight;    
+}
+
+.roll-button {
+    width: 100%;
+    margin:0 auto;    
+    outline: none;
+    background-color:transparent;
+    border: 0.25em solid @linkColorLight;
+    color: @linkColorLight;
+    padding: 0.25em;
+    .boxSizing();
+    .border-radius();
+    
+    
+    h1 {
+        display:inline-table;
+    }
+    
+
+    svg {
+        fill:@linkColorLight;
+        display:inline-table;
+        height: 3em;
+        vertical-align: middle;
+    }
+    
+    &:hover,
+    &:visited 
+    {
+
+    }
+    
+    &:active {
+        color:#EEEEEE;
+        border-color:#EEEEEE;
+        svg {
+            fill:#EEEEEE;
+        }
+    }
+}

@@ -34,6 +34,7 @@
 -->
 
 	<!-- database -->
+
 	<bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@//mydatabase.clowtjmlyf7s.us-east-2.rds.amazonaws.com:1521/ORCL"></property>

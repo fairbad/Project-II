@@ -1,6 +1,11 @@
-<form name="createCharacter" ng-submit="character.createCharacter()">
-	<h1>Character</h1>
-	<input id="name" type="text" placeholder="Name" ng-model="character.character.name">
-	<input id="image" type="text" placeholder="Image" ng-model="character.character.image">
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+<div style="background-image: url(images/darkbrownleather.jpg); padding:50px; border-radius:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+	    <h1><font face="Metamorphous">Character</font></h1>
+	    <font face="almendra"><a ui-sref="character.create" class="btn btn-primary">Create Character</a>
+	    <a ui-sref="character.edit" class="btn btn-primary">Edit Character</a>
+	    <a ui-sref="character.view" class="btn btn-primary">View Characters</a>
+	    <a ui-sref="character.delete" class="btn btn-danger">Delete Character</a>
+		</font>
+	</div>
+</div>
+<div ui-view></div>

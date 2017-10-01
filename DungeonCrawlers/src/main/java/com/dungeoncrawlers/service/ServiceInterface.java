@@ -13,6 +13,7 @@ import com.dungeoncrawlers.beans.Map;
 import com.dungeoncrawlers.beans.NonPlayableCharacter;
 import com.dungeoncrawlers.beans.Rating;
 import com.dungeoncrawlers.beans.User;
+import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
 import com.dungeoncrawlers.dto.CharacterDTO;
@@ -38,6 +39,12 @@ public interface ServiceInterface {
 	
 	public UserDTO authenticateUser(UserDTO userDto);
 	
+	public UserDTO checkIfUAndP(UserDTO userDTO);
+	
+	//public List<String> getEmails();
+	
+	//public List<String> getUserName();
+	
 	/*
 	 * Campaign Operations
 	 */
@@ -45,9 +52,11 @@ public interface ServiceInterface {
 	
 	public Campaign addCampaign(CampaignDTO campaignDTO);
 	
-	public Campaign updateCampaign(CampaignDTO campaignDTO);
+	public Campaign updateCampaign(Campaign campaign);
 	
 	public Campaign updateCampaignMap(Campaign campaign, MapDTO mapDTO);
+	
+	public CampaignAndComponentsDTO updateCampaignInfo(CampaignAndComponentsDTO cacDTO);
 	
 	public void deleteCampaign(CampaignDTO campaignDTO);
 	

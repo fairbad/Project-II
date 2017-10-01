@@ -25,8 +25,8 @@
 	<bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="dm"></property>
-		<property name="password" value="admin"></property>
+		<property name="username" value="MyDatabase"></property>
+		<property name="password" value="p4ssw0rd"></property>
 	</bean>
 	
 	<!-- hibernate session factory -->

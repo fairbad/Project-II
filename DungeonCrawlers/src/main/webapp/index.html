@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="dndApp">
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Dungeon Crawlers</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -12,7 +15,95 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
 	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+	<script src="angular-dragdrop-master/angular-dragdrop-master/src/angular-dragdrop.js"></script>
 	<script src="js/app.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Almendra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+<style>
+body{
+	background-image: url(images/marble.jpg);
+}
+.container{
+	background:transparent;
+}
+.well{
+	background-image: url(images/rustyleather.jpeg);
+	border:transparent;
+	color:ivory;
+}
+.jumbotron{
+	background-image: url(images/paper.jpg);
+	color:#341207;
+}
+.navbar{
+	background-image: url(images/darkbrownleather.jpg);
+	border:transparent;
+	font-family: Metamorphous;
+	font-size:90%;
+}
+.btn{
+	background-color:#EFAC58;
+	margin:5px;
+	border:transparent;
+}
+.btn:hover{
+	background-image:url(images/lightbrownleather.jpg);
+}
+.btn:active{
+	background-image:url(images/lightbrownleather.jpg);
+}
+.navbar-default .navbar-nav > li > a:link, .navbar-default .navbar-nav > li > a:focus {
+	color:ivory;
+}
+.navbar-default .navbar-nav > li > a:visited, .navbar-default .navbar-nav > li > a:focus {
+	color:ivory;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color:#EFAC58;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #451A06;
+   border-color:black;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+   border: 0.5px solid #000000;
+}
+#theStory .nav-pills > li > a{
+	border-radius: 4px 4px 0 0;
+}
+#theStory .tab-content{
+	color: ivory;
+	background color: #310803;
+	padding: 5px 15px;
+}
+input[type="file"]{
+	margin-left:39%;
+}
+::-webkit-file-upload-button{
+	background:transparent;
+	border:transparent;
+	color:transparent;
+}
+.custom-file-upload{
+	border: transparent;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+}
+.btn-primary:active,
+.btn-primary:focus {
+    background-image: url(images/rustyleather.jpeg) !important;
+}
+.btn-danger:active,
+.btn-danger:focus {
+    background-image: url(images/redleather.jpeg) !important;
+}
+</style>
 </head>
 <body>
 
@@ -20,23 +111,19 @@
 		<div class="container-fluid">
 			<div id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a ui-sref="login">Login</a></li>
-					<li><a ui-sref="home">Home</a></li>
-					<li><a ui-sref="create">Creator</a></li>
-					<li><a ui-sref="viewCreations">View Creations</a></li>
-					<li><a ui-sref="editCreation">Edit Creations</a></li>
-					<li><a ui-sref="deleteCreation">Delete Creation</a></li>
-					<li><a ui-sref="campaign">Campaign</a></li>
-					<li><a ui-sref="viewPublicCampaigns">View Public Campaigns</a></li>
-					<li><a ui-sref="viewCampaigns">View My Campaigns</a></li>
-					<li><a ui-sref="logout">Logout</a></li>
+					<li ng-hide = "loggedIn"><a ui-sref="login">Login</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="home">Home</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="creator">Creator</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewPublicCampaigns">View Public Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="viewCampaigns">View My Campaigns</a></li>
+					<li ng-show = "loggedIn"><a ui-sref="logout" ng-click="logout.doLogout()">Logout</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	
-	<div class="container">
-		<div class="row well" ui-view></div>
+	<div class="container-fluid">
+		<div ui-view></div>
 	</div>
 
 </body>

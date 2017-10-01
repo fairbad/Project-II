@@ -1,6 +1,11 @@
-<form name="createEnemy" ng-submit="enemy.createEnemy()">
-	<h1>Enemy</h1>
-	<input id="name" type="text" placeholder="Name" ng-model="enemy.enemy.name">
-	<input id="image" type="text" placeholder="Image" ng-model="enemy.enemy.image">
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+<div style="background-image: url(images/darkbrownleather.jpg); padding:50px; border-radius:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+	    <h1><font face="Metamorphous">Enemy</font></h1>
+	    <font face="almendra"><a ui-sref="enemy.create" class="btn btn-primary">Create enemy</a>
+	    <a ui-sref="enemy.edit" class="btn btn-primary">Edit enemy</a>
+	    <a ui-sref="enemy.view" class="btn btn-primary">View enemy</a>
+	    <a ui-sref="enemy.delete" class="btn btn-danger">Delete enemy</a></font>
+	</div>
+</div>
+
+<div ui-view></div>
