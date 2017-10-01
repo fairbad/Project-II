@@ -186,7 +186,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Chapter addChapter(ChapterDTO chapterDTO) {
 		Chapter chapter = new Chapter();
-		chapter.setCampaign(chapterDTO.getCampaign());
+		chapter.setCampaign(daoimpl.getCampaign(chapterDTO.getCampaign_id()));
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
@@ -198,7 +198,7 @@ public class ServiceImpl implements ServiceInterface{
 	public Chapter updateChapter(ChapterDTO chapterDTO) {
 		Chapter chapter = new Chapter();
 		chapter.setId(chapterDTO.getId());
-		chapter.setCampaign(chapterDTO.getCampaign());
+		//chapter.setCampaign(chapterDTO.getCampaign());
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
@@ -210,7 +210,7 @@ public class ServiceImpl implements ServiceInterface{
 	public void deleteChapter(ChapterDTO chapterDTO) {
 		Chapter chapter = new Chapter();
 		chapter.setId(chapterDTO.getId());
-		chapter.setCampaign(chapterDTO.getCampaign());
+		//chapter.setCampaign(chapterDTO.getCampaign());
 		chapter.setDescription(chapterDTO.getDescription());
 		chapter.setImage(chapterDTO.getImage());
 		chapter.setName(chapterDTO.getName());
@@ -278,7 +278,7 @@ public class ServiceImpl implements ServiceInterface{
 	@Override
 	public Location addLocation(LocationDTO locationDTO) {
 		Location location = new Location();
-		location.setChapter(locationDTO.getChapter());
+		location.setChapter(daoimpl.getChapter(locationDTO.getChapter_id()));
 		location.setDescription(locationDTO.getDescription());
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
@@ -290,7 +290,7 @@ public class ServiceImpl implements ServiceInterface{
 	public Location updateLocation(LocationDTO locationDTO) {
 		Location location = new Location();
 		location.setId(locationDTO.getId());
-		location.setChapter(locationDTO.getChapter());
+		//location.setChapter(locationDTO.getChapter());
 		location.setDescription(locationDTO.getDescription());
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
@@ -302,7 +302,7 @@ public class ServiceImpl implements ServiceInterface{
 	public void deleteLocation(LocationDTO locationDTO) {
 		Location location = new Location();
 		location.setId(locationDTO.getId());
-		location.setChapter(locationDTO.getChapter());
+		//location.setChapter(locationDTO.getChapter());
 		location.setDescription(locationDTO.getDescription());
 		location.setImage(locationDTO.getImage());
 		location.setName(locationDTO.getName());
@@ -327,7 +327,8 @@ public class ServiceImpl implements ServiceInterface{
 		event.setEnemies(eventDTO.getEnemies());
 		event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(eventDTO.getLocation());
+		event.setLocation(daoimpl.getLocation(eventDTO.getId()));
+		//event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
@@ -339,12 +340,12 @@ public class ServiceImpl implements ServiceInterface{
 		Event event = new Event();
 		event.setId(eventDTO.getId());
 		event.setDescription(eventDTO.getDescription());
-		event.setEnemies(eventDTO.getEnemies());
-		event.setEvent(eventDTO.getEvent());
+		//event.setEnemies(eventDTO.getEnemies());
+		//event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(eventDTO.getLocation());
+		//event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
-		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
+		//event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
 		return daoimpl.updateEvent(event);
 	}
@@ -354,12 +355,12 @@ public class ServiceImpl implements ServiceInterface{
 		Event event = new Event();
 		event.setId(eventDTO.getId());
 		event.setDescription(eventDTO.getDescription());
-		event.setEnemies(eventDTO.getEnemies());
-		event.setEvent(eventDTO.getEvent());
+		//event.setEnemies(eventDTO.getEnemies());
+		//event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(eventDTO.getLocation());
+		//event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
-		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
+		//event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
 		daoimpl.deleteEvent(event);
 	}
@@ -471,12 +472,12 @@ public class ServiceImpl implements ServiceInterface{
 	public List<Enemy> getAllEnemiesByEvent(EventDTO eventDTO) {
 		Event event = new Event();
 		event.setDescription(eventDTO.getDescription());
-		event.setEnemies(eventDTO.getEnemies());
-		event.setEvent(eventDTO.getEvent());
+		//event.setEnemies(eventDTO.getEnemies());
+		//event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(eventDTO.getLocation());
+		//event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
-		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
+		//event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
 		return daoimpl.getAllEnemiesByEvent(event);
 	}
@@ -527,12 +528,12 @@ public class ServiceImpl implements ServiceInterface{
 	public List<NonPlayableCharacter> getAllNonPlayableCharactersByEvent(EventDTO eventDTO) {
 		Event event = new Event();
 		event.setDescription(eventDTO.getDescription());
-		event.setEnemies(eventDTO.getEnemies());
-		event.setEvent(eventDTO.getEvent());
+		//event.setEnemies(eventDTO.getEnemies());
+		//event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(eventDTO.getLocation());
+		//event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
-		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
+		//event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());
 		
 		return daoimpl.getAllNonPlayableCharactersByEvent(event);
 	}

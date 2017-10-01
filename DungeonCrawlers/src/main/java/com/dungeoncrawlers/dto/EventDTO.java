@@ -19,7 +19,8 @@ public class EventDTO {
 
 	private EventType event;
 
-	private Location location;
+	private int location_id;
+	//private Location location;
 
 	private List<NonPlayableCharacter> nonPlayableCharacters;
 
@@ -28,17 +29,17 @@ public class EventDTO {
 	public EventDTO() {
 	}
 
-	public EventDTO(int id, String name, String description, String image, EventType event, Location location,
+	public EventDTO(int id, String name, String description, String image, EventType event, int location_id,
 			ArrayList<NonPlayableCharacter> nonPlayableCharacters, ArrayList<Enemy> enemies) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.event = event;
-		this.location = location;
-		this.nonPlayableCharacters = nonPlayableCharacters;
-		this.enemies = enemies;
+		//this.event = event;
+		this.location_id = location_id;
+		//this.nonPlayableCharacters = nonPlayableCharacters;
+		//this.enemies = enemies;
 	}
 
 	public int getId() {
@@ -81,12 +82,12 @@ public class EventDTO {
 		this.event = event;
 	}
 
-	public Location getLocation() {
-		return location;
+	public int getLocation_id() {
+		return location_id;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLocation_id(int location_id) {
+		this.location_id = location_id;
 	}
 
 	public List<NonPlayableCharacter> getNonPlayableCharacters() {
@@ -104,4 +105,5 @@ public class EventDTO {
 	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
 	}
+
 }

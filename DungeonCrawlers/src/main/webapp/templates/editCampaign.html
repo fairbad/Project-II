@@ -71,11 +71,16 @@
 
 			<br>
 			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
+			<button type="button" ng-click="addChapter(campaignInfo.campaign)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Chapter</button>
 			<div ng-repeat="ch in campaignInfo.chapters">
 				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
 				<button type="button" ng-click="getChapter(ch)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
 				<div ng-repeat="l in ch.locations">
 					<h5 style="text-align:center"><font face="Almendra">{{l.location.name}}</font></h5>
+					<button type="button" ng-click="getLocation(l.location)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Event</button>
+					<div ng-repeat="e in l.events">
+						<h6 style="text-align:center"><font face="Almendra">{{e.event.name}}</font></h6>
+					</div>
 				</div>
 			</div>
 		</div>
