@@ -24,7 +24,6 @@ import com.dungeoncrawlers.dto.CampaignAndComponentsDTO;
 import com.dungeoncrawlers.dto.CampaignDTO;
 import com.dungeoncrawlers.dto.ChapterAndLocationsDTO;
 import com.dungeoncrawlers.dto.ChapterDTO;
-import com.dungeoncrawlers.dto.ChapterLocationDTO;
 import com.dungeoncrawlers.dto.EventDTO;
 import com.dungeoncrawlers.dto.LocationAndEventsDTO;
 import com.dungeoncrawlers.dto.LocationDTO;
