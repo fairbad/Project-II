@@ -880,6 +880,17 @@ dndApp.service("CommunityService", function($http, $q){
 				);
 		return promise;
 	};
+
+	service.incrementView = function(campaign){
+		var promise = $http.post('rest/community/incrementView',
+			campaign).then(
+				function(response){
+					return response;
+				},
+				function(error){
+					console.log("failed to incrementView")
+				})
+	}
 });
 
 /**
@@ -1567,7 +1578,14 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 			})
 			$scope.getCampaign = function(campaign){
 		console.log(campaign);
+		var promise = CommunityService.incrementView(campaign);
+		promise.then(
+			function(response){
+				console.log(response);
+			})
 	}
+
+
 });
 
 
