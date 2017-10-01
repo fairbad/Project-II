@@ -620,6 +620,41 @@ dndApp.service("CampaignService", function($http, $q){
 			image : "",
 			location_id : ""
 	};
+	
+	service.getBase64 = function(loc) {
+		switch(loc) {
+		case "Campaign":
+			var fileChooser = document.getElementById('CamImage');
+			var file = fileChooser.files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function () {
+				service.campaignInfo.campaign.image = reader.result;
+				console.log('this is in campaign');
+			};
+			break;
+		case "Map":
+			var fileChooser = document.getElementById('MapImage');
+			var file = fileChooser.files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function () {
+				service.campaignInfo.campaign.map.image = reader.result;
+				console.log(service.map.image);
+				console.log('this is in map');
+			};
+			break;
+		case "Chapter":
+			service.chapter.image = reader.result;
+			break;
+		case "Location":
+			service.location.image = reader.result;
+			break;
+		case "Event":
+			service.event.image = reader.result;
+			break;
+		}
+	}
 
 	service.getCampaign = function(){
 		return service.campaign;
@@ -774,6 +809,7 @@ dndApp.service("CampaignService", function($http, $q){
 	};
 	
 	service.editCampaignDetails = function(){
+		console.log(service.campaignInfo);
 		var promise = $http.post('rest/campaign/editCampaignDetails', service.campaignInfo).then(
 					function(response){
 						console.log("response service.editCampaignInfo")
@@ -1413,6 +1449,8 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 					console.log(error);
 				});
 	};
+	document.getElementById('CamImage').onchange = function() { CampaignService.getBase64("Campaign") };
+	document.getElementById('MapImage').onchange = function() { CampaignService.getBase64("Map") };
 });
 
 
