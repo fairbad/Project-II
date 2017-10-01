@@ -327,7 +327,6 @@ public class ServiceImpl implements ServiceInterface{
 		event.setEnemies(eventDTO.getEnemies());
 		event.setEvent(eventDTO.getEvent());
 		event.setImage(eventDTO.getImage());
-		event.setLocation(daoimpl.getLocation(eventDTO.getId()));
 		event.setLocation(eventDTO.getLocation());
 		event.setName(eventDTO.getName());
 		event.setNonPlayableCharacters(eventDTO.getNonPlayableCharacters());

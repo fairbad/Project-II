@@ -36,6 +36,7 @@ public class EventDTO {
 		this.description = description;
 		this.image = image;
 		this.event = event;
+		this.location = location;
 		this.nonPlayableCharacters = nonPlayableCharacters;
 		this.enemies = enemies;
 	}
@@ -92,7 +93,7 @@ public class EventDTO {
 		return nonPlayableCharacters;
 	}
 
-	public void setNonPlayableCharacters(List<NonPlayableCharacter> nonPlayableCharacters) {
+	public void setNonPlayableCharacters(ArrayList<NonPlayableCharacter> nonPlayableCharacters) {
 		this.nonPlayableCharacters = nonPlayableCharacters;
 	}
 
@@ -100,7 +101,7 @@ public class EventDTO {
 		return enemies;
 	}
 
-	public void setEnemies(List<Enemy> enemies) {
+	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
 	}
 }

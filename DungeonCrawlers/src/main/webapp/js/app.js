@@ -604,21 +604,20 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.chapter={
 			name : "",
-			description : "",
-			image : "",
-			campaign_id : ""
+			desc : "",
+			image : ""
 	};
 
 	service.location={
 			name : "",
 			description : "",
 			image : "",
-			chapter_id : ""
+			chapter : []
 	};
 
 	service.event={
 			name : "",
-			description : "",
+			desc : "",
 			image : "",
 			location_id : ""
 	};
@@ -881,17 +880,6 @@ dndApp.service("CommunityService", function($http, $q){
 				);
 		return promise;
 	};
-
-	service.incrementView = function(campaign){
-		var promise = $http.post('rest/community/incrementView',
-			campaign).then(
-				function(response){
-					return response;
-				},
-				function(error){
-					console.log("failed to incrementView")
-				})
-	}
 });
 
 /**
@@ -1466,7 +1454,6 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 	
 	var promise = CampaignService.editCampaign();
 	promise.then(function(response) {
-		console.log(response);
 		if (campaign.campaign && response.data) {
 			CampaignService.campaignInfo = response.data;
 			$scope.campaignInfo = response.data;
@@ -1476,11 +1463,9 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 
 	$scope.updateArray = function(evt,ui,chapter){
 		//var obj = ui.draggable.scope().dndDragItem;
+		
 		// the Location object which has the chapter relationship that it was in
 		var location = ui.draggable.scope().location;
-
-		if(location.location.chapter != chapter.chapter){
-
 		console.log(location);
 
 		//console.log(ui.draggable.scope().location);
@@ -1496,18 +1481,11 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 		var promise = CampaignService.dndLocation(passback);
 		promise.then(
 			function(response){
-				var promise = CampaignService.editCampaign();
-				promise.then(function(response) {
-					if (campaign.campaign && response.data) {
-						CampaignService.campaignInfo = response.data;
-						$scope.campaignInfo = response.data;
-						console.log($scope.campaignInfo);
-					}
-				});
+				console.log(response);
 			}, function(error){
 				console.log(error);
 			});
-		}
+
 	}
 	
 	campaign.editCampaignDetails = function(){
@@ -1518,28 +1496,13 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 		promise.then(
 				function(response){
 					console.log("setting campaign data");
-					console.log(response);
+					console.log(response.data);
 					CampaignService.campaignInfo = response.data;
 					$scope.campaignInfo = response.data;
 					//CampaignService.campaign.name = response.data
 				}, function(error){
 					console.log(error);
 				});
-	};
-	
-	$scope.addChapter = function(campaign){
-		//CampaignService.chapter = chapter;
-		console.log("In add chapter!");
-		console.log(campaign);
-		CampaignService.chapter={
-				name : "New Chapter",
-				description : "Add a description",
-				image : "",
-				campaign_id : campaign.id
-		};
-		console.log(CampaignService.chapter);
-		CampaignService.createChapter();
-	
 	};
 
 	$scope.getChapter = function(chapter){
@@ -1550,25 +1513,10 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 				name : "New Location",
 				description : "Add a description",
 				image : "",
-				chapter_id : chapter.chapter.id
+				chapter : chapter.chapter
 		};
 		console.log(CampaignService.location);
 		CampaignService.createLocation();
-	
-	};
-	
-	$scope.getLocation = function(location){
-		//CampaignService.chapter = chapter;
-		console.log("In get location!");
-		console.log(location);
-		CampaignService.event={
-				name : "New Event",
-				description : "Add a description",
-				image : "",
-				location_id : location.id
-		};
-		console.log(CampaignService.event);
-		CampaignService.createEvent();
 	
 	};
 	
@@ -1610,14 +1558,7 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 			})
 			$scope.getCampaign = function(campaign){
 		console.log(campaign);
-		var promise = CommunityService.incrementView(campaign);
-		promise.then(
-			function(response){
-				console.log(response);
-			})
 	}
-
-
 });
 
 

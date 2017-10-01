@@ -11,7 +11,6 @@ public class ChapterDTO {
 
 	private String image;
 
-	private int campaign_id;
 	//private int order;
 
 	private Campaign campaign;
@@ -25,7 +24,6 @@ public class ChapterDTO {
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		//this.campaign_id = campaign_id;
 		this.campaign = campaign;
 	}
 
@@ -61,7 +59,6 @@ public class ChapterDTO {
 		this.image = image;
 	}
 
-	
 	/*
 	public int getOrder() {
 		return order;
@@ -79,5 +76,4 @@ public class ChapterDTO {
 	public void setCampaign(Campaign campaign) {
 		this.campaign = campaign;
 	}
-	
 }

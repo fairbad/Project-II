@@ -52,24 +52,6 @@ public class CommunityController {
 		return new ResponseEntity<List<CampaignDTO>>(campaignsDTO, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/incrementView", method = {RequestMethod.POST}, consumes= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> incrementView(@RequestBody CampaignDTO campaignDTO){
-		Campaign campaign = new Campaign();
-		campaign.setId(campaignDTO.getId());
-		campaign.setDescription(campaignDTO.getDescription());
-		campaign.setImage(campaignDTO.getImage());
-		campaign.setMap(campaignDTO.getMap());
-		campaign.setName(campaignDTO.getName());
-		campaign.setNumViews(campaignDTO.getNumViews()+1);
-		campaign.setPublic(campaignDTO.isPublic());
-		campaign.setRating(campaignDTO.getRating());
-		campaign.setUser(campaignDTO.getUser());
-		serviceimpl.updateCampaign(campaign);
-		System.out.println(campaign.toString());
-		
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-	
 	@RequestMapping(value="/addRating", method = {RequestMethod.POST}, consumes= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> addRating(@RequestBody int id){
 		System.out.println("adding a rating");
