@@ -610,9 +610,9 @@ dndApp.service("CampaignService", function($http, $q){
 
 	service.location={
 			name : "",
-			desc : "",
+			description : "",
 			image : "",
-			chapter_id : ""
+			chapter : []
 	};
 
 	service.event={
@@ -1485,6 +1485,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 			}, function(error){
 				console.log(error);
 			});
+
 	}
 	
 	campaign.editCampaignDetails = function(){
@@ -1503,6 +1504,22 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 					console.log(error);
 				});
 	};
+
+	$scope.getChapter = function(chapter){
+		//CampaignService.chapter = chapter;
+		console.log("In get chapter!");
+		console.log(chapter.chapter);
+		CampaignService.location={
+				name : "New Location",
+				description : "Add a description",
+				image : "",
+				chapter : chapter.chapter
+		};
+		console.log(CampaignService.location);
+		CampaignService.createLocation();
+	
+	};
+	
 	document.getElementById('CamImage').onchange = function() { CampaignService.getBase64("Campaign") };
 	document.getElementById('MapImage').onchange = function() { CampaignService.getBase64("Map") };
 });

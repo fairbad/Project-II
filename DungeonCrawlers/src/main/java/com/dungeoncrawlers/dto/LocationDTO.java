@@ -64,4 +64,12 @@ public class LocationDTO {
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
+
+	@Override
+	public String toString() {
+		return "LocationDTO [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
+				+ ", chapter=" + chapter + "]";
+	}
+	
+	
 }
