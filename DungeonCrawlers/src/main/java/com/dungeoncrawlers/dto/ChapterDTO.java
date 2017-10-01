@@ -14,19 +14,19 @@ public class ChapterDTO {
 	private int campaign_id;
 	//private int order;
 
-	//private Campaign campaign;
+	private Campaign campaign;
 
 	public ChapterDTO() {
 	}
 
-	public ChapterDTO(int id, String name, String description, String image, int campaign_id) {
+	public ChapterDTO(int id, String name, String description, String image, Campaign campaign) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
-		this.campaign_id = campaign_id;
-		///this.campaign = campaign;
+		//this.campaign_id = campaign_id;
+		this.campaign = campaign;
 	}
 
 	public int getId() {
@@ -61,14 +61,6 @@ public class ChapterDTO {
 		this.image = image;
 	}
 
-	public int getCampaign_id() {
-		return campaign_id;
-	}
-
-	public void setCampaign_id(int campaign_id) {
-		this.campaign_id = campaign_id;
-	}
-
 	
 	/*
 	public int getOrder() {
@@ -79,7 +71,7 @@ public class ChapterDTO {
 		this.order = order;
 	}
 	*/
-/*
+
 	public Campaign getCampaign() {
 		return campaign;
 	}
@@ -87,5 +79,5 @@ public class ChapterDTO {
 	public void setCampaign(Campaign campaign) {
 		this.campaign = campaign;
 	}
-	*/
+	
 }
