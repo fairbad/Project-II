@@ -174,6 +174,14 @@ dndApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: "templates/campaign.html"
 	})
 	/*
+	 * View Public Campaign
+	 */
+	.state("PubViewCampaign", {
+		url:"/ViewPubCampaign",
+		templateUrl:"templates/ViewCampaign.html",
+		controller: "ViewPubCampaignCtrl as viewPubCampaign"
+	})
+	/*
 	 * Edit Campaign
 	 */
 	.state("editCampaign",{
@@ -853,6 +861,10 @@ dndApp.service("CampaignService", function($http, $q){
 });
 
 
+dndApp.service("ViewPubCampaignService", function($http, $q){
+	
+});
+
 
 /**
  * Community Service
@@ -862,11 +874,237 @@ dndApp.service("CampaignService", function($http, $q){
  * 		A promise
  */
 dndApp.service("CommunityService", function($http, $q){
-	console.log("in CommunityService");
+	console.log("in CommunityService for View Pub Cam");
 
 	var service = this;
 
-	service.campaigns = [];
+	service.campaignInfo=[];
+	
+	service.campaign={
+			name : "",
+			desc : "",
+			image : ""
+	};
+
+	service.map={
+			name : "",
+			desc : "",
+			image : ""
+	};
+
+	service.chapter={
+			name : "",
+			desc : "",
+			image : ""
+	};
+
+	service.location={
+			name : "",
+			desc : "",
+			image : "",
+			chapter_id : ""
+	};
+
+	service.event={
+			name : "",
+			desc : "",
+			image : "",
+			location_id : ""
+	};
+
+	service.getCampaign = function(){
+		return service.campaign;
+	};
+
+	service.getMap = function(){
+		return service.map;
+	};
+
+	service.getChapter = function(){
+		return service.chapter;
+	};
+
+	service.getLocation = function(){
+		return service.location;
+	};
+
+	service.getEvent = function(){
+		return service.event;
+	};
+	
+	service.getCampaigns = function(){
+		var promise = $http.get('rest/campaign/getCampaigns',
+				service.campaigns).then(
+						function(response){
+							return response;
+						},
+						function(error){
+							console.log("get all campaigns failed")
+						}
+				);
+		return promise;
+	};
+
+	service.setCampaign = function(data){
+		service.campaign.name = data.name;
+		service.campaign.desc = data.description;
+		service.campaign.image = data.image;
+	};
+
+	service.setMap = function(data){
+		service.map.name = data.name;
+		service.map.desc = data.description;
+		service.map.image = data.image;
+	};
+
+	service.setChapter = function(data){
+		service.chapter.name = data.name;
+		service.chapter.desc = data.description;
+		service.chapter.image = data.image;
+	};
+
+	service.setLocation = function(data){
+		service.location.name = data.name;
+		service.location.desc = data.description;
+		service.location.image = data.image;
+	};
+
+	service.setEvent = function(data){
+		service.event.name = data.name;
+		service.event.desc = data.description;
+		service.event.image = data.image;
+	};
+
+	service.createCampaign = function(){
+		var promise = $http.post('rest/campaign/details',
+				service.campaignInfo).then(
+						function(response){
+							console.log("response service.createCampaign")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createCampaign promise fail');
+						}
+				);
+		return promise;
+	};
+
+	service.createMap = function(){
+		var promise = $http.post('rest/campaign/map',
+				service.map).then(
+						function(response){
+							console.log("response service.createMap")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createMap promise fail');
+						}
+				);
+		return promise;
+	};
+
+	service.createChapter = function(){
+		console.log(service.chapter);
+		var promise = $http.post('rest/campaign/chapter',
+				service.chapter).then(
+						function(response){
+							console.log("response service.createChapter")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createChapter promise fail');
+						}
+				);
+		return promise;
+	};
+
+	service.createLocation = function(){
+		console.log(service.location);
+		var promise = $http.post('rest/campaign/location',
+				service.location).then(
+						function(response){
+							console.log("response service.createLocation")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createLocation promise fail');
+						}
+				);
+		return promise;
+	};
+
+	service.createEvent = function(){
+		console.log(service.event);
+		var promise = $http.post('rest/campaign/event',
+				service.event).then(
+						function(response){
+							console.log("response service.createEvent")
+							console.log(response);
+							return response;
+						},
+						function(error){
+							console.log('createEvent promise fail');
+						}
+				);
+		return promise;
+	};
+	
+	service.viewPubCampaign = function(){
+		var promise = $http.post('rest/campaign/getCampaign', service.campaign).then(
+			function(response) {
+				console.log(response);
+				return response;
+			}, function(error) {
+				console.log('viewPubCampaign promise fail');
+			});
+		return promise;
+	};
+	
+	service.viewPubCampaignDetails = function(){
+		console.log(service.campaignInfo);
+		var promise = $http.post('rest/campaign/viewPubCampaignDetails', service.campaignInfo).then(
+					function(response){
+						console.log("response service.viewPubCampaignInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('viewPubCampaignInfo promise fail');
+					}
+			);
+		return promise;
+	};
+	
+	service.editChapterDetails = function(){
+		var promise = $http.post('rest/campaign/editChapterDetails', service.chapter).then(
+					function(response){
+						console.log("response service.editChapterInfo")
+						console.log(response);
+						return response;
+					},
+					function(error){
+						console.log('viewPubCampaignInfo promise fail');
+					}
+			);
+		return promise;
+	};
+
+	service.dndLocation = function(passback){
+		var promise = $http.post('rest/campaign/dndLocation', passback).then(
+			function(response){
+				console.log(response);
+				return response;
+			},
+			function(error){
+				console.log('dndlocation promise failed');
+			}
+		);
+		return promise;
+	}
 
 	service.getPublicCampaigns = function(){
 		var promise = $http.get('rest/community/getPublicCampaigns',
@@ -1508,6 +1746,77 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 });
 
 
+/**
+ * Edit Campaign Controller
+ * @param CampaignService
+ * 		The Campaign Service
+ * @param $state
+ * 		The State
+ * @param $scope
+ * 		The Scope
+ */
+dndApp.controller("ViewPubCampaignCtrl", function(CommunityService, $state, $scope){
+	console.log("in ViewPubCampaignCtrl");
+
+	var campaign = this;
+	campaign.campaign = CommunityService.getCampaign();
+	
+	var promise = CommunityService.viewPubCampaign();
+	promise.then(function(response) {
+		if (campaign.campaign && response.data) {
+			console.log(campaign.campaign);
+			CommunityService.campaignInfo = response.data;
+			console.log("Extra Logging");
+			$scope.campaignInfo = response.data;
+			console.log($scope.campaignInfo);
+		}
+	});
+
+	$scope.updateArray = function(evt,ui,chapter){
+		//var obj = ui.draggable.scope().dndDragItem;
+		
+		// the Location object which has the chapter relationship that it was in
+		var location = ui.draggable.scope().location;
+		console.log(location);
+
+		//console.log(ui.draggable.scope().location);
+		// the Chapter that it was dropped into
+		console.log(chapter);
+
+		location.location.chapter = chapter.chapter;
+
+		var passback = location.location
+
+		console.log(passback);
+
+		var promise = CommunityService.dndLocation(passback);
+		promise.then(
+			function(response){
+				console.log(response);
+			}, function(error){
+				console.log(error);
+			});
+	}
+	
+	campaign.viewPubCampaignDetails = function(){
+
+		var promise = CommunityService.viewPubCampaignDetails();
+		console.log(promise);
+
+		promise.then(
+				function(response){
+					console.log("setting campaign data");
+					console.log(response.data);
+					CommunityService.campaignInfo = response.data;
+					$scope.campaignInfo = response.data;
+					//CampaignService.campaign.name = response.data
+				}, function(error){
+					console.log(error);
+				});
+	};
+});
+
+
 
 /**
  * View Public Campaigns Controller
@@ -1539,8 +1848,10 @@ dndApp.controller("ViewPublicCampaignsCtrl", function(NgTableParams, CommunitySe
 					return new NgTableParams(initialParams, initialSettings);
 				}
 			})
-			$scope.getCampaign = function(campaign){
+	$scope.getCampaign = function(campaign){
+		CommunityService.campaign = campaign;
 		console.log(campaign);
+		$state.go("PubViewCampaign");
 	}
 });
 
