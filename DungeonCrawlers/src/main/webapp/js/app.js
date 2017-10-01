@@ -1463,9 +1463,11 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 
 	$scope.updateArray = function(evt,ui,chapter){
 		//var obj = ui.draggable.scope().dndDragItem;
-		
 		// the Location object which has the chapter relationship that it was in
 		var location = ui.draggable.scope().location;
+
+		if(location.location.chapter != chapter.chapter){
+
 		console.log(location);
 
 		//console.log(ui.draggable.scope().location);
@@ -1481,11 +1483,18 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 		var promise = CampaignService.dndLocation(passback);
 		promise.then(
 			function(response){
-				console.log(response);
+				var promise = CampaignService.editCampaign();
+				promise.then(function(response) {
+					if (campaign.campaign && response.data) {
+						CampaignService.campaignInfo = response.data;
+						$scope.campaignInfo = response.data;
+						console.log($scope.campaignInfo);
+					}
+				});
 			}, function(error){
 				console.log(error);
 			});
-
+		}
 	}
 	
 	campaign.editCampaignDetails = function(){
