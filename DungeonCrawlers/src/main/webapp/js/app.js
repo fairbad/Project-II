@@ -801,6 +801,19 @@ dndApp.service("CampaignService", function($http, $q){
 			);
 		return promise;
 	};
+
+	service.dndLocation = function(passback){
+		var promise = $http.post('rest/campaign/dndLocation', passback).then(
+			function(response){
+				console.log(response);
+				return response;
+			},
+			function(error){
+				console.log('dndlocation promise failed');
+			}
+		);
+		return promise;
+	}
 });
 
 
@@ -1418,36 +1431,24 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 		// the Location object which has the chapter relationship that it was in
 		var location = ui.draggable.scope().location;
 		console.log(location);
+
 		//console.log(ui.draggable.scope().location);
 		// the Chapter that it was dropped into
 		console.log(chapter);
 
-		//var oldChapter = $scope.campaignInfo.
+		location.location.chapter = chapter.chapter;
 
-		console.log("CHAPTERSSSSSSSSSS")
-		console.log($scope.campaignInfo.chapters);
-		$scope.campaignInfo.chapters.forEach(function(scopechapter){
-			if(scopechapter == chapter){
-				console.log("YRES");
-				// the chapter which the location relationship should be changed to
-				// send an update to the server to update location's chapter id
-				console.log(scopechapter);
-			}
-		});
+		var passback = location.location
 
-		/*
-		console.log(list);
-		//var index = list.indexOf(obj);
-		var index = $scope.list1.indexOf(obj);
-		console.log(index);
-		$scope.list1.splice(index,1);
-		console.log($scope.list1);
-		/*
-		console.log(stuff);
-		console.log(list);
-		var index = list.indexOf(stuff);
-		console.log(index);
-		$scope.list.splice(index,1);*/
+		console.log(passback);
+
+		var promise = CampaignService.dndLocation(passback);
+		promise.then(
+			function(response){
+				console.log(response);
+			}, function(error){
+				console.log(error);
+			});
 	}
 	
 	campaign.editCampaignDetails = function(){
