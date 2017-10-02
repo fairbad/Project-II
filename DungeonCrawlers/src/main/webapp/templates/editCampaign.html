@@ -1,57 +1,68 @@
 <div class="container">
 	<div class="row well">
 		<div style="width: 50%; height: 50%; float: left">
-			<img ng-src="{{campaignInfo.campaign.image}}" alt="image" width="90%" height="90%"><br>
-			<br>
+			<font face="Almendra"><img ng-src="{{campaignInfo.campaign.image}}" alt="Image" width="90%"
+				height="90%"><br> <br></font>
 			<form name="editCampaignImage"
 				ng-submit="editCampaign.editCampaignDetails()">
-				<div style="text-align:center">
-				<label for="CamImage" class="custom-file-upload" style="margin-left:auto;margin-right:auto"><span class="glyphicon glyphicon-open" aria-hidden="true"></span>  Upload  Image</label>
-				<font face="Almendra"><input id="CamImage" type="file" placeholder="Image" style="margin-right:auto;margin-left:auto">
-				</font>
-				<font face="Almendra"><button type="submit" class="btn btn-primary">Save</button></font>
+				<div style="text-align: center">
+					<label for="CamImage" class="custom-file-upload"
+						style="margin-left: auto; margin-right: auto"><span
+						class="glyphicon glyphicon-open" aria-hidden="true"></span> Upload
+						Image</label> <font face="Almendra"><input id="CamImage"
+						type="file" placeholder="Image"
+						style="margin-right: auto; margin-left: auto"> </font> <font
+						face="Almendra"><button type="submit"
+							class="btn btn-primary">Save</button></font>
 				</div>
-				
 			</form>
 
 			<form name="editIsPublic"
 				ng-submit="editCampaign.editCampaignDetails()">
-				<font face="Almendra">Public </font><input id="isPublic" type="checkbox"
-					ng-model="campaignInfo.campaign.public">
-				<button type="submit" class="btn btn-primary"><font face="almendra">Save</font></button>
+				<font face="Almendra">Public </font><input id="isPublic"
+					type="checkbox" ng-model="campaignInfo.campaign.public">
+				<button type="submit" class="btn btn-primary">
+					<font face="almendra">Save</font>
+				</button>
 			</form>
 		</div>
 
 		<div style="width: 50%; height: 50%; float: right">
 			<form name="editCampaignName"
 				ng-submit="editCampaign.editCampaignDetails()">
-				<font face="Almendra" color="ivory">Name </font><font face="Almendra" color="black"><input id="name" type="text" placeholder="Name"
-					ng-model="campaignInfo.campaign.name"></font>
-				<button type="submit" class="btn btn-primary"><font face="Almendra">Save</font></button>
+				<font face="Almendra" color="ivory">Name </font><font
+					face="Almendra" color="black"><input id="name" type="text"
+					placeholder="Name" ng-model="campaignInfo.campaign.name"></font>
+				<button type="submit" class="btn btn-primary">
+					<font face="Almendra">Save</font>
+				</button>
 			</form>
 
 			<form name="editCampaignDescription"
 				ng-submit="editCampaign.editCampaignDetails()">
-				<font face="Almendra" color="ivory">Description</font>
-				<font face="Almendra" color="black">
-				<textarea id="desc" name="desc" rows="4" cols="50"
-					placeholder="Description"
-					ng-model="campaignInfo.campaign.description"></textarea></font>
-				<font face="Almendra" color="ivory">
-				<button type="submit" class="btn btn-primary">Save</button>
+				<font face="Almendra" color="ivory">Description</font> <font
+					face="Almendra" color="black"> <textarea id="desc"
+						name="desc" rows="4" cols="50" placeholder="Description"
+						ng-model="campaignInfo.campaign.description"></textarea></font> <font
+					face="Almendra" color="ivory">
+					<button type="submit" class="btn btn-primary">Save</button>
 				</font>
 			</form>
 		</div>
-		
+
 		<div>
-			<br>
-			<br> <img ng-src="{{campaignInfo.campaign.map.image}}" alt="image" width="90%" height="90%"
-				style="margin: 20px"><br>
+			<br> <br> <img ng-src="{{campaignInfo.campaign.map.image}}"
+				alt="image" width="90%" height="90%" style="margin: 20px"><br>
 			<form name="setMap" ng-submit="editCampaign.editCampaignDetails()">
-				<div style="text-align:center">
-				<label for="MapImage" class="custom-file-upload" style="margin-left:auto;margin-right:auto"><span class="glyphicon glyphicon-open" aria-hidden="true"></span>  Upload World Map</label>
-				<font face="Almendra"><input id="MapImage" type="file" placeholder="Image" style="margin-left:auto;margin-right:auto"></font>
-				<font face="Almendra"><button type="submit" class="btn btn-primary">Save</button></font>
+				<div style="text-align: center">
+					<label for="MapImage" class="custom-file-upload"
+						style="margin-left: auto; margin-right: auto"><span
+						class="glyphicon glyphicon-open" aria-hidden="true"></span> Upload
+						World Map</label> <font face="Almendra"><input id="MapImage"
+						type="file" placeholder="Image"
+						style="margin-left: auto; margin-right: auto"></font> <font
+						face="Almendra"><button type="submit"
+							class="btn btn-primary">Save</button></font>
 				</div>
 			</form>
 		</div>
@@ -60,37 +71,68 @@
 
 
 		<div>
-			<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
-			<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
-
-<div class="container-fluid">
-		<div id="content">
-			<div style="padding-left:15px; padding-top:10px">
-				<div class="panel panel-default" ng-repeat="chapter in campaignInfo.chapters track by $index" ng-model="chapters">
-	  				<div class="panel-heading-custom panel-heading heading" >
-					{{chapter.chapter.name}}</div>
-					<div class="panel-body" ngmodel="chapter.locations" data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
-	  					drop here
-	  					<br>
-	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.location.name">
-							{{location.location.name}}
-	  					</div>
-  					</div>
+			<h2 style="text-align: center">
+				<font face="Metamorphous">Story</font>
+			</h2>
+			<br>
+			<h3 style="text-align: center">
+				<font face="Metamorphous">Table of Contents</font>
+			</h3>
+		</div>
+		<div class="container-fluid">
+			<div id="content">
+				<div style="padding-left: 15px; padding-top: 10px">
+					<div class="panel panel-default"
+						ng-repeat="chapter in campaignInfo.chapters track by $index"
+						ng-model="chapters">
+						<div class="panel-heading-custom panel-heading heading">
+							{{chapter.chapter.name}}</div>
+						<div class="panel-body" ngmodel="chapter.locations"
+							data-drop="true" data-jqyoui-options
+							jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
+							drop here <br>
+							<div ng-repeat="location in chapter.locations track by $index"
+								class="btn btn-success" data-drag="true"
+								data-jqyoui-options="{revert: 'invalid'}" ng-model="location"
+								jqyoui-draggable="{animate:true}"
+								ng-hide="!location.location.name">
+								{{location.location.name}}</div>
+						</div>
+					</div>
 				</div>
 			</div>
-	</div>
 
 			<br>
-			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
-			<button type="button" ng-click="addChapter(campaignInfo.campaign)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Chapter</button>
+			<h3 style="text-align: center">
+				<font face="Metamorphous">Chapters</font>
+			</h3>
+			<button type="button" ng-click="addChapter(campaignInfo.campaign)"
+				style="background: transparent; border: transparent;">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"
+					color="black"></span> Add New Chapter
+			</button>
 			<div ng-repeat="ch in campaignInfo.chapters">
-				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
-				<button type="button" ng-click="getChapter(ch.chapter)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
+				<h4 style="text-align: center">
+					<font face="Almendra">{{ch.chapter.name}}</font>
+				</h4>
+				<button type="button" ng-click="getChapter(ch.chapter)"
+					style="background: transparent; border: transparent;">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"
+						color="black"></span> Add New Location
+				</button>
 				<div ng-repeat="l in ch.locations">
-					<h5 style="text-align:center"><font face="Almendra">{{l.location.name}}</font></h5>
-					<button type="button" ng-click="getLocation(l.location)" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Event</button>
+					<h5 style="text-align: center">
+						<font face="Almendra">{{l.location.name}}</font>
+					</h5>
+					<button type="button" ng-click="getLocation(l.location)"
+						style="background: transparent; border: transparent;">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"
+							color="black"></span> Add New Event
+					</button>
 					<div ng-repeat="e in l.events">
-						<h6 style="text-align:center"><font face="Almendra">{{e.event.name}}</font></h6>
+						<h6 style="text-align: center">
+							<font face="Almendra">{{e.event.name}}</font>
+						</h6>
 					</div>
 				</div>
 			</div>

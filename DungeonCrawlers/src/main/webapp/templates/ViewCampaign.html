@@ -1,53 +1,37 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row well">
 		<div style="width: 50%; height: 50%; float: left">
-			<img ng-src="{{campaignInfo.campaign.image}}" alt="image" width="90%" height="90%"><br>
-			<br>
+			<font face="almendra"><img ng-src="{{campaignInfo.campaign.image}}" alt="Image" width="90%" height="90%"><br></font>
 		</div>
-
+		<br>
 		<div style="width: 50%; height: 50%; float: right">
-			<span>Name: </span><span>{{campaignInfo.campaign.name}}</span>
+			<font face="Metamorphous" size="4">Author: </font><font face="Almendra">{{campaignInfo.campaign.user.username}}</font>
+			<br>
+			<font face="Metamorphous" size="4">Name: </font><font face="Almendra">{{campaignInfo.campaign.name}}</font>
 			<br>
 			<br>
-			<span>Description: </span><p>{{campaignInfo.campaign.description}}</p>
+			<font face="Metamorphous" size="4">Description: </font><font face="Almendra"><p>{{campaignInfo.campaign.description}}</p></font>
 		</div>
-		
+		<br>
+		<br>
 		<div>
-			<br>
-			<br> 
-			<span>Map Image</span><img ng-src="{{campaignInfo.campaign.map.image}}" alt="image" width="90%" height="90%" style="margin: 20px"><br>
+			<font face="Metamorphous" size="4">Map Image</font><font face="Almendra"><img ng-src="{{campaignInfo.campaign.map.image}}" alt="image" width="90%" height="90%" style="margin: 20px"><br></font>
 		</div>
 
 		<br>
 
 
 		<div>
-			<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
-			<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
-
-<div class="container-fluid">
-		<div id="content">
-			<div style="padding-left:15px; padding-top:10px">
-				<div class="panel panel-default" ng-repeat="chapter in campaignInfo.chapters track by $index" ng-model="chapters">
-	  				<div class="panel-heading-custom panel-heading heading" >
-					{{chapter.chapter.name}}</div>
-					<div class="panel-body" ngmodel="chapter.locations" data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
-	  					drop here
-	  					<br>
-	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.location.name">
-							{{location.location.name}}
-	  					</div>
-  					</div>
-				</div>
-			</div>
-	</div>
-
-			<br>
-			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
+			<h1 style="text-align:center"><font face="Metamorphous">Story</font></h1>
+		</div>
+		<div class="container-fluid">
+			<h3 style="text-align:center"><font face="Metamorphous"size="5">Table of Contents</font></h3>
 			<div ng-repeat="ch in campaignInfo.chapters">
 				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
-				<button type="button" ng-click="dummyNG" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
 			</div>
 		</div>
+		
 	</div>
+	
 </div>
+
