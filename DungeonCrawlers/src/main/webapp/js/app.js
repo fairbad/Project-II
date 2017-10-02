@@ -600,27 +600,28 @@ dndApp.service("CampaignService", function($http, $q){
 	
 	service.campaign={
 			name : "",
-			desc : "",
+			description : "",
 			image : ""
 	};
 
 	service.map={
 			name : "",
-			desc : "",
+			description : "",
 			image : ""
 	};
 
 	service.chapter={
 			name : "",
-			desc : "",
-			image : ""
+			description : "",
+			image : "",
+			campaign : []
 	};
 
 	service.location={
 			name : "",
-			desc : "",
+			description : "",
 			image : "",
-			chapter_id : ""
+			chapter : []
 	};
 
 	service.event={
@@ -1723,6 +1724,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 			}, function(error){
 				console.log(error);
 			});
+
 	}
 	
 	campaign.editCampaignDetails = function(){
@@ -1741,6 +1743,51 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
 					console.log(error);
 				});
 	};
+	
+	$scope.addChapter = function(campaign){
+        //CampaignService.chapter = chapter;
+        console.log("In add chapter!");
+        console.log(campaign);
+        CampaignService.chapter={
+                name : "New Chapter",
+                description : "Add a description",
+                image : "",
+                campaign : campaign
+        };
+        console.log(CampaignService.chapter);
+        CampaignService.createChapter();
+    
+    };
+    $scope.getChapter = function(chapter){
+        //CampaignService.chapter = chapter;
+        console.log("In get chapter!");
+        console.log(chapter);
+        CampaignService.location={
+                name : "New Location",
+                description : "Add a description",
+                image : "",
+                chapter : chapter
+        };
+        console.log(CampaignService.location);
+        CampaignService.createLocation();
+    
+    };
+    
+    $scope.getLocation = function(location){
+        //CampaignService.chapter = chapter;
+        console.log("In get location!");
+        console.log(location);
+        CampaignService.event={
+                name : "New Event",
+                description : "Add a description",
+                image : "",
+                location : location
+        };
+        console.log(CampaignService.event);
+        CampaignService.createEvent();
+    
+    };
+
 	document.getElementById('CamImage').onchange = function() { CampaignService.getBase64("Campaign") };
 	document.getElementById('MapImage').onchange = function() { CampaignService.getBase64("Map") };
 });
@@ -1890,6 +1937,17 @@ dndApp.controller("ViewCampaignsCtrl",function(NgTableParams, CampaignService, $
 		CampaignService.campaign = campaign;
 		$state.go("editCampaign");
 	};
+	
+	$scope.newCampaign = function(){
+		CampaignService.campaign = {
+				name : "",
+				description : "",
+				image : ""
+		};
+		$state.go("editCampaign");
+	};
+	
+	
 });
 
 

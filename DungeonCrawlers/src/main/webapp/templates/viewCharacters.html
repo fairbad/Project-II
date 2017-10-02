@@ -1,7 +1,12 @@
-<h1>Characters</h1>	
-<div>
-	<ul ng-repeat="x in characters">
-		<li>{{ x.name }}</li>
-		<li><img ng-src="{{ x.image }}" style="width: 50px; height: 50px;"/></li>
-	</ul>
+<div style="background-image: url(images/stone2.jpg); padding:50px; border-radius:20px;margin-top:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;background-image:url(images/darkwood.png)">
+
+		<h1><font face="Metamorphous" color="ivory">View Characters</font></h1>	
+		<div>
+			<ul ng-repeat="x in characters">
+				<li><font face="Almendra" color="ivory">{{ x.name }}</font></li>
+				<li><img ng-src="{{ x.image }}" style="width: 50px; height: 50px;"/></li>
+			</ul>
+		</div>
+	</div>
 </div>

@@ -1,6 +1,15 @@
-<form name="createEnemy" ng-submit="enemy.createEnemy()">
-	<h1>Enemy</h1>
-	<input id="name" type="text" placeholder="Name" ng-model="enemy.enemy.name">
-	<input id="image" type="file" placeholder="Image">
-	<button type="submit" class="btn btn-primary">Create</button>
-</form>
+<div style="background-image: url(images/stone2.jpg); padding:50px; border-radius:20px;margin-top:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;background-image:url(images/darkwood.png)">		
+
+		<form name="createEnemy" ng-submit="enemy.createEnemy()">
+			<h1><font face="Metamorphous" color="ivory">Create Enemy</font></h1>
+			<font face="Almendra"><input id="name" type="text" placeholder="Name" ng-model="enemy.enemy.name"></font>
+			<font face="Almendra" color="ivory"><br><br>
+			<label for="image" class="custom-file-upload"><span class="glyphicon glyphicon-open" aria-hidden="true"></span>  Upload  Image</label>
+			<input id="image" type="file" placeholder="Image">
+			<br>
+			<button type="submit" class="btn btn-primary">Create</button></font>
+		</form>
+		
+	</div>
+</div>

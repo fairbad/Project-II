@@ -1,6 +1,13 @@
-<h1>NPCs</h1>	
-<div>
-	<select ng-model="NPC" ng-options="NPC as NPC.name for NPC in NPCs">
-	</select>
-	<button type="submit" class="btn btn-danger" ng-click="delete()">Delete</button>
+<div style="background-image: url(images/stone2.jpg); padding:50px; border-radius:20px;margin-top:20px;">
+	<div class="jumbotron text-center" style="width:90%; height:70%; margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;background-image:url(images/darkwood.png)">
+		<h1><font face="Metamorphous" color="ivory">Delete NPCs</font></h1>	
+		<div>
+			<font face="Almendra" color="black"><select ng-model="NPC" ng-options="NPC as NPC.name for NPC in NPCs">
+			</select>
+			</font>
+			<font face="Almendra" color="ivory">
+			<button type="submit" class="btn btn-danger" ng-click="delete()">Delete</button>
+			</font>
+		</div>
+	</div>
 </div>

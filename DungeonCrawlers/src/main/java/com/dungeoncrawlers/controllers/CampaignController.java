@@ -70,7 +70,7 @@ public class CampaignController {
         campaignDTO.setUser(currentUser);
         campaignDTO.setPublic(true);
         Campaign campaign = serviceimpl.addCampaign(campaignDTO);
-        session.setAttribute("campaign", campaign);
+        //session.setAttribute("campaign", campaign);
         campaignDTO.setId(campaign.getId());
 		return new ResponseEntity<CampaignDTO>(campaignDTO, HttpStatus.OK);
 	}
@@ -90,7 +90,7 @@ public class CampaignController {
         campaignDTO.setMap(map);
         campaignDTO.setUser(currentCampaign.getUser());
         //currentCampaign = serviceimpl.updateCampaign(campaignDTO);
-        session.setAttribute("campaign", currentCampaign);
+        //session.setAttribute("campaign", currentCampaign);
         mapDTO.setId(map.getId());
 		return new ResponseEntity<MapDTO>(mapDTO, HttpStatus.OK);
 	}
@@ -100,8 +100,6 @@ public class CampaignController {
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ChapterDTO> createChapter(HttpSession session, @RequestBody ChapterDTO chapterDTO){
 		System.out.println("creating new chapter");
-        Campaign currentCampaign = (Campaign) session.getAttribute("campaign");
-        chapterDTO.setCampaign(currentCampaign);
         Chapter chapter = serviceimpl.addChapter(chapterDTO);
         chapterDTO.setId(chapter.getId());
 		return new ResponseEntity<ChapterDTO>(chapterDTO, HttpStatus.OK);
@@ -150,24 +148,7 @@ public class CampaignController {
 		CampaignAndComponentsDTO cacDTO;
 		
 		Campaign campaign = serviceimpl.getCampaign(campaignDTO.getId());
-        /*
-        CampaignChapterDTO campaignChapterDTO = new CampaignChapterDTO();
-        campaignChapterDTO.setCampaign(campaign);
-        
-        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
-        List<ChapterLocationDTO> chapterLocationsDTO = new ArrayList<ChapterLocationDTO>();
-        for(Chapter c: chapters) {
-        	ChapterLocationDTO chapterLocationDTO = new ChapterLocationDTO();
-        	chapterLocationDTO.setChapter(c);
-        	chapterLocationDTO.setLocations(serviceimpl.getAllLocationsByChapter(c));
-        	chapterLocationsDTO.add(chapterLocationDTO);
-        }
-        
-        campaignChapterDTO.setChapters(chapterLocationsDTO);
-        
-        return new ResponseEntity<CampaignChapterDTO>(campaignChapterDTO, HttpStatus.OK);
-        
-        */
+		
         if (campaign != null) {
 	        List<ChapterAndLocationsDTO> chapters_locations = new ArrayList<ChapterAndLocationsDTO>();
 	        List<Chapter> chapters = serviceimpl.getAllChaptersByCampaign(campaign);
