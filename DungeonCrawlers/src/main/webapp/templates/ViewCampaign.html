@@ -25,28 +25,16 @@
 			<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
 			<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
 
-<div class="container-fluid">
-		<div id="content">
-			<div style="padding-left:15px; padding-top:10px">
-				<div class="panel panel-default" ng-repeat="chapter in campaignInfo.chapters track by $index" ng-model="chapters">
-	  				<div class="panel-heading-custom panel-heading heading" >
-					{{chapter.chapter.name}}</div>
-					<div class="panel-body" ngmodel="chapter.locations" data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'updateArray(chapter)'}">
-	  					drop here
-	  					<br>
-	  					<div ng-repeat="location in chapter.locations track by $index" class="btn btn-success" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="location" jqyoui-draggable="{animate:true}" ng-hide="!location.location.name">
-							{{location.location.name}}
-	  					</div>
-  					</div>
-				</div>
-			</div>
-	</div>
-
 			<br>
 			<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
 			<div ng-repeat="ch in campaignInfo.chapters">
 				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
-				<button type="button" ng-click="dummyNG" style="background:transparent;border:transparent;"><span class="glyphicon glyphicon-plus" aria-hidden="true" color="black"></span> Add New Location</button>
+				<div ng-repeat="l in ch.locations">
+					<h5 style="text-align:center"><font face="Almendra">{{l.location.name}}</font></h5>
+					<div ng-repeat="e in l.events">
+						<h6 style="text-align:center"><font face="Almendra">{{e.event.name}}</font></h6>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
