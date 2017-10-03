@@ -1480,11 +1480,11 @@ dndApp.controller("DeleteCharacterCtrl",function(CreatorService, $state, $scope)
 			function(response){
 				$scope.characters = response.data;
 			})
-//			$scope.delete = function(){
-//			CreatorService.deleteCharacter($scope.character);
-//			var index = $scope.characters.indexOf($scope.character);
-//			$scope.characters.splice(index, 1);
-//			}
+			$scope.delete = function(){
+			CreatorService.deleteCharacter($scope.character);
+			var index = $scope.characters.indexOf($scope.character);
+			$scope.characters.splice(index, 1);
+			}
 });
 
 
@@ -1504,11 +1504,11 @@ dndApp.controller("DeleteNPCCtrl",function(CreatorService, $state, $scope){
 			function(response){
 				$scope.NPCs = response.data;
 			})
-//			$scope.delete = function(){
-//			CreatorService.deleteNPC($scope.NPC);
-//			var index = $scope.NPCs.indexOf($scope.NPC);
-//			$scope.NPCs.splice(index, 1);
-//			}
+			$scope.delete = function(){
+			CreatorService.deleteNPC($scope.NPC);
+			var index = $scope.NPCs.indexOf($scope.NPC);
+			$scope.NPCs.splice(index, 1);
+			}
 });
 
 
@@ -1528,11 +1528,11 @@ dndApp.controller("DeleteEnemyCtrl",function(CreatorService, $state, $scope){
 			function(response){
 				$scope.enemies = response.data;
 			})
-//			$scope.delete = function(){
-//			CreatorService.deleteEnemy($scope.enemy);
-//			var index = $scope.enemies.indexOf($scope.enemy);
-//			$scope.enemies.splice(index, 1);
-//			}
+			$scope.delete = function(){
+			CreatorService.deleteEnemy($scope.enemy);
+			var index = $scope.enemies.indexOf($scope.enemy);
+			$scope.enemies.splice(index, 1);
+			}
 });
 
 

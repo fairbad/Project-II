@@ -20,17 +20,20 @@
 
 		<br>
 
-
-		<div>
-			<h1 style="text-align:center"><font face="Metamorphous">Story</font></h1>
-		</div>
-		<div class="container-fluid">
-			<h3 style="text-align:center"><font face="Metamorphous"size="5">Table of Contents</font></h3>
-			<div ng-repeat="ch in campaignInfo.chapters">
-				<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
+		<h2 style="text-align:center"><font face="Metamorphous">Story</font></h2><br>
+		<h3 style="text-align:center"><font face="Metamorphous">Table of Contents</font></h3>
+		<br>
+		<h3 style="text-align:center"><font face="Metamorphous">Chapters</font></h3>
+		<div ng-repeat="ch in campaignInfo.chapters">
+			<h4 style="text-align:center"><font face="Almendra">{{ch.chapter.name}}</font></h4>
+			<div ng-repeat="l in ch.locations">
+				<h5 style="text-align:center"><font face="Almendra">{{l.location.name}}</font></h5>
+				<div ng-repeat="e in l.events">
+					<h6 style="text-align:center"><font face="Almendra">{{e.event.name}}</font></h6>
+				</div>
 			</div>
 		</div>
-		
+			
 	</div>
 	
 </div>
