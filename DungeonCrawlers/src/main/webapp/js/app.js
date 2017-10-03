@@ -1767,7 +1767,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
         };
         console.log(CampaignService.chapter);
         CampaignService.createChapter();
-    
+        $state.reload();
     };
     $scope.getChapter = function(chapter){
         //CampaignService.chapter = chapter;
@@ -1781,7 +1781,7 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
         };
         console.log(CampaignService.location);
         CampaignService.createLocation();
-    
+        $state.reload();
     };
     
     $scope.getLocation = function(location){
@@ -1795,8 +1795,8 @@ dndApp.controller("EditCampaignCtrl", function(CampaignService, $state, $scope){
                 location : location
         };
         console.log(CampaignService.event);
-        CampaignService.createEvent();
-    
+        //CampaignService.createEvent();
+        //$state.reload();
     };
 
 	document.getElementById('CamImage').onchange = function() { CampaignService.getBase64("Campaign") };
